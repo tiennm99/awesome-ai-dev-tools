@@ -15,7 +15,7 @@
 | 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 144.7k | +725 | Python | 2026-09-10 | Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands. |
 | 4 | [openai/codex](https://github.com/openai/codex) | 123.3k | +1944 | Rust | 2026-09-11 | Lightweight coding agent that runs in your terminal |
 | 5 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 106.9k | +102 | TypeScript | 2026-09-11 | An open-source AI agent that brings the power of Gemini directly into your terminal. |
-| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2484 | TypeScript | 2026-09-11 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
+| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2485 | TypeScript | 2026-09-11 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
 | 7 | [zed-industries/zed](https://github.com/zed-industries/zed) | 90.1k | +359 | Rust | 2026-09-11 | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. |
 | 8 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 87.3k | +1211 | TypeScript | 2026-09-11 | 🙌 OpenHands: AI-Driven Development |
 | 9 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 68.3k | — | Rust | 2026-09-09 | A coding agent for open models like Kimi K3 and GLM 5.3 |
