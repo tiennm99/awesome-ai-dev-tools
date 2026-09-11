@@ -160,6 +160,35 @@
   .charthead { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: .75rem; flex-wrap: wrap; }
   .chartwrap { position: relative; height: 460px; }
   .chartmsg { color: var(--muted); text-align: center; padding-top: 4rem; }
+  /* Hover readout. Chart.js paints its tooltip on the canvas, which cannot
+     bold one row, so the ranking is HTML and the built-in tooltip stays off. */
+  #hovercard {
+    position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; opacity: 0;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 18%); padding: .5rem .6rem; max-width: 100%;
+    transition: opacity .12s ease;
+  }
+  #hovercard .hdate {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); font-weight: 600; margin-bottom: .35rem;
+  }
+  #hovercard .cols { display: flex; gap: .85rem; align-items: flex-start; }
+  #hovercard ul { list-style: none; margin: 0; padding: 0; }
+  /* Grid, not flex: every row in a column shares the template, so names
+     truncate at one width and the star counts line up. */
+  #hovercard li {
+    display: grid; grid-template-columns: .5rem 1.15rem minmax(0, 9.5rem) auto;
+    align-items: center; gap: .35rem; font-size: .72rem; line-height: 1.6;
+    color: var(--muted);
+  }
+  #hovercard li.on { color: var(--fg); font-weight: 700; }
+  #hovercard .sw { width: .5rem; height: .5rem; border-radius: 2px; opacity: .75; }
+  #hovercard li.on .sw { opacity: 1; }
+  #hovercard .rk { text-align: right; font-variant-numeric: tabular-nums; opacity: .75; }
+  #hovercard .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #hovercard .val { text-align: right; font-variant-numeric: tabular-nums; padding-left: .5rem; }
+  /* Touch devices have no hover, so the card would only ever be in the way. */
+  @media (hover: none) { #hovercard { display: none; } }
   .hint { color: var(--muted); font-size: .85rem; margin: .75rem 0 0; }
   #err { color: var(--neg); }
   footer { color: var(--muted); font-size: .85rem; margin: 1.5rem 0 .5rem; display: flex; gap: .5rem; flex-wrap: wrap; }
@@ -172,6 +201,7 @@
   }
   @media (max-width: 480px) { body { padding: 1rem; } .stats { grid-template-columns: 1fr 1fr; } }
   @media (prefers-reduced-motion: reduce) {
+    #hovercard { transition: none; }
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
@@ -236,8 +266,9 @@
       <button type="button" id="scaleToggle" class="btn" aria-pressed="false">Log scale</button>
     </div>
     <div class="chartwrap"><canvas id="chart" role="img"
-      aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas></div>
-    <p class="hint">Every tracked repo is plotted — click legend entries to hide series. The tag filters and search above also filter the chart.</p>
+      aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas><div
+      id="hovercard" aria-hidden="true"></div></div>
+    <p class="hint">Every tracked repo is plotted — hover a date for the full ranking at that point, click legend entries to hide series. The tag filters and search above also filter the chart.</p>
   </section>
 
   <footer>
@@ -259,6 +290,7 @@
   }
 
   const rows = data.rows.map((r, i) => ({ ...r, rank: i + 1 }));
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmtStars = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(n);
 
   // KPI stat cards
@@ -405,7 +437,6 @@
       }
     });
 
-    const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const tbody = document.querySelector('#tbl tbody');
     if (!list.length) {
       tbody.innerHTML = '<tr><td class="empty" colspan="9">No repos match your filters.</td></tr>';
@@ -449,10 +480,71 @@
   let yType = 'linear';
   const hiddenState = {}; // repo key -> hidden bool, survives chart re-renders
 
+  // --- hover readout ---
+  const hoverCard = document.getElementById('hovercard');
+  let hoverIdx = -1; // datasetIndex nearest the cursor, -1 when the cursor is away
+
+  // The series under the cursor stays solid and thick; the rest go thin and
+  // dashed, so one line reads clearly out of forty overlapping ones.
+  function paintEmphasis() {
+    chart.data.datasets.forEach((ds, i) => {
+      const on = i === hoverIdx;
+      ds.borderWidth = hoverIdx === -1 ? 2 : on ? 3.5 : 1;
+      ds.borderDash = hoverIdx === -1 || on ? [] : [4, 3];
+      ds.pointHoverRadius = on ? 4.5 : 0;
+    });
+    chart.update('none');
+  }
+
+  function hideHover() {
+    hoverCard.style.opacity = '0';
+    if (hoverIdx !== -1) {
+      hoverIdx = -1;
+      paintEmphasis(); // repaint runs once: hoverIdx is already -1 on re-entry
+    }
+  }
+
+  // Rank every plotted series at the hovered date, highest first, and bold the
+  // one under the cursor. Columns keep forty rows inside the chart card.
+  function showHover(tooltip) {
+    const items = tooltip.dataPoints
+      .filter(p => p.parsed.y != null)
+      .sort((a, b) => b.parsed.y - a.parsed.y);
+    if (!items.length) { hideHover(); return; }
+
+    const cols = items.length > 28 ? 3 : items.length > 14 ? 2 : 1;
+    const perCol = Math.ceil(items.length / cols);
+    let html = '<div class="hdate">' + esc(items[0].label) + '</div><div class="cols">';
+    for (let c = 0; c < cols; c++) {
+      html += '<ul>';
+      items.slice(c * perCol, (c + 1) * perCol).forEach((p, j) => {
+        // borderColor comes from color() in this file, never from data.json
+        html += '<li class="' + (p.datasetIndex === hoverIdx ? 'on' : '') + '">'
+          + '<span class="sw" style="background:' + p.dataset.borderColor + '"></span>'
+          + '<span class="rk">' + (c * perCol + j + 1) + '</span>'
+          + '<span class="nm">' + esc(p.dataset.label) + '</span>'
+          + '<span class="val">' + p.parsed.y.toLocaleString('en-US') + '</span></li>';
+      });
+      html += '</ul>';
+    }
+    hoverCard.innerHTML = html + '</div>';
+
+    // Place beside the caret, flipped or clamped to stay inside the card.
+    hoverCard.style.opacity = '1';
+    const wrap = chartWrap.getBoundingClientRect();
+    const card = hoverCard.getBoundingClientRect();
+    let left = tooltip.caretX + 18;
+    if (left + card.width > wrap.width) left = tooltip.caretX - card.width - 18;
+    hoverCard.style.left = Math.max(0, Math.min(left, Math.max(0, wrap.width - card.width))) + 'px';
+    hoverCard.style.top = Math.max(0, Math.min(tooltip.caretY - card.height / 2, Math.max(0, wrap.height - card.height))) + 'px';
+  }
+
   function renderChart() {
     // Degraded mode: filter/search handlers still call this after the early
     // CDN-failure return; without the guard they hit TDZ consts and throw.
     if (!window.Chart) return;
+    hoverIdx = -1;
+    hoverCard.style.opacity = '0';
     const list = visible();
     const datasets = list.map((r, i) => {
       const pts = data.history.map(s => s.stars[r.key] ?? null);
@@ -464,6 +556,7 @@
         borderColor: color(i),
         backgroundColor: color(i),
         pointRadius: nPoints < 2 ? 3 : 0, // single snapshots need a visible dot
+        pointHoverRadius: 0, // paintEmphasis turns the dot on for the hovered series only
         borderWidth: 2,
         spanGaps: true,
         hidden: hiddenState[r.key] ?? false, // every series plotted until the legend hides it
@@ -475,7 +568,14 @@
       data: { labels: dates, datasets },
       options: {
         responsive: true, maintainAspectRatio: false, animation: false,
-        interaction: { mode: 'nearest', intersect: false },
+        // index mode collects every series at the hovered date, which is what
+        // the readout ranks; onHover tracks which one the cursor is nearest.
+        interaction: { mode: 'index', intersect: false, axis: 'x' },
+        onHover(e, _active, ch) {
+          const near = ch.getElementsAtEventForMode(e, 'nearest', { intersect: false }, true);
+          const idx = near.length ? near[0].datasetIndex : -1;
+          if (idx !== hoverIdx) { hoverIdx = idx; paintEmphasis(); }
+        },
         scales: {
           y: { type: yType, ticks: { callback: v => fmtStars(v) } },
           x: { ticks: { maxTicksLimit: 12 } },
@@ -490,13 +590,18 @@
               hiddenState[ds.repoKey] = !legend.chart.isDatasetVisible(item.datasetIndex);
             },
           },
-          tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.parsed.y ?? '—').toLocaleString() } },
+          tooltip: {
+            enabled: false, // replaced by the HTML readout in showHover
+            external: ctx => ctx.tooltip.opacity ? showHover(ctx.tooltip) : hideHover(),
+          },
         },
       },
     });
     document.getElementById('chart').setAttribute('aria-label',
       'Line chart of GitHub star history over time for ' + list.length + ' repositories. The same data is in the table above.');
   }
+
+  document.getElementById('chart').addEventListener('mouseleave', hideHover);
 
   const scaleBtn = document.getElementById('scaleToggle');
   scaleBtn.onclick = () => {
