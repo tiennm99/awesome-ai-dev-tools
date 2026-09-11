@@ -237,7 +237,7 @@
     </div>
     <div class="chartwrap"><canvas id="chart" role="img"
       aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas></div>
-    <p class="hint">Top 12 repos shown by default — click legend entries to toggle series. The tag filters and search above also filter the chart.</p>
+    <p class="hint">Every tracked repo is plotted — click legend entries to hide series. The tag filters and search above also filter the chart.</p>
   </section>
 
   <footer>
@@ -466,7 +466,7 @@
         pointRadius: nPoints < 2 ? 3 : 0, // single snapshots need a visible dot
         borderWidth: 2,
         spanGaps: true,
-        hidden: r.key in hiddenState ? hiddenState[r.key] : i >= 12, // top 12 visible by default
+        hidden: hiddenState[r.key] ?? false, // every series plotted until the legend hides it
       };
     });
     if (chart) chart.destroy();
