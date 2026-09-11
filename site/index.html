@@ -481,8 +481,45 @@
   const hiddenState = {}; // repo key -> hidden bool, survives chart re-renders
 
   // --- hover readout ---
+  // Hover is handled from the canvas rather than through Chart.js
+  // interaction modes: an index-mode tooltip only recomputes when the x index
+  // changes, so moving straight up and down inside one date never re-picked
+  // the series under the cursor. Tracking the pointer here makes both the
+  // emphasis and the bolded row follow vertical movement.
+  const canvas = document.getElementById('chart');
   const hoverCard = document.getElementById('hovercard');
-  let hoverIdx = -1; // datasetIndex nearest the cursor, -1 when the cursor is away
+  let hoverAt = -1;  // x index under the cursor, -1 when the cursor is away
+  let hoverIdx = -1; // datasetIndex nearest the cursor, -1 when none
+
+  // Vertical guide at the hovered date plus a dot where the emphasized series
+  // crosses it — the anchor Chart.js's own caret would have drawn.
+  const crosshair = {
+    id: 'crosshair',
+    afterDatasetsDraw(c) {
+      if (hoverAt < 0) return;
+      const x = c.scales.x.getPixelForValue(hoverAt);
+      if (!Number.isFinite(x)) return;
+      const { ctx, chartArea } = c;
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.strokeStyle = Chart.defaults.borderColor;
+      ctx.beginPath();
+      ctx.moveTo(x, chartArea.top);
+      ctx.lineTo(x, chartArea.bottom);
+      ctx.stroke();
+      const ds = hoverIdx >= 0 ? c.data.datasets[hoverIdx] : null;
+      const v = ds ? ds.data[hoverAt] : null;
+      if (v != null) {
+        ctx.setLineDash([]);
+        ctx.fillStyle = ds.borderColor;
+        ctx.beginPath();
+        ctx.arc(x, c.scales.y.getPixelForValue(v), 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    },
+  };
 
   // The series under the cursor stays solid and thick; the rest go thin and
   // dashed, so one line reads clearly out of forty overlapping ones.
@@ -491,58 +528,111 @@
       const on = i === hoverIdx;
       ds.borderWidth = hoverIdx === -1 ? 2 : on ? 3.5 : 1;
       ds.borderDash = hoverIdx === -1 || on ? [] : [4, 3];
-      ds.pointHoverRadius = on ? 4.5 : 0;
     });
-    chart.update('none');
+    chart.update('none'); // dash and width are resolved at update time, not draw
   }
 
   function hideHover() {
     hoverCard.style.opacity = '0';
-    if (hoverIdx !== -1) {
-      hoverIdx = -1;
-      paintEmphasis(); // repaint runs once: hoverIdx is already -1 on re-entry
-    }
+    const wasOn = hoverAt !== -1 || hoverIdx !== -1;
+    hoverAt = -1;
+    hoverIdx = -1;
+    if (wasOn && chart) paintEmphasis();
   }
 
   // Rank every plotted series at the hovered date, highest first, and bold the
   // one under the cursor. Columns keep forty rows inside the chart card.
-  function showHover(tooltip) {
-    const items = tooltip.dataPoints
-      .filter(p => p.parsed.y != null)
-      .sort((a, b) => b.parsed.y - a.parsed.y);
-    if (!items.length) { hideHover(); return; }
-
+  function renderHoverCard(items) {
     const cols = items.length > 28 ? 3 : items.length > 14 ? 2 : 1;
     const perCol = Math.ceil(items.length / cols);
-    let html = '<div class="hdate">' + esc(items[0].label) + '</div><div class="cols">';
+    let html = '<div class="hdate">' + esc(dates[hoverAt]) + '</div><div class="cols">';
     for (let c = 0; c < cols; c++) {
       html += '<ul>';
-      items.slice(c * perCol, (c + 1) * perCol).forEach((p, j) => {
-        // borderColor comes from color() in this file, never from data.json
-        html += '<li class="' + (p.datasetIndex === hoverIdx ? 'on' : '') + '">'
-          + '<span class="sw" style="background:' + p.dataset.borderColor + '"></span>'
+      items.slice(c * perCol, (c + 1) * perCol).forEach((it, j) => {
+        // colors come from color() in this file, never from data.json
+        html += '<li class="' + (it.i === hoverIdx ? 'on' : '') + '">'
+          + '<span class="sw" style="background:' + it.color + '"></span>'
           + '<span class="rk">' + (c * perCol + j + 1) + '</span>'
-          + '<span class="nm">' + esc(p.dataset.label) + '</span>'
-          + '<span class="val">' + p.parsed.y.toLocaleString('en-US') + '</span></li>';
+          + '<span class="nm">' + esc(it.label) + '</span>'
+          + '<span class="val">' + it.v.toLocaleString('en-US') + '</span></li>';
       });
       html += '</ul>';
     }
     hoverCard.innerHTML = html + '</div>';
+  }
 
-    // Place beside the caret, flipped or clamped to stay inside the card.
+  // Beside the guide line, flipped or clamped to stay inside the chart card.
+  function placeHoverCard(anchorX, cursorY) {
     hoverCard.style.opacity = '1';
     const wrap = chartWrap.getBoundingClientRect();
     const card = hoverCard.getBoundingClientRect();
-    let left = tooltip.caretX + 18;
-    if (left + card.width > wrap.width) left = tooltip.caretX - card.width - 18;
+    let left = anchorX + 18;
+    if (left + card.width > wrap.width) left = anchorX - card.width - 18;
     hoverCard.style.left = Math.max(0, Math.min(left, Math.max(0, wrap.width - card.width))) + 'px';
-    hoverCard.style.top = Math.max(0, Math.min(tooltip.caretY - card.height / 2, Math.max(0, wrap.height - card.height))) + 'px';
+    hoverCard.style.top = Math.max(0, Math.min(cursorY - card.height / 2, Math.max(0, wrap.height - card.height))) + 'px';
   }
+
+  function trackHover(x, y) {
+    if (!chart) return;
+    const { chartArea: area, scales } = chart;
+    if (x < area.left || x > area.right || y < area.top || y > area.bottom) { hideHover(); return; }
+
+    // Nearest date by pixel distance, using the same scale call the crosshair
+    // draws with, so the guide line always lands on the date being reported.
+    let idx = 0;
+    let idxDist = Infinity;
+    for (let i = 0; i < dates.length; i++) {
+      const dist = Math.abs(scales.x.getPixelForValue(i) - x);
+      if (dist < idxDist) { idxDist = dist; idx = i; }
+    }
+
+    // One pass: collect the plotted values at this date and, from their pixel
+    // positions, the series closest to the cursor's height.
+    const items = [];
+    let nearest = -1;
+    let nearestDist = Infinity;
+    chart.data.datasets.forEach((ds, i) => {
+      if (!chart.isDatasetVisible(i)) return;
+      const v = ds.data[idx];
+      if (v == null) return;
+      items.push({ i, v, label: ds.label, color: ds.borderColor });
+      const dist = Math.abs(scales.y.getPixelForValue(v) - y);
+      if (dist < nearestDist) { nearestDist = dist; nearest = i; }
+    });
+    if (!items.length) { hideHover(); return; }
+    items.sort((a, b) => b.v - a.v);
+
+    const movedDate = idx !== hoverAt;
+    const movedSeries = nearest !== hoverIdx;
+    hoverAt = idx;
+    hoverIdx = nearest;
+
+    if (movedDate || movedSeries) renderHoverCard(items);
+    placeHoverCard(scales.x.getPixelForValue(idx), y);
+    if (movedSeries) paintEmphasis();      // re-resolves dash and width, then redraws
+    else if (movedDate) chart.render();    // only the guide line moved
+  }
+
+  // One read per frame: mousemove fires far faster than the chart can redraw.
+  let framePending = false;
+  let cursor = null;
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    cursor = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(() => {
+      framePending = false;
+      if (cursor) trackHover(cursor.x, cursor.y);
+    });
+  });
+  canvas.addEventListener('mouseleave', () => { cursor = null; hideHover(); });
 
   function renderChart() {
     // Degraded mode: filter/search handlers still call this after the early
     // CDN-failure return; without the guard they hit TDZ consts and throw.
     if (!window.Chart) return;
+    hoverAt = -1;
     hoverIdx = -1;
     hoverCard.style.opacity = '0';
     const list = visible();
@@ -556,26 +646,19 @@
         borderColor: color(i),
         backgroundColor: color(i),
         pointRadius: nPoints < 2 ? 3 : 0, // single snapshots need a visible dot
-        pointHoverRadius: 0, // paintEmphasis turns the dot on for the hovered series only
+        pointHoverRadius: 0, // the crosshair plugin draws the dot instead
         borderWidth: 2,
         spanGaps: true,
         hidden: hiddenState[r.key] ?? false, // every series plotted until the legend hides it
       };
     });
     if (chart) chart.destroy();
-    chart = new Chart(document.getElementById('chart'), {
+    chart = new Chart(canvas, {
       type: 'line',
+      plugins: [crosshair],
       data: { labels: dates, datasets },
       options: {
         responsive: true, maintainAspectRatio: false, animation: false,
-        // index mode collects every series at the hovered date, which is what
-        // the readout ranks; onHover tracks which one the cursor is nearest.
-        interaction: { mode: 'index', intersect: false, axis: 'x' },
-        onHover(e, _active, ch) {
-          const near = ch.getElementsAtEventForMode(e, 'nearest', { intersect: false }, true);
-          const idx = near.length ? near[0].datasetIndex : -1;
-          if (idx !== hoverIdx) { hoverIdx = idx; paintEmphasis(); }
-        },
         scales: {
           y: { type: yType, ticks: { callback: v => fmtStars(v) } },
           x: { ticks: { maxTicksLimit: 12 } },
@@ -590,18 +673,13 @@
               hiddenState[ds.repoKey] = !legend.chart.isDatasetVisible(item.datasetIndex);
             },
           },
-          tooltip: {
-            enabled: false, // replaced by the HTML readout in showHover
-            external: ctx => ctx.tooltip.opacity ? showHover(ctx.tooltip) : hideHover(),
-          },
+          tooltip: { enabled: false }, // replaced by the HTML readout above
         },
       },
     });
     document.getElementById('chart').setAttribute('aria-label',
       'Line chart of GitHub star history over time for ' + list.length + ' repositories. The same data is in the table above.');
   }
-
-  document.getElementById('chart').addEventListener('mouseleave', hideHover);
 
   const scaleBtn = document.getElementById('scaleToggle');
   scaleBtn.onclick = () => {
