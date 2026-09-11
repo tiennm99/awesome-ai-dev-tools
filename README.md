@@ -5,24 +5,24 @@
 
 📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/awesome-coding-agents/)**
 
-**Last updated:** 2026-09-11 07:30 UTC · **Tracked:** 40 repos
-**Top 7-day mover:** [anomalyco/opencode](https://github.com/anomalyco/opencode) (+2980 stars)
+**Last updated:** 2026-09-11 07:37 UTC · **Tracked:** 40 repos
+**Top 7-day mover:** [anomalyco/opencode](https://github.com/anomalyco/opencode) (+2981 stars)
 
 | # | Repo | Stars | Δ7d | Language | Last push | Description |
 |---|------|------:|----:|----------|-----------|-------------|
 | 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 219.7k | — | TypeScript | 2026-09-11 | DeepSeek Harness: Everything is a Plugin. |
-| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 206.6k | +2980 | TypeScript | 2026-09-11 | The open source coding agent. |
+| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 206.6k | +2981 | TypeScript | 2026-09-11 | The open source coding agent. |
 | 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 144.7k | +722 | Python | 2026-09-10 | Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands. |
-| 4 | [openai/codex](https://github.com/openai/codex) | 123.2k | +1902 | Rust | 2026-09-11 | Lightweight coding agent that runs in your terminal |
+| 4 | [openai/codex](https://github.com/openai/codex) | 123.2k | +1905 | Rust | 2026-09-11 | Lightweight coding agent that runs in your terminal |
 | 5 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 106.9k | +103 | TypeScript | 2026-09-11 | An open-source AI agent that brings the power of Gemini directly into your terminal. |
-| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2457 | TypeScript | 2026-09-10 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
-| 7 | [zed-industries/zed](https://github.com/zed-industries/zed) | 90.1k | +350 | Rust | 2026-09-11 | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. |
-| 8 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 87.3k | +1194 | TypeScript | 2026-09-11 | 🙌 OpenHands: AI-Driven Development |
+| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2460 | TypeScript | 2026-09-10 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
+| 7 | [zed-industries/zed](https://github.com/zed-industries/zed) | 90.1k | +353 | Rust | 2026-09-11 | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. |
+| 8 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 87.3k | +1197 | TypeScript | 2026-09-11 | 🙌 OpenHands: AI-Driven Development |
 | 9 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 68.3k | — | Rust | 2026-09-09 | A coding agent for open models like Kimi K3 and GLM 5.3 |
 | 10 | [cline/cline](https://github.com/cline/cline) | 67.8k | +380 | TypeScript | 2026-09-11 | Autonomous coding agent as an SDK, IDE extension, or CLI assistant. |
-| 11 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 64.9k | +159 | Rust | 2026-09-11 | Warp is an agentic development environment, born out of the terminal. |
+| 11 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 64.9k | +160 | Rust | 2026-09-11 | Warp is an agentic development environment, born out of the terminal. |
 | 12 | [AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer) | 55.1k | -4 | Python | 2025-05-14 | CLI platform to experiment with codegen. Precursor to: https://lovable.dev |
-| 13 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 54.1k | +214 | Rust | 2026-09-11 | an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM |
+| 13 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 54.1k | +216 | Rust | 2026-09-11 | an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM |
 | 14 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 48.9k | +173 | Python | 2026-05-22 | aider is AI pair programming in your terminal |
 | 15 | [Hmbown/Codewhale](https://github.com/Hmbown/Codewhale) | 40.9k | — | Rust | 2026-09-11 | Open-source coding agent for your terminal, built in Rust and on a journey of continuous community improvement. Issues and PRs welcome. |
 | 16 | [continuedev/continue](https://github.com/continuedev/continue) | 35.9k | +120 | TypeScript | 2026-09-08 | open-source coding agent |
@@ -70,7 +70,9 @@
 
 1. **An AI coding agent or assistant itself** — a tool that autonomously writes, edits, or reviews code. Frameworks, wrappers, observability layers, and workspaces *for* agents are out of scope.
 2. **Notable**: roughly **10,000+ GitHub stars** (the current list floor).
-3. **Open source and actively maintained** (archived repos are kept only for historical significance, marked as such).
+3. **Open source and actively maintained** — no push in **6 months** means the entry is dropped. The daily run flags anything past **3 months** for review, so the ranking reflects tools people can actually use today.
+
+Archived or abandoned repos are kept only when they are historically significant, and are marked as such in [`data/agents.yml`](data/agents.yml).
 
 Add an agent to [`data/agents.yml`](data/agents.yml):
 
