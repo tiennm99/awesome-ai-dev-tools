@@ -35,11 +35,13 @@ Optional fields: `notes` (for clarifications or caveats)
 
 ## Handling Duplicates and Changes
 
-**Duplicate repos:** If a repo appears twice (same owner/repo), the second entry is ignored in the next daily run.
+**Duplicate repos:** CI rejects them. `go run . -check` fails on a case-insensitive `owner/repo` match, so a duplicate never reaches a daily run.
 
-**Renamed repos:** If a GitHub repo is renamed after being tracked, update the `repo` field in `data/agents.yml`. The updater will fetch fresh metadata under the new name. Historical data in `data/history.jsonl` remains under the old key and is not migrated.
+**Renamed repos:** GitHub redirects the old slug, so the updater keeps working — it prints a `::warning::` naming the new slug. Update `owner`/`repo` in `data/agents.yml` to the new slug and add the old key to `canonicalKeyMigrations` in `history.go`, or the repo's star history detaches and its deltas show `—`.
 
-**Deprecation:** To remove an agent, delete its entry from `data/agents.yml`. The next run will drop it from the README; historical data is preserved.
+**Deprecation:** To remove an agent, delete its entry from `data/agents.yml`. The next run drops it from the README; its history stays in `data/history.jsonl`, so re-adding the entry later restores its star chart.
+
+**Staleness:** An entry with no push in **6 months** is dropped. Past **3 months** the updater prints a `::warning::` naming the repo and its days idle, so the daily run surfaces candidates without anyone auditing the list by hand. Removal stays a human decision: a repo can go quiet between releases, and a historically significant one (`gpt-engineer`) is kept with a `notes` marker instead.
 
 ## PR Review
 

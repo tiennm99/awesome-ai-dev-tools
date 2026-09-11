@@ -6,10 +6,12 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 // aliasRe extracts the numeric alias index from a GraphQL query fragment
@@ -225,5 +227,88 @@ func TestFetchStats_DriftWarnings(t *testing.T) {
 		if s.CanonicalKey == "org/archived-repo" && !s.IsArchived {
 			t.Error("expected org/archived-repo Stat.IsArchived=true")
 		}
+	}
+}
+
+// captureStdout redirects os.Stdout for the duration of fn and returns what
+// was written, so the ::warning:: annotations fetchStats emits are assertable.
+func captureStdout(t *testing.T, fn func()) string {
+	t.Helper()
+	r, w, err := os.Pipe()
+	if err != nil {
+		t.Fatalf("os.Pipe: %v", err)
+	}
+	orig := os.Stdout
+	os.Stdout = w
+	defer func() { os.Stdout = orig }()
+
+	fn()
+
+	if err := w.Close(); err != nil {
+		t.Fatalf("close pipe writer: %v", err)
+	}
+	out, err := io.ReadAll(r)
+	if err != nil {
+		t.Fatalf("read pipe: %v", err)
+	}
+	return string(out)
+}
+
+func TestFetchStats_StaleWarning(t *testing.T) {
+	fixed := time.Date(2026, 9, 11, 0, 0, 0, 0, time.UTC)
+	origNow := timeNow
+	timeNow = func() time.Time { return fixed }
+	defer func() { timeNow = origNow }()
+
+	agents := []Agent{
+		{Owner: "org", Repo: "fresh", Category: "cli"},
+		{Owner: "org", Repo: "stale", Category: "cli"},
+		{Owner: "org", Repo: "stale-and-archived", Category: "cli"},
+	}
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		node := func(name, pushedAt string, archived bool) map[string]any {
+			return map[string]any{
+				"stargazerCount": 5,
+				"nameWithOwner":  name,
+				"pushedAt":       pushedAt,
+				"isArchived":     archived,
+			}
+		}
+		out, _ := json.Marshal(map[string]any{"data": map[string]any{
+			// 2 days idle: inside the window, no warning.
+			"r0": node("org/fresh", "2026-09-09T00:00:00Z", false),
+			// 120 days idle: past staleWarnAfter.
+			"r1": node("org/stale", "2026-05-14T00:00:00Z", false),
+			// Also stale, but archived — the archived warning covers it.
+			"r2": node("org/stale-and-archived", "2025-01-01T00:00:00Z", true),
+		}})
+		_, _ = w.Write(out) // httptest write error is not actionable in a test fake
+	}))
+	defer srv.Close()
+	withGraphQLURL(t, srv)
+
+	var stats []Stat
+	var fetchErr error
+	logs := captureStdout(t, func() { stats, fetchErr = fetchStats("test-token", agents) })
+
+	if fetchErr != nil {
+		t.Fatalf("fetchStats: %v (staleness should warn, not fail)", fetchErr)
+	}
+	if len(stats) != 3 {
+		t.Fatalf("expected 3 stats, got %d", len(stats))
+	}
+
+	if want := "::warning::repo org/stale has no push in 120 days"; !strings.Contains(logs, want) {
+		t.Errorf("missing stale warning %q in:\n%s", want, logs)
+	}
+	if strings.Contains(logs, "org/fresh has no push") {
+		t.Errorf("warned about a repo pushed 2 days ago:\n%s", logs)
+	}
+	if strings.Contains(logs, "org/stale-and-archived has no push") {
+		t.Errorf("stale warning duplicates the archived warning:\n%s", logs)
+	}
+	if want := "::warning::repo org/stale-and-archived is archived"; !strings.Contains(logs, want) {
+		t.Errorf("missing archived warning %q in:\n%s", want, logs)
 	}
 }

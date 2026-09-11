@@ -68,6 +68,12 @@ var httpClient = &http.Client{Timeout: 30 * time.Second}
 // a network call or token.
 var graphqlURL = "https://api.github.com/graphql"
 
+// staleWarnAfter is how long a tracked repo may go without a push before the
+// updater flags it for review. It mirrors the review window in the README's
+// inclusion criteria; dropping an entry stays a human decision, so this only
+// annotates the run.
+const staleWarnAfter = 90 * 24 * time.Hour
+
 // chunkSize is the max aliases per GraphQL request (GitHub node-limit safety margin).
 const chunkSize = 50
 
@@ -111,14 +117,20 @@ func fetchStats(token string, agents []Agent) ([]Stat, error) {
 			lang = node.PrimaryLanguage.Name
 		}
 
-		// Drift detection: surface renames/archival as GitHub Actions run
-		// annotations so a human notices without polling every repo by hand.
+		// Drift detection: surface renames, archival and staleness as GitHub
+		// Actions run annotations so a human notices without polling every
+		// repo by hand.
 		canonicalKey := a.Owner + "/" + a.Repo
 		if node.NameWithOwner != "" && !strings.EqualFold(node.NameWithOwner, canonicalKey) {
 			fmt.Printf("::warning::repo %s renamed to %s — update data/agents.yml and add a canonicalKeyMigrations entry\n", canonicalKey, node.NameWithOwner)
 		}
-		if node.IsArchived {
+		switch {
+		case node.IsArchived:
+			// Archived already implies no further pushes; one warning is enough.
 			fmt.Printf("::warning::repo %s is archived — consider removing or annotating\n", canonicalKey)
+		case !node.PushedAt.IsZero() && timeNow().Sub(node.PushedAt) > staleWarnAfter:
+			days := int(timeNow().Sub(node.PushedAt).Hours() / 24)
+			fmt.Printf("::warning::repo %s has no push in %d days — review against the maintenance criterion\n", canonicalKey, days)
 		}
 
 		stats = append(stats, Stat{
