@@ -393,3 +393,43 @@ func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 		t.Errorf("temp file should not exist after successful write")
 	}
 }
+
+func TestReadSnapshots_SortsOutOfOrderDates(t *testing.T) {
+	// A hand edit or a merge of two concurrent updater runs can leave lines
+	// out of date order; delta windows depend on ascending order.
+	path := t.TempDir() + "/history.jsonl"
+	lines := `{"date":"2026-09-03","stars":{"org/repo":300}}
+{"date":"2026-08-27","stars":{"org/repo":100}}
+{"date":"2026-09-10","stars":{"org/repo":400}}
+{"date":"2026-09-01","stars":{"org/repo":200}}
+`
+	if err := os.WriteFile(path, []byte(lines), 0o644); err != nil {
+		t.Fatalf("seed file: %v", err)
+	}
+
+	got, err := readSnapshots(path)
+	if err != nil {
+		t.Fatalf("readSnapshots: %v", err)
+	}
+	want := []string{"2026-08-27", "2026-09-01", "2026-09-03", "2026-09-10"}
+	if len(got) != len(want) {
+		t.Fatalf("got %d snapshots, want %d", len(got), len(want))
+	}
+	for i, d := range want {
+		if got[i].Date != d {
+			t.Errorf("snapshot %d date = %s, want %s", i, got[i].Date, d)
+		}
+	}
+
+	// With the dates ordered, the 7-day base is 2026-09-03 (not the
+	// last line in the file), so the delta is 400-300.
+	fixed := time.Date(2026, 9, 10, 0, 0, 0, 0, time.UTC)
+	orig := timeNow
+	timeNow = func() time.Time { return fixed }
+	defer func() { timeNow = orig }()
+
+	deltas := computeDeltas(got, Snapshot{Date: "2026-09-10", Stars: map[string]int{"org/repo": 400}})
+	if deltas["org/repo"] != 100 {
+		t.Errorf("delta = %d, want 100", deltas["org/repo"])
+	}
+}

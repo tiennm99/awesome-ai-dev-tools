@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"os"
+	"io"
 )
 
 // siteRow is one ranked repo in site/data.json, consumed by site/index.html.
@@ -55,13 +55,11 @@ func writeSiteData(path string, stats []Stat, deltas7, deltas30 map[string]int, 
 		}
 	}
 
-	out, err := json.Marshal(siteData{
-		UpdatedAt: timeNow().UTC().Format("2006-01-02 15:04 UTC"),
-		Rows:      rows,
-		History:   history,
+	return atomicWriteFile(path, func(w io.Writer) error {
+		return json.NewEncoder(w).Encode(siteData{
+			UpdatedAt: timeNow().UTC().Format("2006-01-02 15:04 UTC"),
+			Rows:      rows,
+			History:   history,
+		})
 	})
-	if err != nil {
-		return err
-	}
-	return os.WriteFile(path, out, 0o644)
 }

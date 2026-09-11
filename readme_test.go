@@ -1,7 +1,10 @@
 package main
 
 import (
+	"os"
+	"strings"
 	"testing"
+	"time"
 )
 
 func TestSanitizeCell(t *testing.T) {
@@ -116,5 +119,86 @@ func TestSanitizeCell(t *testing.T) {
 				t.Errorf("%s: expected %q, got %q", tt.desc, tt.expected, result)
 			}
 		})
+	}
+}
+
+func TestRenderReadme_TableRowsAndCallout(t *testing.T) {
+	fixed := time.Date(2026, 9, 11, 3, 39, 0, 0, time.UTC)
+	orig := timeNow
+	timeNow = func() time.Time { return fixed }
+	defer func() { timeNow = orig }()
+
+	stats := []Stat{
+		{CanonicalKey: "org/big", NameWithOwner: "org/big", URL: "https://github.com/org/big",
+			Stars: 1_500_000, Language: "Go", PushedAt: fixed, Description: "huge | agent", Category: "cli"},
+		{CanonicalKey: "org/mid", NameWithOwner: "org/mid", URL: "https://github.com/org/mid",
+			Stars: 1234, Language: "Rust", PushedAt: fixed, Description: "mid agent", Category: "cli"},
+		{CanonicalKey: "org/small", NameWithOwner: "org/small", URL: "https://github.com/org/small",
+			Stars: 999, Language: "", PushedAt: fixed, Description: "small agent", Category: "cli"},
+	}
+	// org/small has no delta: its row must show the em dash, and it must not
+	// win the top-mover callout.
+	deltas := map[string]int{"org/big": 12, "org/mid": -3}
+
+	out := t.TempDir() + "/README.md"
+	if err := renderReadme("templates/readme.tmpl", out, stats, deltas); err != nil {
+		t.Fatalf("renderReadme: %v", err)
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	got := string(raw)
+
+	want := []string{
+		"**Last updated:** 2026-09-11 03:39 UTC · **Tracked:** 3 repos",
+		"**Top 7-day mover:** [org/big](https://github.com/org/big) (+12 stars)",
+		"| 1 | [org/big](https://github.com/org/big) | 1.5M | +12 | Go | 2026-09-11 | huge \\| agent |",
+		"| 2 | [org/mid](https://github.com/org/mid) | 1.2k | -3 | Rust | 2026-09-11 | mid agent |",
+		"| 3 | [org/small](https://github.com/org/small) | 999 | — |  | 2026-09-11 | small agent |",
+	}
+	for _, w := range want {
+		if !strings.Contains(got, w) {
+			t.Errorf("README missing line:\n%s\n--- got ---\n%s", w, got)
+		}
+	}
+}
+
+func TestRenderReadme_NoDeltasOmitsTopMover(t *testing.T) {
+	fixed := time.Date(2026, 9, 11, 3, 39, 0, 0, time.UTC)
+	orig := timeNow
+	timeNow = func() time.Time { return fixed }
+	defer func() { timeNow = orig }()
+
+	stats := []Stat{{CanonicalKey: "org/repo", NameWithOwner: "org/repo",
+		URL: "https://github.com/org/repo", Stars: 10, PushedAt: fixed, Category: "cli"}}
+
+	out := t.TempDir() + "/README.md"
+	if err := renderReadme("templates/readme.tmpl", out, stats, map[string]int{}); err != nil {
+		t.Fatalf("renderReadme: %v", err)
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if strings.Contains(string(raw), "Top 7-day mover") {
+		t.Error("top-mover callout rendered with no deltas available")
+	}
+}
+
+func TestRenderReadme_MissingTemplateDoesNotTouchOutput(t *testing.T) {
+	out := t.TempDir() + "/README.md"
+	if err := os.WriteFile(out, []byte("previous"), 0o644); err != nil {
+		t.Fatalf("seed file: %v", err)
+	}
+	if err := renderReadme("templates/does-not-exist.tmpl", out, nil, nil); err == nil {
+		t.Fatal("expected an error for a missing template")
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if string(raw) != "previous" {
+		t.Errorf("output = %q, want the existing README left intact", raw)
 	}
 }

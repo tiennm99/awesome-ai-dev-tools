@@ -2,8 +2,10 @@ package main
 
 import (
 	"bufio"
+	"cmp"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"slices"
 	"time"
@@ -98,7 +100,16 @@ func readSnapshots(path string) ([]Snapshot, error) {
 		s.Stars = applyMigrations(s.Stars)
 		out = append(out, s)
 	}
-	return out, scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	// Delta windows pick the newest snapshot inside the window by scan order,
+	// so the slice must be date-ascending. Sort rather than trust the file:
+	// a hand edit or a merge of two concurrent runs can interleave lines.
+	slices.SortStableFunc(out, func(a, b Snapshot) int { return cmp.Compare(a.Date, b.Date) })
+
+	return out, nil
 }
 
 // applyMigrations rewrites any deprecated history keys to their current
@@ -156,38 +167,17 @@ func resolveCanonicalKey(key string) string {
 	return key
 }
 
-// writeSnapshots writes to a temp file then renames atomically so a crash
-// mid-write never leaves history.jsonl truncated or partially written.
+// writeSnapshots persists every snapshot as one JSON object per line.
 func writeSnapshots(path string, snapshots []Snapshot) error {
-	tmp := path + ".tmp"
-	f, err := os.Create(tmp)
-	if err != nil {
-		return err
-	}
-
-	enc := json.NewEncoder(f)
-	writeErr := error(nil)
-	for _, s := range snapshots {
-		if err := enc.Encode(s); err != nil {
-			writeErr = err
-			break
+	return atomicWriteFile(path, func(w io.Writer) error {
+		enc := json.NewEncoder(w)
+		for _, s := range snapshots {
+			if err := enc.Encode(s); err != nil {
+				return err
+			}
 		}
-	}
-
-	if syncErr := f.Sync(); syncErr != nil && writeErr == nil {
-		writeErr = syncErr
-	}
-	// A failed close on a write path can hide lost data — surface it.
-	if closeErr := f.Close(); closeErr != nil && writeErr == nil {
-		writeErr = closeErr
-	}
-
-	if writeErr != nil {
-		_ = os.Remove(tmp) // best-effort cleanup; the write error is what matters
-		return writeErr
-	}
-
-	return os.Rename(tmp, path)
+		return nil
+	})
 }
 
 // computeDeltas returns stars-now minus stars-at-or-before-cutoff for each

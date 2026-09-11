@@ -7,12 +7,21 @@ import (
 	"os"
 )
 
+// Paths the updater reads and writes, relative to the repository root.
+const (
+	agentsPath   = "data/agents.yml"
+	historyPath  = "data/history.jsonl"
+	readmeTmpl   = "templates/readme.tmpl"
+	readmePath   = "README.md"
+	siteDataPath = "site/data.json"
+)
+
 func main() {
 	check := flag.Bool("check", false, "validate data/agents.yml offline (no network, no token) and exit")
 	flag.Parse()
 
 	if *check {
-		if err := runCheck("data/agents.yml"); err != nil {
+		if err := runCheck(agentsPath); err != nil {
 			log.Printf("check failed: %v", err)
 			os.Exit(1)
 		}
@@ -25,12 +34,12 @@ func main() {
 }
 
 func run() error {
-	agents, err := loadAgents("data/agents.yml")
+	agents, err := loadAgents(agentsPath)
 	if err != nil {
 		return err
 	}
 	if len(agents) == 0 {
-		return fmt.Errorf("no agents in data/agents.yml")
+		return fmt.Errorf("no agents in %s", agentsPath)
 	}
 
 	token := os.Getenv("GITHUB_TOKEN")
@@ -43,16 +52,16 @@ func run() error {
 		return err
 	}
 
-	snapshots, deltas7, deltas30, err := appendHistory("data/history.jsonl", stats)
+	snapshots, deltas7, deltas30, err := appendHistory(historyPath, stats)
 	if err != nil {
 		return err
 	}
 
-	if err := renderReadme("templates/readme.tmpl", "README.md", stats, deltas7); err != nil {
+	if err := renderReadme(readmeTmpl, readmePath, stats, deltas7); err != nil {
 		return err
 	}
 
-	if err := writeSiteData("site/data.json", stats, deltas7, deltas30, snapshots); err != nil {
+	if err := writeSiteData(siteDataPath, stats, deltas7, deltas30, snapshots); err != nil {
 		return err
 	}
 

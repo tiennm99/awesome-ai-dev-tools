@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"io"
 	"path/filepath"
 	"strings"
 	"text/template"
@@ -84,22 +84,14 @@ func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int)
 		return err
 	}
 
-	f, err := os.Create(outPath)
-	if err != nil {
-		return err
-	}
-
-	execErr := tmpl.ExecuteTemplate(f, filepath.Base(tmplPath), map[string]any{
-		"Rows":      rows,
-		"UpdatedAt": timeNow().UTC().Format("2006-01-02 15:04 UTC"),
-		"Total":     len(rows),
-		"TopMover":  topMover,
+	return atomicWriteFile(outPath, func(w io.Writer) error {
+		return tmpl.ExecuteTemplate(w, filepath.Base(tmplPath), map[string]any{
+			"Rows":      rows,
+			"UpdatedAt": timeNow().UTC().Format("2006-01-02 15:04 UTC"),
+			"Total":     len(rows),
+			"TopMover":  topMover,
+		})
 	})
-	// A failed close on a write path can hide lost data — surface it.
-	if closeErr := f.Close(); closeErr != nil && execErr == nil {
-		execErr = closeErr
-	}
-	return execErr
 }
 
 // sanitizeCell makes a third-party repo description safe to embed in a
