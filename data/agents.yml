@@ -33,9 +33,6 @@ agents:
     repo: goose
     category: cli
     notes: Moved to the Agentic AI Foundation (Linux Foundation)
-  - owner: plandex-ai
-    repo: plandex
-    category: cli
   - owner: AntonOsika
     repo: gpt-engineer
     category: cli
@@ -60,12 +57,9 @@ agents:
   - owner: anthropics
     repo: claude-code
     category: cli
-  - owner: yetone
+  - owner: avante-corp
     repo: avante.nvim
     category: extension
-  - owner: stackblitz
-    repo: bolt.new
-    category: web
   - owner: kortix-ai
     repo: suna
     category: web
@@ -94,9 +88,49 @@ agents:
   - owner: dyad-sh
     repo: dyad
     category: web
-  - owner: bytedance
-    repo: trae-agent
-    category: research
   - owner: github
     repo: copilot-cli
+    category: cli
+  - owner: deepseek-ai
+    repo: deepseek-harness
+    category: cli
+    notes: Developer preview; compatibility-breaking changes expected
+  - owner: openinterpreter
+    repo: openinterpreter
+    category: cli
+  - owner: Hmbown
+    repo: Codewhale
+    category: cli
+  - owner: esengine
+    repo: DeepSeek-Reasonix
+    category: cli
+  - owner: Gitlawb
+    repo: openclaude
+    category: cli
+  - owner: can1357
+    repo: oh-my-pi
+    category: cli
+  - owner: xai-org
+    repo: grok-build
+    category: cli
+  - owner: alibaba
+    repo: open-code-review
+    category: cli
+  - owner: PrimeIntellect-ai
+    repo: prime-agent
+    category: cli
+  - owner: 1jehuang
+    repo: jcode
+    category: cli
+  - owner: HKUDS
+    repo: DeepCode
+    category: research
+  - owner: CodebuffAI
+    repo: freebuff
+    category: cli
+  - owner: MoonshotAI
+    repo: kimi-cli
+    category: cli
+  - owner: Kuberwastaken
+    repo: claurst
     category: cli

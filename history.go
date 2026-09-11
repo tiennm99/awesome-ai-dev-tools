@@ -23,10 +23,12 @@ type Snapshot struct {
 //     both spellings from earlier flip-flops, so map the non-canonical one.
 //   - opencode moved sst → anomalyco
 //   - gpt-engineer moved gpt-engineer-org → AntonOsika
+//   - avante.nvim moved yetone → avante-corp
 var canonicalKeyMigrations = map[string]string{
 	"block/goose":                   "aaif-goose/goose",
 	"sst/opencode":                  "anomalyco/opencode",
 	"gpt-engineer-org/gpt-engineer": "AntonOsika/gpt-engineer",
+	"yetone/avante.nvim":            "avante-corp/avante.nvim",
 }
 
 // timeNow is a seam for tests: production code always calls time.Now, but
