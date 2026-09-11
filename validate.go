@@ -18,15 +18,60 @@ var ownerPattern = regexp.MustCompile(`^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`)
 // underscore, hyphen.
 var repoPattern = regexp.MustCompile(`^[A-Za-z0-9._-]+$`)
 
-// validCategories mirrors the category enum documented in
-// templates/readme.tmpl's Contributing section.
-var validCategories = map[string]bool{
-	"cli":       true,
-	"ide":       true,
-	"extension": true,
-	"library":   true,
-	"research":  true,
-	"web":       true,
+// tagVocabulary is the closed tag list, ordered for display. Tags describe a
+// tool along orthogonal facets, so an entry carries several; the grouping is
+// what lets the dashboard offer OR-within-facet, AND-across-facet filters.
+//
+// Deliberately excluded: model names (gpt-4, sonnet, r1 — they churn within
+// months) and implementation stacks (rust, nextjs — they say nothing about
+// choosing the tool).
+//
+// This slice is the single source of truth: the lookup map below, the
+// validation messages, and the dashboard's filter chips (shipped in
+// site/data.json) are all derived from it.
+var tagVocabulary = []tagFacet{
+	{ID: facetSurface, Label: "Surface", Tags: []string{"terminal", "editor-plugin", "ide", "desktop", "web", "self-hosted"}},
+	{ID: facetModel, Label: "Model access", Tags: []string{"byo-model", "single-vendor", "local-models"}},
+	{ID: facetWorkflow, Label: "Workflow", Tags: []string{"interactive", "autonomous", "review", "app-builder", "research"}},
+	{ID: facetIntegration, Label: "Integration", Tags: []string{"mcp", "acp", "headless"}},
+	{ID: facetOrigin, Label: "Origin", Tags: []string{"vendor", "community"}},
+}
+
+// tagFacet is one group of related tags, also the shape the dashboard consumes.
+type tagFacet struct {
+	ID    string   `json:"id"`
+	Label string   `json:"label"`
+	Tags  []string `json:"tags"`
+}
+
+const (
+	facetSurface     = "surface"
+	facetModel       = "model"
+	facetWorkflow    = "workflow"
+	facetIntegration = "integration"
+	facetOrigin      = "origin"
+)
+
+// tagFacetIDs indexes tag -> facet ID for O(1) validation.
+var tagFacetIDs = func() map[string]string {
+	m := make(map[string]string)
+	for _, f := range tagVocabulary {
+		for _, t := range f.Tags {
+			m[t] = f.ID
+		}
+	}
+	return m
+}()
+
+// facetTags lists one facet's legal tags, for error messages that tell a
+// contributor exactly what they may write.
+func facetTags(id string) []string {
+	for _, f := range tagVocabulary {
+		if f.ID == id {
+			return f.Tags
+		}
+	}
+	return nil
 }
 
 // validateAgents checks data/agents.yml entries offline (no network, no
@@ -53,12 +98,10 @@ func validateAgents(agents []Agent) []string {
 			violations = append(violations, fmt.Sprintf("%s: repo %q contains characters not allowed in a GitHub repo name (allowed: letters, digits, '.', '_', '-')", ref, a.Repo))
 		}
 
-		switch {
-		case strings.TrimSpace(a.Category) == "":
-			violations = append(violations, fmt.Sprintf("%s: category is required (one of: cli, ide, extension, library, research, web)", ref))
-		case !validCategories[a.Category]:
-			violations = append(violations, fmt.Sprintf("%s: category %q is not one of cli, ide, extension, library, research, web", ref, a.Category))
+		if a.Category != "" {
+			violations = append(violations, fmt.Sprintf("%s: category %q is no longer a field — replace it with tags, e.g. tags: [terminal, byo-model, interactive, community]", ref, a.Category))
 		}
+		violations = append(violations, validateTags(ref, a.Tags)...)
 
 		key := strings.ToLower(a.Owner + "/" + a.Repo)
 		if first, dup := seen[key]; dup {
@@ -91,4 +134,35 @@ func runCheck(path string) error {
 
 	fmt.Printf("%s: %d agents valid\n", path, len(agents))
 	return nil
+}
+
+// validateTags checks one entry's tags against the closed vocabulary: every
+// tag known, no repeats, at least one surface tag (the dashboard groups rows
+// by where you run them), and at most one origin tag (a tool has one
+// publisher).
+func validateTags(ref string, tags []string) []string {
+	var violations []string
+	seen := make(map[string]bool, len(tags))
+	facetCount := map[string]int{}
+
+	for _, tag := range tags {
+		switch facet, known := tagFacetIDs[tag]; {
+		case !known:
+			violations = append(violations, fmt.Sprintf("%s: tag %q is not in the vocabulary (see docs/CONTRIBUTING.md)", ref, tag))
+		case seen[tag]:
+			violations = append(violations, fmt.Sprintf("%s: tag %q is repeated", ref, tag))
+		default:
+			seen[tag] = true
+			facetCount[facet]++
+		}
+	}
+
+	if facetCount[facetSurface] == 0 {
+		violations = append(violations, fmt.Sprintf("%s: needs at least one surface tag (one of: %s)", ref, strings.Join(facetTags(facetSurface), ", ")))
+	}
+	if facetCount[facetOrigin] > 1 {
+		violations = append(violations, fmt.Sprintf("%s: has %d origin tags, expected at most one (%s)", ref, facetCount[facetOrigin], strings.Join(facetTags(facetOrigin), ", ")))
+	}
+
+	return violations
 }

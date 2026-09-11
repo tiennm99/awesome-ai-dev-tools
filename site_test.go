@@ -18,7 +18,7 @@ func TestWriteSiteData_JSONShapeAndDeltaFields(t *testing.T) {
 			CanonicalKey:  "org/repo1",
 			Owner:         "org",
 			Repo:          "repo1",
-			Category:      "cli",
+			Tags:          []string{"terminal", "community"},
 			Notes:         "some note",
 			Description:   "a repo",
 			Stars:         100,
@@ -32,7 +32,7 @@ func TestWriteSiteData_JSONShapeAndDeltaFields(t *testing.T) {
 			CanonicalKey:  "org/repo2",
 			Owner:         "org",
 			Repo:          "repo2",
-			Category:      "web",
+			Tags:          []string{"web", "community"},
 			Description:   "another repo",
 			Stars:         50,
 			Language:      "TypeScript",
@@ -115,7 +115,7 @@ func TestWriteSiteData_JSONShapeAndDeltaFields(t *testing.T) {
 	if !ok {
 		t.Fatalf("expected row to be an object, got %T", rows[0])
 	}
-	for _, key := range []string{"key", "nameWithOwner", "url", "stars", "delta7d", "hasDelta", "delta30d", "hasDelta30", "language", "pushedAt", "description", "category", "archived"} {
+	for _, key := range []string{"key", "nameWithOwner", "url", "stars", "delta7d", "hasDelta", "delta30d", "hasDelta30", "language", "pushedAt", "description", "tags", "archived"} {
 		if _, ok := firstRow[key]; !ok {
 			t.Errorf("expected JSON field %q in row, got keys: %v", key, mapKeys(firstRow))
 		}

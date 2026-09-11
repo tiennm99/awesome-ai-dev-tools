@@ -18,7 +18,6 @@ type Row struct {
 	Language      string
 	PushedAt      string
 	Description   string
-	Category      string
 }
 
 // TopMover is the biggest 7-day gainer, surfaced as a one-line callout above
@@ -47,7 +46,6 @@ func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int)
 			Language:      s.Language,
 			PushedAt:      s.PushedAt.Format("2006-01-02"),
 			Description:   sanitizeCell(s.Description),
-			Category:      s.Category,
 		}
 		if has && (!topMover.HasMover || delta > topMover.Delta) {
 			topMover = TopMover{NameWithOwner: s.NameWithOwner, URL: s.URL, Delta: delta, HasMover: true}

@@ -1,136 +1,141 @@
 # Curated list of AI agent coding tools.
-# Edit this file to add, remove, or recategorize entries.
+# Edit this file to add, remove, or retag entries.
 # The daily GitHub Actions run will refresh stars and regenerate README.md.
 #
 # owner/repo must be the CURRENT canonical GitHub slug. When a tracked repo is
 # renamed, update it here AND add a key migration in history.go so historical
 # star data stays attached.
+#
+# tags describe each tool across five facets — surface (at least one required),
+# model access, workflow, integration, and origin (at most one). The full
+# vocabulary and the evidence rule for applying a tag live in
+# docs/CONTRIBUTING.md; `go run . -check` rejects anything outside it.
 
 agents:
   - owner: Aider-AI
     repo: aider
-    category: cli
+    tags: [terminal, byo-model, local-models, interactive, community]
   - owner: cline
     repo: cline
-    category: extension
+    tags: [editor-plugin, terminal, byo-model, local-models, interactive, mcp, community]
   - owner: continuedev
     repo: continue
-    category: extension
+    tags: [editor-plugin, terminal, byo-model, local-models, interactive, mcp, community]
   - owner: anomalyco
     repo: opencode
-    category: cli
+    tags: [terminal, desktop, byo-model, local-models, interactive, headless, mcp, community]
   - owner: charmbracelet
     repo: crush
-    category: cli
+    tags: [terminal, byo-model, local-models, interactive, mcp, community]
   - owner: google-gemini
     repo: gemini-cli
-    category: cli
+    tags: [terminal, single-vendor, interactive, headless, mcp, vendor]
     notes: Google announced a closed-source successor; OSS repo may be retired
   - owner: openai
     repo: codex
-    category: cli
+    tags: [terminal, editor-plugin, single-vendor, interactive, headless, mcp, vendor]
   - owner: aaif-goose
     repo: goose
-    category: cli
+    tags: [terminal, desktop, byo-model, local-models, interactive, mcp, acp, community]
     notes: Moved to the Agentic AI Foundation (Linux Foundation)
   - owner: AntonOsika
     repo: gpt-engineer
-    category: cli
+    tags: [terminal, byo-model, autonomous, community]
     notes: Archived upstream (read-only); kept for historical significance
   - owner: SWE-agent
     repo: SWE-agent
-    category: research
+    tags: [terminal, byo-model, autonomous, research, community]
   - owner: RooCodeInc
     repo: Roo-Code
-    category: extension
+    tags: [editor-plugin, byo-model, interactive, mcp, community]
     notes: Archived upstream (read-only)
   - owner: TabbyML
     repo: tabby
-    category: ide
+    tags: [self-hosted, editor-plugin, local-models, interactive, community]
   - owner: zed-industries
     repo: zed
-    category: ide
+    tags: [ide, byo-model, local-models, interactive, acp, community]
   - owner: voideditor
     repo: void
-    category: ide
+    tags: [ide, byo-model, local-models, interactive, community]
     notes: Archived upstream (read-only)
   - owner: anthropics
     repo: claude-code
-    category: cli
+    tags: [terminal, editor-plugin, single-vendor, interactive, headless, mcp, vendor]
   - owner: avante-corp
     repo: avante.nvim
-    category: extension
+    tags: [editor-plugin, byo-model, local-models, interactive, mcp, acp, community]
   - owner: kortix-ai
     repo: suna
-    category: web
+    tags: [web, self-hosted, byo-model, autonomous, mcp, community]
   - owner: earendil-works
     repo: pi
-    category: cli
+    tags: [terminal, byo-model, interactive, community]
   - owner: OpenHands
     repo: OpenHands
-    category: web
+    tags: [web, self-hosted, terminal, byo-model, autonomous, acp, community]
   - owner: warpdotdev
     repo: warp
-    category: ide
+    tags: [terminal, desktop, byo-model, interactive, community]
     notes: Agentic terminal; client open-sourced Apr 2026 (AGPL-3.0)
   - owner: Pythagora-io
     repo: gpt-pilot
-    category: cli
+    tags: [terminal, editor-plugin, byo-model, autonomous, community]
   - owner: QwenLM
     repo: qwen-code
-    category: cli
+    tags: [terminal, editor-plugin, desktop, byo-model, local-models, interactive, headless, mcp, acp, vendor]
   - owner: Kilo-Org
     repo: kilocode
-    category: extension
+    tags: [editor-plugin, terminal, byo-model, interactive, mcp, community]
   - owner: onlook-dev
     repo: onlook
-    category: web
+    tags: [desktop, web, byo-model, app-builder, mcp, community]
   - owner: dyad-sh
     repo: dyad
-    category: web
+    tags: [desktop, byo-model, local-models, app-builder, community]
   - owner: github
     repo: copilot-cli
-    category: cli
+    tags: [terminal, single-vendor, interactive, headless, mcp, vendor]
   - owner: deepseek-ai
     repo: deepseek-harness
-    category: cli
+    tags: [terminal, single-vendor, interactive, vendor]
     notes: Developer preview; compatibility-breaking changes expected
   - owner: openinterpreter
     repo: openinterpreter
-    category: cli
+    tags: [terminal, byo-model, local-models, interactive, mcp, acp, community]
   - owner: Hmbown
     repo: Codewhale
-    category: cli
+    tags: [terminal, editor-plugin, desktop, byo-model, local-models, interactive, mcp, community]
   - owner: esengine
     repo: DeepSeek-Reasonix
-    category: cli
+    tags: [terminal, desktop, web, editor-plugin, byo-model, interactive, autonomous, mcp, acp, community]
   - owner: Gitlawb
     repo: openclaude
-    category: cli
+    tags: [terminal, byo-model, local-models, interactive, headless, mcp, community]
   - owner: can1357
     repo: oh-my-pi
-    category: cli
+    tags: [terminal, editor-plugin, byo-model, local-models, interactive, mcp, acp, headless, community]
   - owner: xai-org
     repo: grok-build
-    category: cli
+    tags: [terminal, editor-plugin, single-vendor, interactive, headless, mcp, acp, vendor]
   - owner: alibaba
     repo: open-code-review
-    category: cli
+    tags: [terminal, byo-model, review, mcp, vendor]
   - owner: PrimeIntellect-ai
     repo: prime-agent
-    category: cli
+    tags: [terminal, byo-model, autonomous, headless, vendor]
   - owner: 1jehuang
     repo: jcode
-    category: cli
+    tags: [terminal, byo-model, local-models, interactive, headless, mcp, community]
   - owner: HKUDS
     repo: DeepCode
-    category: research
+    tags: [terminal, desktop, web, byo-model, local-models, autonomous, research, mcp, headless, community]
   - owner: CodebuffAI
     repo: freebuff
-    category: cli
+    tags: [terminal, interactive, community]
   - owner: MoonshotAI
     repo: kimi-cli
-    category: cli
+    tags: [terminal, editor-plugin, single-vendor, interactive, mcp, acp, vendor]
   - owner: Kuberwastaken
     repo: claurst
-    category: cli
+    tags: [terminal, byo-model, interactive, headless, acp, community]

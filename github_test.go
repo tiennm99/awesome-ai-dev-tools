@@ -49,7 +49,7 @@ func TestFetchStats_ChunkingHappyPath(t *testing.T) {
 	const n = 55
 	agents := make([]Agent, n)
 	for i := range agents {
-		agents[i] = Agent{Owner: "org", Repo: fmt.Sprintf("repo%02d", i), Category: "cli"}
+		agents[i] = Agent{Owner: "org", Repo: fmt.Sprintf("repo%02d", i), Tags: []string{"terminal", "community"}}
 	}
 
 	var requestCount int
@@ -118,9 +118,9 @@ func TestFetchStats_ChunkingHappyPath(t *testing.T) {
 
 func TestFetchStats_MissingNodeNamesTheRepo(t *testing.T) {
 	agents := []Agent{
-		{Owner: "foo", Repo: "bar0", Category: "cli"},
-		{Owner: "foo", Repo: "bar1", Category: "cli"},
-		{Owner: "foo", Repo: "bar2", Category: "cli"},
+		{Owner: "foo", Repo: "bar0", Tags: []string{"terminal", "community"}},
+		{Owner: "foo", Repo: "bar1", Tags: []string{"terminal", "community"}},
+		{Owner: "foo", Repo: "bar2", Tags: []string{"terminal", "community"}},
 	}
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -155,9 +155,9 @@ func TestFetchStats_MissingNodeNamesTheRepo(t *testing.T) {
 
 func TestFetchStats_GraphQLErrorNamesTheRepo(t *testing.T) {
 	agents := []Agent{
-		{Owner: "foo", Repo: "bar0", Category: "cli"},
-		{Owner: "foo", Repo: "bar1", Category: "cli"},
-		{Owner: "foo", Repo: "bar2", Category: "cli"},
+		{Owner: "foo", Repo: "bar0", Tags: []string{"terminal", "community"}},
+		{Owner: "foo", Repo: "bar1", Tags: []string{"terminal", "community"}},
+		{Owner: "foo", Repo: "bar2", Tags: []string{"terminal", "community"}},
 	}
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -193,8 +193,8 @@ func TestFetchStats_DriftWarnings(t *testing.T) {
 	// still succeeds and reports the drift as a warning (checked via
 	// captured stdout) rather than failing the whole daily update.
 	agents := []Agent{
-		{Owner: "old-owner", Repo: "renamed-repo", Category: "cli"},
-		{Owner: "org", Repo: "archived-repo", Category: "cli"},
+		{Owner: "old-owner", Repo: "renamed-repo", Tags: []string{"terminal", "community"}},
+		{Owner: "org", Repo: "archived-repo", Tags: []string{"terminal", "community"}},
 	}
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -261,9 +261,9 @@ func TestFetchStats_StaleWarning(t *testing.T) {
 	defer func() { timeNow = origNow }()
 
 	agents := []Agent{
-		{Owner: "org", Repo: "fresh", Category: "cli"},
-		{Owner: "org", Repo: "stale", Category: "cli"},
-		{Owner: "org", Repo: "stale-and-archived", Category: "cli"},
+		{Owner: "org", Repo: "fresh", Tags: []string{"terminal", "community"}},
+		{Owner: "org", Repo: "stale", Tags: []string{"terminal", "community"}},
+		{Owner: "org", Repo: "stale-and-archived", Tags: []string{"terminal", "community"}},
 	}
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

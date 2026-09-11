@@ -45,12 +45,24 @@ Add an agent to [`data/agents.yml`](data/agents.yml):
 agents:
   - owner: github-username-or-org
     repo: repository-name
-    category: cli   # cli | ide | extension | library | research | web
+    tags: [terminal, byo-model, interactive, community]
 ```
+
+**Tags** describe a tool across five facets — the [dashboard](https://tiennm99.github.io/awesome-coding-agents/) filters on them, OR within a facet and AND across facets:
+
+| Facet | Tags |
+|-------|------|
+| Surface (at least one) | `terminal` · `editor-plugin` · `ide` · `desktop` · `web` · `self-hosted` |
+| Model access | `byo-model` · `single-vendor` · `local-models` |
+| Workflow | `interactive` · `autonomous` · `review` · `app-builder` · `research` |
+| Integration | `mcp` · `acp` · `headless` |
+| Origin (at most one) | `vendor` · `community` |
+
+Apply a tag only when the repo's own README, docs, or topics back it up. See [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) for what each tag means.
 
 Open a PR. The next daily run picks it up automatically.
 
-PRs are validated automatically by CI (`go run . -check`): owner/repo must be non-empty and look like a real GitHub slug, category must be one of the values above, and duplicates (case-insensitive) are rejected.
+PRs are validated automatically by CI (`go run . -check`): owner/repo must be non-empty and look like a real GitHub slug, every tag must come from the vocabulary above with at least one surface tag and at most one origin tag, and duplicates (case-insensitive) are rejected.
 
 ## License
 

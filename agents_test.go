@@ -19,7 +19,7 @@ func TestLoadAgents_ValidationErrors(t *testing.T) {
 			yaml: `agents:
   - owner: org
     repo: repo1
-    category: tools
+    tags: [terminal, community]
 `,
 			expectErr: false,
 			desc:      "should load valid entry",
@@ -69,7 +69,7 @@ func TestLoadAgents_ValidationErrors(t *testing.T) {
     repo: repo1
   - owner: org2
     repo: repo2
-    category: ai
+    tags: [terminal, community]
 `,
 			expectErr: false,
 			desc:      "should load multiple valid entries",

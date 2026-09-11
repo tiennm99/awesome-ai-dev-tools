@@ -8,10 +8,15 @@ import (
 )
 
 type Agent struct {
-	Owner    string `yaml:"owner"`
-	Repo     string `yaml:"repo"`
+	Owner string   `yaml:"owner"`
+	Repo  string   `yaml:"repo"`
+	Tags  []string `yaml:"tags"`
+	Notes string   `yaml:"notes,omitempty"`
+
+	// Category is the retired single-select field that tags replaced. It is
+	// still parsed so a stale entry fails validation with a message naming
+	// the replacement, rather than being silently ignored.
 	Category string `yaml:"category,omitempty"`
-	Notes    string `yaml:"notes,omitempty"`
 }
 
 func loadAgents(path string) ([]Agent, error) {

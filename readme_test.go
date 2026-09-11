@@ -130,11 +130,11 @@ func TestRenderReadme_TableRowsAndCallout(t *testing.T) {
 
 	stats := []Stat{
 		{CanonicalKey: "org/big", NameWithOwner: "org/big", URL: "https://github.com/org/big",
-			Stars: 1_500_000, Language: "Go", PushedAt: fixed, Description: "huge | agent", Category: "cli"},
+			Stars: 1_500_000, Language: "Go", PushedAt: fixed, Description: "huge | agent", Tags: []string{"terminal", "community"}},
 		{CanonicalKey: "org/mid", NameWithOwner: "org/mid", URL: "https://github.com/org/mid",
-			Stars: 1234, Language: "Rust", PushedAt: fixed, Description: "mid agent", Category: "cli"},
+			Stars: 1234, Language: "Rust", PushedAt: fixed, Description: "mid agent", Tags: []string{"terminal", "community"}},
 		{CanonicalKey: "org/small", NameWithOwner: "org/small", URL: "https://github.com/org/small",
-			Stars: 999, Language: "", PushedAt: fixed, Description: "small agent", Category: "cli"},
+			Stars: 999, Language: "", PushedAt: fixed, Description: "small agent", Tags: []string{"terminal", "community"}},
 	}
 	// org/small has no delta: its row must show the em dash, and it must not
 	// win the top-mover callout.
@@ -171,7 +171,7 @@ func TestRenderReadme_NoDeltasOmitsTopMover(t *testing.T) {
 	defer func() { timeNow = orig }()
 
 	stats := []Stat{{CanonicalKey: "org/repo", NameWithOwner: "org/repo",
-		URL: "https://github.com/org/repo", Stars: 10, PushedAt: fixed, Category: "cli"}}
+		URL: "https://github.com/org/repo", Stars: 10, PushedAt: fixed, Tags: []string{"terminal", "community"}}}
 
 	out := t.TempDir() + "/README.md"
 	if err := renderReadme("templates/readme.tmpl", out, stats, map[string]int{}); err != nil {

@@ -18,7 +18,7 @@ type Stat struct {
 	CanonicalKey  string
 	Owner         string
 	Repo          string
-	Category      string
+	Tags          []string
 	Notes         string
 	Description   string
 	Stars         int
@@ -137,7 +137,7 @@ func fetchStats(token string, agents []Agent) ([]Stat, error) {
 			CanonicalKey:  canonicalKey,
 			Owner:         a.Owner,
 			Repo:          a.Repo,
-			Category:      a.Category,
+			Tags:          a.Tags,
 			Notes:         a.Notes,
 			Description:   node.Description,
 			Stars:         node.StargazerCount,

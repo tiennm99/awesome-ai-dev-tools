@@ -7,26 +7,29 @@ import (
 
 // siteRow is one ranked repo in site/data.json, consumed by site/index.html.
 type siteRow struct {
-	Key           string `json:"key"` // canonical owner/repo, matches history keys
-	NameWithOwner string `json:"nameWithOwner"`
-	URL           string `json:"url"`
-	Stars         int    `json:"stars"`
-	Delta7d       int    `json:"delta7d"`
-	HasDelta      bool   `json:"hasDelta"`
-	Delta30d      int    `json:"delta30d"`
-	HasDelta30    bool   `json:"hasDelta30"`
-	Language      string `json:"language"`
-	PushedAt      string `json:"pushedAt"`
-	Description   string `json:"description"`
-	Category      string `json:"category"`
-	Notes         string `json:"notes,omitempty"`
-	Archived      bool   `json:"archived"`
+	Key           string   `json:"key"` // canonical owner/repo, matches history keys
+	NameWithOwner string   `json:"nameWithOwner"`
+	URL           string   `json:"url"`
+	Stars         int      `json:"stars"`
+	Delta7d       int      `json:"delta7d"`
+	HasDelta      bool     `json:"hasDelta"`
+	Delta30d      int      `json:"delta30d"`
+	HasDelta30    bool     `json:"hasDelta30"`
+	Language      string   `json:"language"`
+	PushedAt      string   `json:"pushedAt"`
+	Description   string   `json:"description"`
+	Tags          []string `json:"tags"`
+	Notes         string   `json:"notes,omitempty"`
+	Archived      bool     `json:"archived"`
 }
 
 type siteData struct {
 	UpdatedAt string     `json:"updatedAt"`
 	Rows      []siteRow  `json:"rows"`
 	History   []Snapshot `json:"history"`
+	// Facets drives the dashboard's filter chips, so the tag vocabulary is
+	// defined once in Go rather than duplicated in site/index.html.
+	Facets []tagFacet `json:"facets"`
 }
 
 // writeSiteData emits the JSON payload for the GitHub Pages dashboard.
@@ -49,7 +52,7 @@ func writeSiteData(path string, stats []Stat, deltas7, deltas30 map[string]int, 
 			Language:      s.Language,
 			PushedAt:      s.PushedAt.Format("2006-01-02"),
 			Description:   s.Description,
-			Category:      s.Category,
+			Tags:          s.Tags,
 			Notes:         s.Notes,
 			Archived:      s.IsArchived,
 		}
@@ -60,6 +63,7 @@ func writeSiteData(path string, stats []Stat, deltas7, deltas30 map[string]int, 
 			UpdatedAt: timeNow().UTC().Format("2006-01-02 15:04 UTC"),
 			Rows:      rows,
 			History:   history,
+			Facets:    tagVocabulary,
 		})
 	})
 }

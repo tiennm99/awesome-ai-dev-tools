@@ -115,17 +115,35 @@
   a.repo { color: var(--link); text-decoration: none; font-weight: 500; white-space: nowrap; font-size: .92rem; }
   a.repo:hover { text-decoration: underline; }
   .pos { color: var(--pos); } .neg { color: var(--neg); }
-  /* Category badges: tinted per category; text label carries the meaning */
-  .cat {
-    display: inline-block; font-size: .74rem; font-weight: 500; padding: .1rem .55rem;
+  /* Tag pills: tinted per facet; the text label carries the meaning */
+  td.tags { max-width: 20rem; }
+  .taglist { display: flex; flex-wrap: wrap; gap: .25rem; }
+  .tag {
+    display: inline-block; font-size: .72rem; font-weight: 500; padding: .1rem .5rem;
     border: 1px solid var(--border); border-radius: 999px; color: var(--muted); background: var(--surface-2);
+    white-space: nowrap;
   }
-  .cat-cli       { border-color: color-mix(in srgb, var(--primary) 45%, var(--border)); color: var(--link); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
-  .cat-ide       { border-color: color-mix(in srgb, #9333ea 45%, var(--border)); background: color-mix(in srgb, #9333ea 12%, var(--surface)); }
-  .cat-extension { border-color: color-mix(in srgb, #0d9488 45%, var(--border)); background: color-mix(in srgb, #0d9488 12%, var(--surface)); }
-  .cat-web       { border-color: color-mix(in srgb, #ea580c 45%, var(--border)); background: color-mix(in srgb, #ea580c 12%, var(--surface)); }
-  .cat-research  { border-color: color-mix(in srgb, #db2777 45%, var(--border)); background: color-mix(in srgb, #db2777 12%, var(--surface)); }
-  .cat-ide, .cat-extension, .cat-web, .cat-research { color: var(--fg); }
+  .tag-surface     { border-color: color-mix(in srgb, var(--primary) 45%, var(--border)); color: var(--link); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
+  .tag-model       { border-color: color-mix(in srgb, #9333ea 45%, var(--border)); background: color-mix(in srgb, #9333ea 12%, var(--surface)); }
+  .tag-workflow    { border-color: color-mix(in srgb, #0d9488 45%, var(--border)); background: color-mix(in srgb, #0d9488 12%, var(--surface)); }
+  .tag-integration { border-color: color-mix(in srgb, #ea580c 45%, var(--border)); background: color-mix(in srgb, #ea580c 12%, var(--surface)); }
+  .tag-origin      { border-color: color-mix(in srgb, #db2777 45%, var(--border)); background: color-mix(in srgb, #db2777 12%, var(--surface)); }
+  .tag-model, .tag-workflow, .tag-integration, .tag-origin { color: var(--fg); }
+  /* Facet filter rows */
+  .facets { margin: 0 0 1rem; display: grid; gap: .4rem; }
+  .facet { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+  .facet > .flabel {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    font-weight: 600; min-width: 6.5rem;
+  }
+  .facet button {
+    border: 1px solid var(--border); background: var(--surface); color: var(--fg);
+    border-radius: 999px; padding: .22rem .7rem; cursor: pointer; font: inherit; font-size: .82rem;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .facet button:hover { border-color: var(--primary); }
+  .facet button[aria-pressed="true"] { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+  #clearfilters[hidden] { display: none; }
   tr.stale td { color: var(--muted); }
   .stalebadge {
     display: inline-block; font-size: .7rem; padding: 0 .45rem; margin-left: .4rem;
@@ -188,13 +206,14 @@
   </div>
 
   <div class="toolbar">
-    <label class="vh" for="q">Search repositories by name or description</label>
+    <label class="vh" for="q">Search repositories by name, description, or tag</label>
     <div class="searchbox">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="Search repos…" autocomplete="off">
     </div>
+    <button type="button" class="btn" id="clearfilters" hidden>Clear filters</button>
   </div>
-  <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  <div class="facets" id="facets"></div>
 
   <div class="tablewrap"><table id="tbl">
     <thead><tr>
@@ -203,7 +222,7 @@
       <th scope="col" data-k="stars" class="num" tabindex="0">Stars</th>
       <th scope="col" data-k="delta7d" class="num" tabindex="0">Δ7d</th>
       <th scope="col" data-k="delta30d" class="num" tabindex="0">Δ30d</th>
-      <th scope="col" data-k="category" tabindex="0">Category</th>
+      <th scope="col">Tags</th>
       <th scope="col" data-k="language" tabindex="0">Language</th>
       <th scope="col" data-k="pushedAt" tabindex="0">Last push</th>
       <th scope="col">Description</th>
@@ -218,7 +237,7 @@
     </div>
     <div class="chartwrap"><canvas id="chart" role="img"
       aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas></div>
-    <p class="hint">Top 12 repos shown by default — click legend entries to toggle series. The category filter and search above also filter the chart.</p>
+    <p class="hint">Top 12 repos shown by default — click legend entries to toggle series. The tag filters and search above also filter the chart.</p>
   </section>
 
   <footer>
@@ -257,27 +276,73 @@
   staleCutoff.setMonth(staleCutoff.getMonth() - 6);
   const isStale = r => r.pushedAt && new Date(r.pushedAt) < staleCutoff;
 
-  // --- category filter chips ---
-  const cats = ['all', ...new Set(rows.map(r => r.category).filter(Boolean).sort())];
-  let activeCat = 'all';
-  const chipBox = document.getElementById('chips');
-  for (const c of cats) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = c;
-    b.className = c === activeCat ? 'on' : '';
-    b.setAttribute('aria-pressed', String(c === activeCat));
-    b.onclick = () => {
-      activeCat = c;
-      chipBox.querySelectorAll('button').forEach(x => {
-        const on = x === b;
-        x.classList.toggle('on', on);
-        x.setAttribute('aria-pressed', String(on));
-      });
-      renderTable(); renderChart();
-    };
-    chipBox.appendChild(b);
+  // --- facet filter chips (multi-select) ---
+  // Vocabulary comes from site/data.json, which the Go updater fills from
+  // tagVocabulary — no second copy of the tag list lives in this file.
+  const facets = Array.isArray(data.facets) ? data.facets : [];
+  // Only offer a tag some row actually carries, so the rows never disagree
+  // with the chips after an agents.yml edit.
+  const inUse = new Set(rows.flatMap(r => r.tags || []));
+  const active = new Set();
+  const facetBox = document.getElementById('facets');
+  const clearBtn = document.getElementById('clearfilters');
+
+  const syncChips = () => {
+    facetBox.querySelectorAll('button[data-tag]').forEach(b => {
+      b.setAttribute('aria-pressed', String(active.has(b.dataset.tag)));
+    });
+    clearBtn.hidden = active.size === 0;
+  };
+
+  for (const f of facets) {
+    const usable = (f.tags || []).filter(t => inUse.has(t));
+    if (!usable.length) continue;
+    const row = document.createElement('div');
+    row.className = 'facet';
+    row.setAttribute('role', 'group');
+    row.setAttribute('aria-label', 'Filter by ' + f.label);
+    const label = document.createElement('span');
+    label.className = 'flabel';
+    label.textContent = f.label;
+    row.appendChild(label);
+    for (const tag of usable) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.dataset.tag = tag;
+      b.dataset.facet = f.id;
+      b.textContent = tag;
+      b.setAttribute('aria-pressed', 'false');
+      b.onclick = () => {
+        active.has(tag) ? active.delete(tag) : active.add(tag);
+        syncChips(); renderTable(); renderChart();
+      };
+      row.appendChild(b);
+    }
+    facetBox.appendChild(row);
   }
+
+  clearBtn.onclick = () => { active.clear(); syncChips(); renderTable(); renderChart(); };
+
+  // Selected tags grouped by facet: a row must match at least one tag in every
+  // facet that has a selection (OR inside a facet, AND across facets).
+  const selectionsByFacet = () => {
+    const groups = new Map();
+    for (const f of facets) {
+      const picked = (f.tags || []).filter(t => active.has(t));
+      if (picked.length) groups.set(f.id, picked);
+    }
+    return groups;
+  };
+
+  const matchesTags = r => {
+    const groups = selectionsByFacet();
+    if (!groups.size) return true;
+    const own = new Set(r.tags || []);
+    for (const picked of groups.values()) {
+      if (!picked.some(t => own.has(t))) return false;
+    }
+    return true;
+  };
 
   // --- text search (filters table + chart) ---
   let query = '';
@@ -292,10 +357,11 @@
   });
 
   const visible = () => rows.filter(r =>
-    (activeCat === 'all' || r.category === activeCat) &&
+    matchesTags(r) &&
     (!query ||
       r.nameWithOwner.toLowerCase().includes(query) ||
-      String(r.description || '').toLowerCase().includes(query)));
+      String(r.description || '').toLowerCase().includes(query) ||
+      (r.tags || []).some(t => t.includes(query))));
 
   // --- sortable table ---
   let sortKey = 'rank', sortAsc = true;
@@ -303,7 +369,7 @@
     const activate = () => {
       const k = th.dataset.k;
       if (sortKey === k) sortAsc = !sortAsc;
-      else { sortKey = k; sortAsc = (k === 'rank' || k === 'nameWithOwner' || k === 'category' || k === 'language'); }
+      else { sortKey = k; sortAsc = (k === 'rank' || k === 'nameWithOwner' || k === 'language'); }
       renderTable();
     };
     th.onclick = activate;
@@ -312,8 +378,9 @@
     });
   });
 
-  // category → badge class; strict allowlist so third-party data can't inject class names
-  const catClass = c => /^[a-z][a-z0-9-]*$/.test(c || '') ? ' cat-' + c : '';
+  // tag → facet class; strict allowlist so third-party data can't inject class names
+  const facetOf = new Map(facets.flatMap(f => (f.tags || []).map(t => [t, f.id])));
+  const tagClass = t => /^[a-z][a-z0-9-]*$/.test(facetOf.get(t) || '') ? ' tag-' + facetOf.get(t) : '';
 
   function renderTable() {
     const list = [...visible()].sort((a, b) => {
@@ -351,7 +418,9 @@
         <td class="num">${fmtStars(r.stars)}</td>
         <td class="num ${r.hasDelta && r.delta7d > 0 ? 'pos' : r.hasDelta && r.delta7d < 0 ? 'neg' : ''}">${r.hasDelta ? (r.delta7d > 0 ? '+' : '') + r.delta7d : '—'}</td>
         <td class="num ${r.hasDelta30 && r.delta30d > 0 ? 'pos' : r.hasDelta30 && r.delta30d < 0 ? 'neg' : ''}">${r.hasDelta30 ? (r.delta30d > 0 ? '+' : '') + r.delta30d : '—'}</td>
-        <td><span class="cat${catClass(r.category)}">${esc(r.category || '—')}</span></td>
+        <td class="tags">${(r.tags || []).length
+          ? '<div class="taglist">' + r.tags.map(t => `<span class="tag${tagClass(t)}">${esc(t)}</span>`).join('') + '</div>'
+          : '—'}</td>
         <td class="lang">${esc(r.language || '')}</td>
         <td>${esc(r.pushedAt)}${isStale(r) ? ' <span class="stalebadge">stale</span>' : ''}${r.archived ? ' <span class="stalebadge">archived</span>' : ''}</td>
         <td class="desc">${esc(r.description)}${r.notes ? ' · <em>' + esc(r.notes) + '</em>' : ''}</td>
