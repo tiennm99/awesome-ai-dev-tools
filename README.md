@@ -5,19 +5,19 @@
 
 📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/awesome-coding-agents/)**
 
-**Last updated:** 2026-09-11 09:07 UTC · **Tracked:** 40 repos
-**Top 7-day mover:** [anomalyco/opencode](https://github.com/anomalyco/opencode) (+3004 stars)
+**Last updated:** 2026-09-11 09:25 UTC · **Tracked:** 40 repos
+**Top 7-day mover:** [anomalyco/opencode](https://github.com/anomalyco/opencode) (+3007 stars)
 
 | # | Repo | Stars | Δ7d | Language | Last push | Description |
 |---|------|------:|----:|----------|-----------|-------------|
 | 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 219.9k | — | TypeScript | 2026-09-11 | DeepSeek Harness: Everything is a Plugin. |
-| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 206.6k | +3004 | TypeScript | 2026-09-11 | The open source coding agent. |
-| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 144.7k | +727 | Python | 2026-09-10 | Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands. |
-| 4 | [openai/codex](https://github.com/openai/codex) | 123.3k | +1957 | Rust | 2026-09-11 | Lightweight coding agent that runs in your terminal |
-| 5 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 106.9k | +103 | TypeScript | 2026-09-11 | An open-source AI agent that brings the power of Gemini directly into your terminal. |
-| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2497 | TypeScript | 2026-09-11 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
-| 7 | [zed-industries/zed](https://github.com/zed-industries/zed) | 90.1k | +364 | Rust | 2026-09-11 | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. |
-| 8 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 87.3k | +1218 | TypeScript | 2026-09-11 | 🙌 OpenHands: AI-Driven Development |
+| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 206.6k | +3007 | TypeScript | 2026-09-11 | The open source coding agent. |
+| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 144.7k | +729 | Python | 2026-09-10 | Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands. |
+| 4 | [openai/codex](https://github.com/openai/codex) | 123.3k | +1961 | Rust | 2026-09-11 | Lightweight coding agent that runs in your terminal |
+| 5 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 106.9k | +104 | TypeScript | 2026-09-11 | An open-source AI agent that brings the power of Gemini directly into your terminal. |
+| 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 104.0k | +2503 | TypeScript | 2026-09-11 | AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI |
+| 7 | [zed-industries/zed](https://github.com/zed-industries/zed) | 90.1k | +365 | Rust | 2026-09-11 | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter. |
+| 8 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 87.3k | +1222 | TypeScript | 2026-09-11 | 🙌 OpenHands: AI-Driven Development |
 | 9 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 68.3k | — | Rust | 2026-09-09 | A coding agent for open models like Kimi K3 and GLM 5.3 |
 | 10 | [cline/cline](https://github.com/cline/cline) | 67.8k | +383 | TypeScript | 2026-09-11 | Autonomous coding agent as an SDK, IDE extension, or CLI assistant. |
 | 11 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 64.9k | +160 | Rust | 2026-09-11 | Warp is an agentic development environment, born out of the terminal. |
@@ -33,7 +33,7 @@
 | 21 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | 30.6k | — | TypeScript | 2026-09-11 | ⌥ Coding agent with the IDE wired in |
 | 22 | [voideditor/void](https://github.com/voideditor/void) | 28.8k | -11 | TypeScript | 2026-06-02 |  |
 | 23 | [charmbracelet/crush](https://github.com/charmbracelet/crush) | 28.0k | +123 | Go | 2026-09-11 | Glamourous agentic coding for all 💘 |
-| 24 | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | 27.8k | +135 | TypeScript | 2026-09-11 | An open-source AI coding agent that lives in your terminal. |
+| 24 | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | 27.8k | +136 | TypeScript | 2026-09-11 | An open-source AI coding agent that lives in your terminal. |
 | 25 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | 27.3k | +95 | TypeScript | 2026-09-11 | Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent. |
 | 26 | [onlook-dev/onlook](https://github.com/onlook-dev/onlook) | 26.7k | +80 | TypeScript | 2026-08-25 | The Cursor for Designers • An Open-Source AI-First Design tool • Visually build, style, and edit your React App with AI |
 | 27 | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 26.7k | — | Rust | 2026-09-09 | SpaceXAI's coding agent harness and TUI. Fullscreen, mouse interactive, extensible. |
@@ -48,7 +48,7 @@
 | 36 | [HKUDS/DeepCode](https://github.com/HKUDS/DeepCode) | 16.5k | — | Python | 2026-09-09 | "DeepCode: Open Agentic Coding (Agent Harness & Loop Engineering & Multi-Agent Orchestration)" |
 | 37 | [CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff) | 11.9k | — | TypeScript | 2026-09-11 | The free coding agent |
 | 38 | [MoonshotAI/kimi-cli](https://github.com/MoonshotAI/kimi-cli) | 11.3k | — | Python | 2026-09-01 | Kimi Code CLI is your next CLI agent. |
-| 39 | [github/copilot-cli](https://github.com/github/copilot-cli) | 11.2k | +21 | Shell | 2026-09-10 | GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal. |
+| 39 | [github/copilot-cli](https://github.com/github/copilot-cli) | 11.2k | +22 | Shell | 2026-09-10 | GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal. |
 | 40 | [Kuberwastaken/claurst](https://github.com/Kuberwastaken/claurst) | 10.3k | — | Rust | 2026-09-02 | Agentic Coding for Builders who Ship |
 
 ---
