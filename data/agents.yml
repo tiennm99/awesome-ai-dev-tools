@@ -139,3 +139,7 @@ agents:
   - owner: Kuberwastaken
     repo: claurst
     tags: [terminal, byo-model, interactive, headless, acp, community]
+  - owner: Orkas-AI
+    repo: Orkas
+    tags: [desktop, byo-model, interactive, community]
+    notes: "Open-source, local-first desktop AI workforce coordinated by a Commander through one chat; supports local coding-agent workflows."
