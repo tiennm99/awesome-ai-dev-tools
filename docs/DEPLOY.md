@@ -36,7 +36,7 @@ by the nightly **Update rankings** workflow — so this is normally just a
 sanity check:
 
 ```bash
-go run . -build   # should print "built dist: N entries, data fetched ..."
+make build   # should print "built dist: N entries, data fetched ..."
 ```
 
 If it is ever missing (a fresh fork, say), regenerate it by triggering
@@ -78,6 +78,10 @@ hand a credential to an environment that has no need for it.
 Cloudflare's build image ships Go and honours `GO_VERSION`. Even on an older
 image, Go's toolchain directive in `go.mod` downloads the matching toolchain
 automatically.
+
+The build command is the raw `go run . -build` rather than `make build`, which
+is the same thing locally. Locally `make` is convenience; in the build image it
+would be one more dependency to rely on for no benefit.
 
 ### 4. Deploy
 

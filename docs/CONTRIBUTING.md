@@ -135,4 +135,5 @@ historical-significance exception.
 - No manual review required; the updater regenerates the README after your PR merges
 
 For local testing before opening a PR, see [LOCAL_DEV.md](./LOCAL_DEV.md). A tag
-or note change needs only `go run . -build` — no GitHub token.
+or note change needs only `make build` — no GitHub token. `make test` runs
+everything CI will.

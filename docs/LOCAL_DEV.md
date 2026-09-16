@@ -3,7 +3,10 @@
 ## Prerequisites
 
 - Go 1.23 or later
-- A GitHub personal access token (PAT)
+- `make` (optional — every target is a one-line wrapper you can run by hand)
+- A GitHub personal access token (PAT), for the update step only
+
+Run `make` with no arguments to list the available targets.
 
 ## Getting a GitHub Token
 
@@ -24,7 +27,7 @@ needs a token. See [DEPLOY.md](./DEPLOY.md) for why.
 
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
-go run .
+make update          # or: go run .
 ```
 
 This will:
@@ -37,17 +40,17 @@ This will:
 ### Build (offline, no token)
 
 ```bash
-go run . -build
+make build           # or: go run . -build
 ```
 
 This joins `data/agents.yml` (tags and notes) with `data/metadata.json` (stars
 and repo metadata) and renders `dist/` — a copy of `site/` plus the generated
 `dist/data.json`. This is exactly what Cloudflare Pages runs.
 
-Preview it with any static server:
+Preview it at <http://localhost:8080>:
 
 ```bash
-go run . -build && python3 -m http.server -d dist 8080
+make serve           # builds first; override the port with PORT=3000
 ```
 
 If you only touched `site/index.html` or the tags in `data/agents.yml`, the
@@ -56,7 +59,15 @@ build step alone is enough — no token required.
 ### Validate (offline, no token)
 
 ```bash
-go run . -check
+make check           # or: go run . -check
+```
+
+### Before pushing
+
+`make test` runs what CI runs — vet, tests, `-check` and `-build`:
+
+```bash
+make test
 ```
 
 ## Reverting Local Changes
