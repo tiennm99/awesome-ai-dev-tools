@@ -74,6 +74,13 @@ var graphqlURL = "https://api.github.com/graphql"
 // annotates the run.
 const staleWarnAfter = 90 * 24 * time.Hour
 
+// minStars is the hard inclusion floor from the README's criteria. Unlike the
+// staleness window, this is not a judgement call: an entry below the floor is
+// dropped from the published ranking, so the list can never show a repo that
+// does not meet it. It lives here rather than in -check because star counts
+// need the API and -check runs offline.
+const minStars = 1000
+
 // chunkSize is the max aliases per GraphQL request (GitHub node-limit safety margin).
 const chunkSize = 50
 
@@ -271,4 +278,20 @@ func doWithRetry(token string, body []byte) ([]byte, int, error) {
 		return raw, sc, nil
 	}
 	return nil, 0, fmt.Errorf("all %d attempts failed; last error: %w", maxRetries, lastErr)
+}
+
+// enforceStarFloor drops entries below minStars and annotates each one as a run
+// error. Dropping rather than failing the run keeps one below-floor entry from
+// blocking the refresh of every other repo, while the ::error:: annotation
+// makes the removal impossible to miss in the Actions log.
+func enforceStarFloor(stats []Stat) []Stat {
+	kept := make([]Stat, 0, len(stats))
+	for _, s := range stats {
+		if s.Stars < minStars {
+			fmt.Printf("::error::repo %s has %d stars, below the %d minimum — dropped from the ranking; remove its entry from data/agents.yml\n", s.CanonicalKey, s.Stars, minStars)
+			continue
+		}
+		kept = append(kept, s)
+	}
+	return kept
 }

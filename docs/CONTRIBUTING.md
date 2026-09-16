@@ -26,20 +26,35 @@ Optional fields: `notes` (for clarifications or caveats)
 
 ## Scope
 
-Two kinds of project belong here:
+This list ranks **developer tools built around AI** — things a developer uses to
+build software, where an LLM is central to what the tool does. In practice that
+spans several shapes:
 
-1. **Coding agents** — they write, edit, or review code themselves.
-2. **Agent development environments (ADEs)** — their primary purpose is running and
-   coordinating those agents: parallel worktrees, session management, remote or mobile
-   control. Tag these `orchestration`.
+- **Coding agents** — they write, edit, or review code themselves.
+- **Agent development environments (ADEs)** — their primary purpose is running and
+  coordinating those agents: parallel worktrees, session management, remote or
+  mobile control. Tag these `orchestration`.
+- **AI-assisted editors, terminals, and review tools** — the developer stays in the
+  driver's seat and the model accelerates the work.
 
-An ADE earns a row because it is the surface a developer actually works in, the same way
-a coding agent is. What stays out is anything that only *assists* agents without being a
-place you run them: libraries and SDKs, prompt or skill collections, dashboards and
-observability-only layers, and single-purpose wrappers around one agent's config.
+The dividing line is **tools you use vs. building blocks you import**. Out of scope:
+libraries and SDKs, agent frameworks meant to be built on, model weights, prompt or
+skill collections, and dashboards that only observe a tool without being one.
 
-The other two criteria in the [README](../README.md#contributing) — roughly 10,000+ stars
-and active maintenance — apply to both kinds equally.
+A tool also has to be *about* software development. General-purpose assistants and
+chat UIs do not qualify just because a developer could use them.
+
+### The star floor is hard
+
+**1,000 stars minimum.** This is not a judgement call and is not waived for
+individual entries, however good the tool is. The updater enforces it: any entry
+below the floor is dropped from the ranking and reported as an `::error::` in the
+Actions log (`enforceStarFloor` in `github.go`). Because star counts require the
+API, `go run . -check` cannot catch this offline — a below-floor entry passes CI
+and is then dropped by the next daily run, so check the count before opening a PR.
+
+Maintenance requirements apply to every entry equally: no push in 6 months means
+removal, and the daily run warns past 3 months.
 
 ## Tag Vocabulary
 

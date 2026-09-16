@@ -1,6 +1,6 @@
 # Awesome Coding Agents
 
-> Curated ranking of AI agent coding tools, sorted by GitHub stars.
+> Curated ranking of AI-powered developer tools, sorted by GitHub stars.
 > Updated daily by GitHub Actions.
 
 📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/awesome-coding-agents/)**
@@ -68,8 +68,8 @@
 
 **Inclusion criteria** — a repo belongs on this list when it is:
 
-1. **An AI coding agent, or an environment for running them** — either a tool that autonomously writes, edits, or reviews code, or an *agent development environment* (ADE) that runs and coordinates those agents as its primary purpose. Libraries, SDKs, prompt/skill collections, and observability-only layers remain out of scope.
-2. **Notable**: roughly **10,000+ GitHub stars** (the current list floor).
+1. **A developer tool built around AI** — something a developer uses to build software, where an LLM is central to what it does. That covers agents that write, edit, or review code; agent development environments that run and coordinate them; and AI-assisted editors, terminals, and review tools. Libraries, SDKs, model weights, and prompt or skill collections are out of scope — this list ranks tools you *use*, not building blocks you *import*.
+2. **At least 1,000 GitHub stars** — a hard floor, enforced by the updater. An entry below it is dropped from the ranking automatically, so the threshold is never waived for an individual entry.
 3. **Open source and actively maintained** — no push in **6 months** means the entry is dropped. The daily run flags anything past **3 months** for review, so the ranking reflects tools people can actually use today.
 
 Archived or abandoned repos are kept only when they are historically significant, and are marked as such in [`data/agents.yml`](data/agents.yml).

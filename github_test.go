@@ -312,3 +312,24 @@ func TestFetchStats_StaleWarning(t *testing.T) {
 		t.Errorf("missing archived warning %q in:\n%s", want, logs)
 	}
 }
+
+func TestEnforceStarFloor(t *testing.T) {
+	in := []Stat{
+		{CanonicalKey: "a/above", Stars: minStars + 1},
+		{CanonicalKey: "b/exactly", Stars: minStars},
+		{CanonicalKey: "c/below", Stars: minStars - 1},
+		{CanonicalKey: "d/zero", Stars: 0},
+	}
+
+	got := enforceStarFloor(in)
+
+	want := []string{"a/above", "b/exactly"}
+	if len(got) != len(want) {
+		t.Fatalf("kept %d entries, want %d: %+v", len(got), len(want), got)
+	}
+	for i, w := range want {
+		if got[i].CanonicalKey != w {
+			t.Errorf("kept[%d] = %s, want %s", i, got[i].CanonicalKey, w)
+		}
+	}
+}

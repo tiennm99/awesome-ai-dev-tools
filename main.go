@@ -52,6 +52,11 @@ func run() error {
 		return err
 	}
 
+	stats = enforceStarFloor(stats)
+	if len(stats) == 0 {
+		return fmt.Errorf("no agents in %s meet the %d-star minimum", agentsPath, minStars)
+	}
+
 	snapshots, deltas7, deltas30, err := appendHistory(historyPath, stats)
 	if err != nil {
 		return err
