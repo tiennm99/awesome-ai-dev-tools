@@ -9,24 +9,55 @@
 
 1. Go to [https://github.com/settings/tokens](https://github.com/settings/tokens)
 2. Click "Generate new token" → "Generate new token (classic)"
-3. Give it a name (e.g., "awesome-coding-agents")
+3. Give it a name (e.g., "awesome-ai-dev-tools")
 4. Select scope: **`public_repo`** (needed to read public repo metadata)
 5. Click "Generate token" and copy the value
 
 The updater reads public repos only; `public_repo` scope is sufficient and safe.
 
-## Running Locally
+## The two steps
+
+The tool separates fetching data from rendering the site, so only the fetch
+needs a token. See [DEPLOY.md](./DEPLOY.md) for why.
+
+### Update (needs a token, hits the network)
 
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
 go run .
 ```
 
-The tool will:
+This will:
 - Read `data/agents.yml`
-- Fetch live metadata from GitHub GraphQL API
+- Fetch live metadata from the GitHub GraphQL API
 - Append star counts to `data/history.jsonl`
+- Write the fetched fields to `data/metadata.json`
 - Regenerate `README.md` from `templates/readme.tmpl`
+
+### Build (offline, no token)
+
+```bash
+go run . -build
+```
+
+This joins `data/agents.yml` (tags and notes) with `data/metadata.json` (stars
+and repo metadata) and renders `dist/` — a copy of `site/` plus the generated
+`dist/data.json`. This is exactly what Cloudflare Pages runs.
+
+Preview it with any static server:
+
+```bash
+go run . -build && python3 -m http.server -d dist 8080
+```
+
+If you only touched `site/index.html` or the tags in `data/agents.yml`, the
+build step alone is enough — no token required.
+
+### Validate (offline, no token)
+
+```bash
+go run . -check
+```
 
 ## Reverting Local Changes
 
@@ -48,3 +79,4 @@ Always set `GITHUB_TOKEN` when testing locally to avoid hitting the unauthentica
 ## Next Steps
 
 To add agents, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+To publish the site, see [DEPLOY.md](./DEPLOY.md).

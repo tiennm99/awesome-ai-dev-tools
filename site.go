@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-// siteRow is one ranked repo in site/data.json, consumed by site/index.html.
+// siteRow is one ranked repo in the generated dist/data.json, consumed by site/index.html.
 type siteRow struct {
 	Key           string   `json:"key"` // canonical owner/repo, matches history keys
 	NameWithOwner string   `json:"nameWithOwner"`
@@ -32,10 +32,13 @@ type siteData struct {
 	Facets []tagFacet `json:"facets"`
 }
 
-// writeSiteData emits the JSON payload for the GitHub Pages dashboard.
-// The file is generated fresh on every updater run and is not committed;
-// the Pages deploy step in the workflow picks it up from the working tree.
-func writeSiteData(path string, stats []Stat, deltas7, deltas30 map[string]int, history []Snapshot) error {
+// writeSiteData emits the JSON payload the dashboard fetches at runtime.
+// It is build output (dist/data.json), never committed.
+//
+// updatedAt is passed in rather than read from the clock because it labels
+// data freshness, not build time: a redeploy of unchanged data must not claim
+// the figures are newer than the fetch that produced them.
+func writeSiteData(path string, updatedAt string, stats []Stat, deltas7, deltas30 map[string]int, history []Snapshot) error {
 	rows := make([]siteRow, len(stats))
 	for i, s := range stats {
 		delta7, has7 := deltas7[s.CanonicalKey]
@@ -60,7 +63,7 @@ func writeSiteData(path string, stats []Stat, deltas7, deltas30 map[string]int, 
 
 	return atomicWriteFile(path, func(w io.Writer) error {
 		return json.NewEncoder(w).Encode(siteData{
-			UpdatedAt: timeNow().UTC().Format("2006-01-02 15:04 UTC"),
+			UpdatedAt: updatedAt,
 			Rows:      rows,
 			History:   history,
 			Facets:    tagVocabulary,

@@ -1,6 +1,6 @@
-# Research Report: awesome-coding-agents list refresh (additions + stale cleanup)
+# Research Report: awesome-ai-dev-tools list refresh (additions + stale cleanup)
 
-**Conducted:** 2026-09-11 13:28 (+07) · **Repo:** `tiennm99/awesome-coding-agents` · **Tracked now:** 29
+**Conducted:** 2026-09-11 13:28 (+07) · **Repo:** `tiennm99/awesome-ai-dev-tools` · **Tracked now:** 29
 
 ## Executive Summary
 

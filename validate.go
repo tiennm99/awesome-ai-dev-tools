@@ -28,11 +28,11 @@ var repoPattern = regexp.MustCompile(`^[A-Za-z0-9._-]+$`)
 //
 // This slice is the single source of truth: the lookup map below, the
 // validation messages, and the dashboard's filter chips (shipped in
-// site/data.json) are all derived from it.
+// the generated dist/data.json) are all derived from it.
 var tagVocabulary = []tagFacet{
 	{ID: facetSurface, Label: "Surface", Tags: []string{"terminal", "editor-plugin", "ide", "desktop", "web", "self-hosted"}},
 	{ID: facetModel, Label: "Model access", Tags: []string{"byo-model", "single-vendor", "local-models"}},
-	{ID: facetWorkflow, Label: "Workflow", Tags: []string{"interactive", "autonomous", "review", "app-builder", "research"}},
+	{ID: facetWorkflow, Label: "Workflow", Tags: []string{"interactive", "autonomous", "review", "app-builder", "research", "orchestration"}},
 	{ID: facetIntegration, Label: "Integration", Tags: []string{"mcp", "acp", "headless"}},
 	{ID: facetOrigin, Label: "Origin", Tags: []string{"vendor", "community"}},
 }

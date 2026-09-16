@@ -1,0 +1,5 @@
+# data.json is regenerated on every deploy and read by the dashboard at load.
+# Cloudflare's edge would otherwise keep serving yesterday's ranking after a
+# nightly refresh; the page's own `cache: 'no-cache'` only covers the browser.
+/data.json
+  Cache-Control: public, max-age=0, must-revalidate

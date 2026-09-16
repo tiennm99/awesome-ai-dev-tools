@@ -51,7 +51,7 @@ func TestWriteSiteData_JSONShapeAndDeltaFields(t *testing.T) {
 	tmpDir := t.TempDir()
 	tmpFile := tmpDir + "/data.json"
 
-	if err := writeSiteData(tmpFile, stats, deltas7, deltas30, history); err != nil {
+	if err := writeSiteData(tmpFile, "2026-08-09 12:00 UTC", stats, deltas7, deltas30, history); err != nil {
 		t.Fatalf("writeSiteData: %v", err)
 	}
 

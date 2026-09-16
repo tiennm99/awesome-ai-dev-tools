@@ -24,6 +24,41 @@ Optional fields: `notes` (for clarifications or caveats)
 | `tags` | list | Yes | Tags from the vocabulary below; at least one surface tag, at most one origin tag |
 | `notes` | string | No | Additional context or disclaimers |
 
+## Scope
+
+This list ranks **developer tools built around AI** — things a developer uses to
+build software, where an LLM is central to what the tool does. In practice that
+spans several shapes:
+
+- **Coding agents** — they write, edit, or review code themselves.
+- **Agent development environments (ADEs)** — their primary purpose is running and
+  coordinating those agents: parallel worktrees, session management, remote or
+  mobile control. Tag these `orchestration`.
+- **AI-assisted editors, terminals, and review tools** — the developer stays in the
+  driver's seat and the model accelerates the work.
+
+The dividing line is **tools you use vs. building blocks you import**. Out of scope:
+libraries and SDKs, agent frameworks meant to be built on, model weights, prompt or
+skill collections, and dashboards that only observe a tool without being one.
+
+A tool also has to be *about* software development. General-purpose assistants,
+chat UIs, and multi-agent "digital workforce" apps — the ones whose specialists write
+reports, decks, and marketing copy — do not qualify just because a developer could use
+them, or because one of their agents happens to touch code. Judge the tool by what it is
+built to do, not by the widest thing it can be pointed at.
+
+### The star floor is hard
+
+**1,000 stars minimum.** This is not a judgement call and is not waived for
+individual entries, however good the tool is. The updater enforces it: any entry
+below the floor is dropped from the ranking and reported as an `::error::` in the
+Actions log (`enforceStarFloor` in `github.go`). Because star counts require the
+API, `go run . -check` cannot catch this offline — a below-floor entry passes CI
+and is then dropped by the next daily run, so check the count before opening a PR.
+
+Maintenance requirements apply to every entry equally: no push in 6 months means
+removal, and the daily run warns past 3 months.
+
 ## Tag Vocabulary
 
 Tags replaced the old single-select `category` field, because one slot cannot
@@ -31,7 +66,7 @@ describe a tool that ships as a CLI, an editor plugin and a desktop app at the
 same time — which most of them now do. An entry carries several tags across
 five facets. `data/agents.yml` is the source of truth; the vocabulary itself
 lives in `tagVocabulary` (`validate.go`) and reaches the dashboard through
-`site/data.json`, so it is defined exactly once.
+the generated `dist/data.json`, so it is defined exactly once.
 
 **Surface** — where you run it. At least one required.
 
@@ -55,6 +90,7 @@ lives in `tagVocabulary` (`validate.go`) and reaches the dashboard through
 - **review** — reviews diffs or existing code rather than writing it
 - **app-builder** — prompt-to-app scaffolding, with preview and deploy
 - **research** — published as a research artifact or proof of concept
+- **orchestration** — runs and coordinates *other* coding agents as its primary purpose (an ADE), rather than editing code itself
 
 **Integration** — what it plugs into.
 
@@ -88,6 +124,9 @@ say nothing about choosing the tool. GitHub topics are a drafting aid only —
 **Deprecation:** To remove an agent, delete its entry from `data/agents.yml`. The next run drops it from the README; its history stays in `data/history.jsonl`, so re-adding the entry later restores its star chart.
 
 **Staleness:** An entry with no push in **6 months** is dropped. Past **3 months** the updater prints a `::warning::` naming the repo and its days idle, so the daily run surfaces candidates without anyone auditing the list by hand. Removal stays a human decision: a repo can go quiet between releases, and a historically significant one (`gpt-engineer`) is kept with a `notes` marker instead.
+A repo the maintainers have **archived or declared deprecated** is different: it will never
+be pushed again, so it is removed without waiting out the 6 months unless it earns the same
+historical-significance exception.
 
 ## PR Review
 
@@ -95,4 +134,5 @@ say nothing about choosing the tool. GitHub topics are a drafting aid only —
 - The daily GitHub Actions workflow (runs at 00:00 UTC) picks up merged PRs automatically
 - No manual review required; the updater regenerates the README after your PR merges
 
-For local testing before opening a PR, see [LOCAL_DEV.md](./LOCAL_DEV.md).
+For local testing before opening a PR, see [LOCAL_DEV.md](./LOCAL_DEV.md). A tag
+or note change needs only `go run . -build` — no GitHub token.
