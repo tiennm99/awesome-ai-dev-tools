@@ -143,3 +143,11 @@ agents:
     repo: Orkas
     tags: [desktop, byo-model, interactive, community]
     notes: "Open-source, local-first desktop AI workforce coordinated by a Commander through one chat; supports local coding-agent workflows."
+  - owner: stablyai
+    repo: orca
+    tags: [desktop, terminal, byo-model, orchestration, headless, community]
+    notes: "ADE: runs Codex, Claude Code, OpenCode and Pi side-by-side, each in its own git worktree, with a mobile companion app."
+  - owner: getpaseo
+    repo: paseo
+    tags: [desktop, web, terminal, self-hosted, byo-model, orchestration, headless, community]
+    notes: "ADE: self-hosted daemon that runs Claude Code, Codex, Copilot, OpenCode and Pi on your own machines, driven from desktop, mobile, web or CLI."

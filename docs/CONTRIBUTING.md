@@ -24,6 +24,23 @@ Optional fields: `notes` (for clarifications or caveats)
 | `tags` | list | Yes | Tags from the vocabulary below; at least one surface tag, at most one origin tag |
 | `notes` | string | No | Additional context or disclaimers |
 
+## Scope
+
+Two kinds of project belong here:
+
+1. **Coding agents** — they write, edit, or review code themselves.
+2. **Agent development environments (ADEs)** — their primary purpose is running and
+   coordinating those agents: parallel worktrees, session management, remote or mobile
+   control. Tag these `orchestration`.
+
+An ADE earns a row because it is the surface a developer actually works in, the same way
+a coding agent is. What stays out is anything that only *assists* agents without being a
+place you run them: libraries and SDKs, prompt or skill collections, dashboards and
+observability-only layers, and single-purpose wrappers around one agent's config.
+
+The other two criteria in the [README](../README.md#contributing) — roughly 10,000+ stars
+and active maintenance — apply to both kinds equally.
+
 ## Tag Vocabulary
 
 Tags replaced the old single-select `category` field, because one slot cannot
@@ -55,6 +72,7 @@ lives in `tagVocabulary` (`validate.go`) and reaches the dashboard through
 - **review** — reviews diffs or existing code rather than writing it
 - **app-builder** — prompt-to-app scaffolding, with preview and deploy
 - **research** — published as a research artifact or proof of concept
+- **orchestration** — runs and coordinates *other* coding agents as its primary purpose (an ADE), rather than editing code itself
 
 **Integration** — what it plugs into.
 

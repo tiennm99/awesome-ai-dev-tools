@@ -68,7 +68,7 @@
 
 **Inclusion criteria** — a repo belongs on this list when it is:
 
-1. **An AI coding agent or assistant itself** — a tool that autonomously writes, edits, or reviews code. Frameworks, wrappers, observability layers, and workspaces *for* agents are out of scope.
+1. **An AI coding agent, or an environment for running them** — either a tool that autonomously writes, edits, or reviews code, or an *agent development environment* (ADE) that runs and coordinates those agents as its primary purpose. Libraries, SDKs, prompt/skill collections, and observability-only layers remain out of scope.
 2. **Notable**: roughly **10,000+ GitHub stars** (the current list floor).
 3. **Open source and actively maintained** — no push in **6 months** means the entry is dropped. The daily run flags anything past **3 months** for review, so the ranking reflects tools people can actually use today.
 
@@ -89,7 +89,7 @@ agents:
 |-------|------|
 | Surface (at least one) | `terminal` · `editor-plugin` · `ide` · `desktop` · `web` · `self-hosted` |
 | Model access | `byo-model` · `single-vendor` · `local-models` |
-| Workflow | `interactive` · `autonomous` · `review` · `app-builder` · `research` |
+| Workflow | `interactive` · `autonomous` · `review` · `app-builder` · `research` · `orchestration` |
 | Integration | `mcp` · `acp` · `headless` |
 | Origin (at most one) | `vendor` · `community` |
 
