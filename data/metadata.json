@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-16T15:28:54.182852946Z",
+  "fetchedAt": "2026-09-16T15:31:21.199690008Z",
   "repos": {
     "1jehuang/jcode": {
       "nameWithOwner": "1jehuang/jcode",
@@ -94,7 +94,7 @@
     "OpenHands/OpenHands": {
       "nameWithOwner": "OpenHands/OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
-      "stars": 88149,
+      "stars": 88150,
       "language": "TypeScript",
       "pushedAt": "2026-09-16T15:13:42Z",
       "description": "🙌 OpenHands: AI-Driven Development",
@@ -105,7 +105,7 @@
       "url": "https://github.com/PrimeIntellect-ai/prime-agent",
       "stars": 20905,
       "language": "TypeScript",
-      "pushedAt": "2026-09-16T15:11:07Z",
+      "pushedAt": "2026-09-16T15:29:23Z",
       "description": "A self-improving RLM agent for coding workflows and long-running autonomous tasks.",
       "archived": false
     },
@@ -121,9 +121,9 @@
     "QwenLM/qwen-code": {
       "nameWithOwner": "QwenLM/qwen-code",
       "url": "https://github.com/QwenLM/qwen-code",
-      "stars": 27895,
+      "stars": 27896,
       "language": "TypeScript",
-      "pushedAt": "2026-09-16T15:28:13Z",
+      "pushedAt": "2026-09-16T15:31:12Z",
       "description": "An open-source AI coding agent that lives in your terminal.",
       "archived": false
     },
@@ -157,7 +157,7 @@
     "alibaba/open-code-review": {
       "nameWithOwner": "alibaba/open-code-review",
       "url": "https://github.com/alibaba/open-code-review",
-      "stars": 30880,
+      "stars": 30885,
       "language": "Go",
       "pushedAt": "2026-09-16T14:52:32Z",
       "description": "Fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI \u0026 Anthropic compatible.",
@@ -168,7 +168,7 @@
       "url": "https://github.com/anomalyco/opencode",
       "stars": 207853,
       "language": "TypeScript",
-      "pushedAt": "2026-09-16T15:28:28Z",
+      "pushedAt": "2026-09-16T15:31:00Z",
       "description": "The open source coding agent.",
       "archived": false
     },
@@ -220,7 +220,7 @@
     "deepseek-ai/deepseek-harness": {
       "nameWithOwner": "deepseek-ai/deepseek-harness",
       "url": "https://github.com/deepseek-ai/deepseek-harness",
-      "stars": 226436,
+      "stars": 226438,
       "language": "TypeScript",
       "pushedAt": "2026-09-15T04:51:11Z",
       "description": "DeepSeek Harness: Everything is a Plugin.",
@@ -274,7 +274,7 @@
     "google-gemini/gemini-cli": {
       "nameWithOwner": "google-gemini/gemini-cli",
       "url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 107016,
+      "stars": 107015,
       "language": "TypeScript",
       "pushedAt": "2026-09-16T01:28:52Z",
       "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
@@ -310,7 +310,7 @@
     "stablyai/orca": {
       "nameWithOwner": "stablyai/orca",
       "url": "https://github.com/stablyai/orca",
-      "stars": 70044,
+      "stars": 70047,
       "language": "TypeScript",
       "pushedAt": "2026-09-16T15:02:06Z",
       "description": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
