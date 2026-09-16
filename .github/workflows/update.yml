@@ -46,6 +46,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: go run .
 
+      # Bot commits are pushed with GITHUB_TOKEN, which by design does not
+      # re-trigger workflows — so CI never runs on them. Without this step a
+      # refresh that broke the build would be discovered by Cloudflare at deploy
+      # time. Running the build before the commit means unbuildable data is
+      # never committed in the first place.
+      - name: Verify the committed data builds
+        run: go run . -build
+
       - name: Commit changes
         run: |
           git config user.name  "github-actions[bot]"

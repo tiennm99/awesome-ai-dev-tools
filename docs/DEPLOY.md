@@ -29,11 +29,18 @@ Cloudflare's build webhook, which redeploys with the new numbers.
 
 ## One-time setup
 
-### 1. Bootstrap `data/metadata.json`
+### 1. Check `data/metadata.json` is committed
 
-The build fails without it, so generate it before connecting Cloudflare. Either
-trigger the **Update rankings** workflow manually (Actions tab →
-*Update rankings* → *Run workflow*), or run the updater locally and commit:
+The build reads it and fails without it. It is committed on `main`, kept fresh
+by the nightly **Update rankings** workflow — so this is normally just a
+sanity check:
+
+```bash
+go run . -build   # should print "built dist: N entries, data fetched ..."
+```
+
+If it is ever missing (a fresh fork, say), regenerate it by triggering
+**Update rankings** manually from the Actions tab, or locally:
 
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
@@ -85,8 +92,8 @@ are copied into `dist/` as-is and use Cloudflare's defaults.
 
 ## Troubleshooting
 
-**Build fails with "data/metadata.json not found"** — the bootstrap in step 1
-has not been committed yet.
+**Build fails with "data/metadata.json not found"** — step 1 has not been
+committed yet. Trigger *Update rankings* to produce it.
 
 **A newly added tool is missing from the site** — expected between merging the
 `agents.yml` entry and the next update run. The build logs a warning and omits

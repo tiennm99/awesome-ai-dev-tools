@@ -2,6 +2,10 @@ name: CI
 
 on:
   pull_request:
+  # Lets a bot-pushed commit be verified on demand: GITHUB_TOKEN pushes do not
+  # trigger workflows, so the nightly refresh otherwise leaves main's CI status
+  # reflecting the last human push.
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
