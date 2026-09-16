@@ -156,16 +156,21 @@ func fetchStats(token string, agents []Agent) ([]Stat, error) {
 		})
 	}
 
-	// Sort by stars descending. Ties are ordered by CanonicalKey for determinism
-	// regardless of map-iteration or agents.yml order.
+	sortStats(stats)
+
+	return stats, nil
+}
+
+// sortStats orders the ranking by stars descending. Ties break on CanonicalKey
+// for determinism regardless of map-iteration or agents.yml order. Shared with
+// the build step, which re-ranks from committed metadata.
+func sortStats(stats []Stat) {
 	sort.Slice(stats, func(i, j int) bool {
 		if stats[i].Stars != stats[j].Stars {
 			return stats[i].Stars > stats[j].Stars
 		}
 		return stats[i].CanonicalKey < stats[j].CanonicalKey
 	})
-
-	return stats, nil
 }
 
 // fetchChunk sends one GraphQL request for a slice of agents. aliasOffset
@@ -251,7 +256,7 @@ func doWithRetry(token string, body []byte) ([]byte, int, error) {
 		}
 		req.Header.Set("Authorization", "Bearer "+token)
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "ai-dev-tools-updater")
+		req.Header.Set("User-Agent", "awesome-ai-dev-tools-updater")
 
 		resp, err := httpClient.Do(req)
 		if err != nil {

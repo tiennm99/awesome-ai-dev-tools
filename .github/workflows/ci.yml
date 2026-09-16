@@ -11,6 +11,7 @@ on:
       - '.github/workflows/ci.yml'
       - 'data/agents.yml'
       - 'templates/**'
+      - 'site/**'
 
 permissions:
   contents: read
@@ -30,6 +31,9 @@ jobs:
       - run: go test ./...
       - run: go build ./...
       - run: go run . -check
+      # Runs exactly what Cloudflare Pages runs, so a build that would fail on
+      # deploy fails here instead. Needs no token — that is the point of the split.
+      - run: go run . -build
 
   lint:
     runs-on: ubuntu-latest

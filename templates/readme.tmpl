@@ -1,9 +1,9 @@
-# AI Dev Tools
+# Awesome AI Dev Tools
 
 > Curated ranking of AI-powered developer tools, sorted by GitHub stars.
 > Updated daily by GitHub Actions.
 
-📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/ai-dev-tools/)**
+📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)**
 
 **Last updated:** {{.UpdatedAt}} · **Tracked:** {{.Total}} repos
 {{- if .TopMover.HasMover }}
@@ -24,8 +24,8 @@
 2. A daily GitHub Actions workflow (`.github/workflows/update.yml`) runs the Go updater.
 3. The updater fetches live repo metadata via the GitHub GraphQL API in one batched query.
 4. Star counts are appended to `data/history.jsonl` for 7-day delta computation.
-5. This `README.md` is regenerated from `templates/readme.tmpl` and committed back to the repo.
-6. `site/data.json` is regenerated and the [dashboard](https://tiennm99.github.io/ai-dev-tools/) (`site/index.html`) is redeployed to GitHub Pages.
+5. This `README.md` and `data/metadata.json` are regenerated and committed back to the repo.
+6. That push triggers Cloudflare Pages, which runs `go run . -build` to render the [dashboard](https://awesome-ai-dev-tools.pages.dev/) from the committed data — no API token needed at build time. See [docs/DEPLOY.md](./docs/DEPLOY.md).
 
 **Δ7d:** Change in stars over the past 7 days; `—` means fewer than 7 days of history.
 
@@ -33,7 +33,7 @@
 
 **Inclusion criteria** — a repo belongs on this list when it is:
 
-1. **A developer tool built around AI** — something a developer uses to build software, where an LLM is central to what it does. That covers agents that write, edit, or review code; agent development environments that run and coordinate them; and AI-assisted editors, terminals, and review tools. Libraries, SDKs, model weights, and prompt or skill collections are out of scope — this list ranks tools you *use*, not building blocks you *import*.
+1. **A developer tool built around AI** — something a developer uses to build software, where an LLM is central to what it does. That covers agents that write, edit, or review code; agent development environments that run and coordinate them; and AI-assisted editors, terminals, and review tools. Libraries, SDKs, model weights, and prompt or skill collections are out of scope — this list ranks tools you *use*, not building blocks you *import*. General-purpose assistants and multi-agent "digital workforce" apps are out as well, even when one of their agents can write code — the tool itself has to be aimed at building software.
 2. **At least 1,000 GitHub stars** — a hard floor, enforced by the updater. An entry below it is dropped from the ranking automatically, so the threshold is never waived for an individual entry.
 3. **Open source and actively maintained** — no push in **6 months** means the entry is dropped. The daily run flags anything past **3 months** for review, so the ranking reflects tools people can actually use today.
 
@@ -48,7 +48,7 @@ agents:
     tags: [terminal, byo-model, interactive, community]
 ```
 
-**Tags** describe a tool across five facets — the [dashboard](https://tiennm99.github.io/ai-dev-tools/) filters on them, OR within a facet and AND across facets:
+**Tags** describe a tool across five facets — the [dashboard](https://awesome-ai-dev-tools.pages.dev/) filters on them, OR within a facet and AND across facets:
 
 | Facet | Tags |
 |-------|------|

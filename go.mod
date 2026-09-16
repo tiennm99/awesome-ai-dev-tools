@@ -1,4 +1,4 @@
-module github.com/tiennm99/ai-dev-tools
+module github.com/tiennm99/awesome-ai-dev-tools
 
 go 1.23
 

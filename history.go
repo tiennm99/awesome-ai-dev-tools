@@ -195,8 +195,16 @@ func computeDeltas(history []Snapshot, current Snapshot) map[string]int {
 // the delta would be misleadingly labeled "Δ<days>d", so we return no delta
 // for that repo instead.
 func computeDeltaOver(history []Snapshot, current Snapshot, days, slackDays int) map[string]int {
+	return computeDeltaAt(history, current, timeNow(), days, slackDays)
+}
+
+// computeDeltaAt is computeDeltaOver with an explicit anchor instead of the
+// wall clock. The build step passes the time the data was fetched, so
+// rebuilding an unchanged dataset later reproduces identical deltas rather
+// than sliding the window forward off its baseline.
+func computeDeltaAt(history []Snapshot, current Snapshot, anchor time.Time, days, slackDays int) map[string]int {
 	deltas := map[string]int{}
-	now := timeNow().UTC()
+	now := anchor.UTC()
 	cutoff := now.AddDate(0, 0, -days).Format("2006-01-02")
 	lowerBound := now.AddDate(0, 0, -(days + slackDays)).Format("2006-01-02")
 
