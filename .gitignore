@@ -1,5 +1,5 @@
 # Go build artifacts
-/awesome-coding-agents
+/ai-dev-tools
 *.exe
 *.test
 *.out

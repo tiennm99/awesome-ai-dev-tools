@@ -1,9 +1,9 @@
-# Awesome Coding Agents
+# AI Dev Tools
 
 > Curated ranking of AI-powered developer tools, sorted by GitHub stars.
 > Updated daily by GitHub Actions.
 
-📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/awesome-coding-agents/)**
+📊 **[Interactive dashboard with star-history charts →](https://tiennm99.github.io/ai-dev-tools/)**
 
 **Last updated:** 2026-09-16 03:54 UTC · **Tracked:** 40 repos
 **Top 7-day mover:** [earendil-works/pi](https://github.com/earendil-works/pi) (+2642 stars)
@@ -60,7 +60,7 @@
 3. The updater fetches live repo metadata via the GitHub GraphQL API in one batched query.
 4. Star counts are appended to `data/history.jsonl` for 7-day delta computation.
 5. This `README.md` is regenerated from `templates/readme.tmpl` and committed back to the repo.
-6. `site/data.json` is regenerated and the [dashboard](https://tiennm99.github.io/awesome-coding-agents/) (`site/index.html`) is redeployed to GitHub Pages.
+6. `site/data.json` is regenerated and the [dashboard](https://tiennm99.github.io/ai-dev-tools/) (`site/index.html`) is redeployed to GitHub Pages.
 
 **Δ7d:** Change in stars over the past 7 days; `—` means fewer than 7 days of history.
 
@@ -83,7 +83,7 @@ agents:
     tags: [terminal, byo-model, interactive, community]
 ```
 
-**Tags** describe a tool across five facets — the [dashboard](https://tiennm99.github.io/awesome-coding-agents/) filters on them, OR within a facet and AND across facets:
+**Tags** describe a tool across five facets — the [dashboard](https://tiennm99.github.io/ai-dev-tools/) filters on them, OR within a facet and AND across facets:
 
 | Facet | Tags |
 |-------|------|

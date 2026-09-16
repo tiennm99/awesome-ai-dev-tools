@@ -251,7 +251,7 @@ func doWithRetry(token string, body []byte) ([]byte, int, error) {
 		}
 		req.Header.Set("Authorization", "Bearer "+token)
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "awesome-coding-agents-updater")
+		req.Header.Set("User-Agent", "ai-dev-tools-updater")
 
 		resp, err := httpClient.Do(req)
 		if err != nil {

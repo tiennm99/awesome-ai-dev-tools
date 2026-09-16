@@ -9,7 +9,7 @@
 
 1. Go to [https://github.com/settings/tokens](https://github.com/settings/tokens)
 2. Click "Generate new token" → "Generate new token (classic)"
-3. Give it a name (e.g., "awesome-coding-agents")
+3. Give it a name (e.g., "ai-dev-tools")
 4. Select scope: **`public_repo`** (needed to read public repo metadata)
 5. Click "Generate token" and copy the value
 
