@@ -51,6 +51,8 @@ func TestFetchStats_ChunkingHappyPath(t *testing.T) {
 	for i := range agents {
 		agents[i] = Agent{Owner: "org", Repo: fmt.Sprintf("repo%02d", i), Tags: []string{"terminal", "community"}}
 	}
+	// A curated description in agents.yml replaces the GitHub one.
+	agents[3].Description = "curated"
 
 	var requestCount int
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -113,6 +115,18 @@ func TestFetchStats_ChunkingHappyPath(t *testing.T) {
 	}
 	if !found {
 		t.Error("expected org/repo52 (second chunk) in results")
+	}
+	for _, s := range stats {
+		switch s.NameWithOwner {
+		case "org/repo03":
+			if s.Description != "curated" {
+				t.Errorf("org/repo03: expected curated description, got %q", s.Description)
+			}
+		case "org/repo04":
+			if s.Description != "desc 4" {
+				t.Errorf("org/repo04: expected GitHub description, got %q", s.Description)
+			}
+		}
 	}
 }
 

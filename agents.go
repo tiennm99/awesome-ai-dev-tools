@@ -13,6 +13,11 @@ type Agent struct {
 	Tags  []string `yaml:"tags"`
 	Notes string   `yaml:"notes,omitempty"`
 
+	// Description is a curated one-liner that replaces the repo's own GitHub
+	// description in the README and dashboard. Many upstream descriptions are
+	// empty, vague, or marketing copy that says nothing about what the tool is.
+	Description string `yaml:"description,omitempty"`
+
 	// Category is the retired single-select field that tags replaced. It is
 	// still parsed so a stale entry fails validation with a message naming
 	// the replacement, rather than being silently ignored.

@@ -140,13 +140,18 @@ func fetchStats(token string, agents []Agent) ([]Stat, error) {
 			fmt.Printf("::warning::repo %s has no push in %d days — review against the maintenance criterion\n", canonicalKey, days)
 		}
 
+		desc := node.Description
+		if a.Description != "" {
+			desc = a.Description
+		}
+
 		stats = append(stats, Stat{
 			CanonicalKey:  canonicalKey,
 			Owner:         a.Owner,
 			Repo:          a.Repo,
 			Tags:          a.Tags,
 			Notes:         a.Notes,
-			Description:   node.Description,
+			Description:   desc,
 			Stars:         node.StargazerCount,
 			Language:      lang,
 			PushedAt:      node.PushedAt,

@@ -8,12 +8,13 @@ Edit [`data/agents.yml`](../data/agents.yml) and add an entry:
 agents:
   - owner: github-username-or-org
     repo: repository-name
+    description: Terminal coding agent that edits files and runs commands in your repo
     tags: [terminal, byo-model, interactive, community]
 ```
 
 Required fields: `owner`, `repo`, `tags`
 
-Optional fields: `notes` (for clarifications or caveats)
+Optional fields: `description` (curated one-liner), `notes` (for clarifications or caveats)
 
 ## Field Reference
 
@@ -22,7 +23,17 @@ Optional fields: `notes` (for clarifications or caveats)
 | `owner` | string | Yes | GitHub user or organization that owns the repo |
 | `repo` | string | Yes | Repository name on GitHub |
 | `tags` | list | Yes | Tags from the vocabulary below; at least one surface tag, at most one origin tag |
+| `description` | string | No | Curated one-line description shown instead of the repo's GitHub description; one line, no `\|`, at most 140 characters |
 | `notes` | string | No | Additional context or disclaimers |
+
+### Writing a description
+
+Say what the tool is (terminal agent, VS Code extension, editor, desktop app,
+self-hosted server) and the one trait that sets it apart, in one plain sentence
+with no trailing period. Base it on the repo's own README, like tags. Leave out
+marketing adjectives, emoji, star counts, and model version names, which go
+stale within months. Without a `description`, the README shows whatever the
+repo's GitHub description says, which is often empty or vague.
 
 ## Scope
 

@@ -204,3 +204,29 @@ func anyContains(list []string, substr string) bool {
 	}
 	return false
 }
+
+func TestValidateAgents_Description(t *testing.T) {
+	tests := []struct {
+		name, desc, want string
+	}{
+		{"valid", "Terminal coding agent with multi-provider support", ""},
+		{"pipe", "CLI | agent", "without '|'"},
+		{"newline", "line one\nline two", "without '|'"},
+		{"padded", " padded", "leading or trailing whitespace"},
+		{"too long", strings.Repeat("x", maxDescriptionLen+1), "max 140"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			violations := validateAgents([]Agent{{Owner: "o", Repo: "r", Tags: []string{"terminal"}, Description: tt.desc}})
+			if tt.want == "" {
+				if len(violations) != 0 {
+					t.Errorf("expected no violations, got %v", violations)
+				}
+				return
+			}
+			if !anyContains(violations, tt.want) {
+				t.Errorf("expected violation containing %q, got %v", tt.want, violations)
+			}
+		})
+	}
+}

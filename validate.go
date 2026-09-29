@@ -102,6 +102,7 @@ func validateAgents(agents []Agent) []string {
 			violations = append(violations, fmt.Sprintf("%s: category %q is no longer a field — replace it with tags, e.g. tags: [terminal, byo-model, interactive, community]", ref, a.Category))
 		}
 		violations = append(violations, validateTags(ref, a.Tags)...)
+		violations = append(violations, validateDescription(ref, a.Description)...)
 
 		key := strings.ToLower(a.Owner + "/" + a.Repo)
 		if first, dup := seen[key]; dup {
@@ -164,5 +165,27 @@ func validateTags(ref string, tags []string) []string {
 		violations = append(violations, fmt.Sprintf("%s: has %d origin tags, expected at most one (%s)", ref, facetCount[facetOrigin], strings.Join(facetTags(facetOrigin), ", ")))
 	}
 
+	return violations
+}
+
+// maxDescriptionLen keeps a curated description to one readable table line.
+const maxDescriptionLen = 140
+
+// validateDescription checks the optional curated description: one line,
+// bounded length, and no pipe, which would split the README table cell.
+func validateDescription(ref, desc string) []string {
+	var violations []string
+	if desc == "" {
+		return nil
+	}
+	if strings.TrimSpace(desc) != desc {
+		violations = append(violations, fmt.Sprintf("%s: description has leading or trailing whitespace", ref))
+	}
+	if strings.ContainsAny(desc, "|\n\r") {
+		violations = append(violations, fmt.Sprintf("%s: description must be one line without '|'", ref))
+	}
+	if n := len([]rune(desc)); n > maxDescriptionLen {
+		violations = append(violations, fmt.Sprintf("%s: description is %d characters, max %d", ref, n, maxDescriptionLen))
+	}
 	return violations
 }
