@@ -1,19 +1,19 @@
 {
-  "fetchedAt": "2026-09-29T06:09:42.036759772Z",
+  "fetchedAt": "2026-09-30T04:36:25.56031702Z",
   "repos": {
     "1jehuang/jcode": {
       "nameWithOwner": "1jehuang/jcode",
       "url": "https://github.com/1jehuang/jcode",
-      "stars": 20198,
+      "stars": 20224,
       "language": "Rust",
-      "pushedAt": "2026-09-29T05:28:27Z",
+      "pushedAt": "2026-09-30T03:35:49Z",
       "description": "Terminal coding agent harness with a TUI and SDK, built for low memory use",
       "archived": false
     },
     "Aider-AI/aider": {
       "nameWithOwner": "Aider-AI/aider",
       "url": "https://github.com/Aider-AI/aider",
-      "stars": 49255,
+      "stars": 49286,
       "language": "Python",
       "pushedAt": "2026-05-22T14:02:20Z",
       "description": "Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs",
@@ -22,7 +22,7 @@
     "AntonOsika/gpt-engineer": {
       "nameWithOwner": "AntonOsika/gpt-engineer",
       "url": "https://github.com/AntonOsika/gpt-engineer",
-      "stars": 55073,
+      "stars": 55070,
       "language": "Python",
       "pushedAt": "2025-05-14T10:15:10Z",
       "description": "CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream",
@@ -31,16 +31,16 @@
     "CodebuffAI/freebuff": {
       "nameWithOwner": "CodebuffAI/freebuff",
       "url": "https://github.com/CodebuffAI/freebuff",
-      "stars": 12915,
+      "stars": 12992,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T06:01:25Z",
+      "pushedAt": "2026-09-30T04:21:28Z",
       "description": "Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos",
       "archived": false
     },
     "Gitlawb/openclaude": {
-      "nameWithOwner": "Gitlawb/openclaude",
-      "url": "https://github.com/Gitlawb/openclaude",
-      "stars": 33564,
+      "nameWithOwner": "Twigpine/openclaude",
+      "url": "https://github.com/Twigpine/openclaude",
+      "stars": 33572,
       "language": "TypeScript",
       "pushedAt": "2026-09-29T05:00:16Z",
       "description": "Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension",
@@ -49,7 +49,7 @@
     "HKUDS/DeepCode": {
       "nameWithOwner": "HKUDS/DeepCode",
       "url": "https://github.com/HKUDS/DeepCode",
-      "stars": 16660,
+      "stars": 16665,
       "language": "Python",
       "pushedAt": "2026-09-28T08:06:05Z",
       "description": "Multi-agent coding tool with terminal, desktop, and web clients sharing one local service",
@@ -58,25 +58,25 @@
     "Hmbown/Codewhale": {
       "nameWithOwner": "Hmbown/Codewhale",
       "url": "https://github.com/Hmbown/Codewhale",
-      "stars": 41038,
+      "stars": 41041,
       "language": "Rust",
-      "pushedAt": "2026-09-29T06:06:09Z",
+      "pushedAt": "2026-09-30T04:34:32Z",
       "description": "Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents",
       "archived": false
     },
     "Kilo-Org/kilocode": {
       "nameWithOwner": "Kilo-Org/kilocode",
       "url": "https://github.com/Kilo-Org/kilocode",
-      "stars": 27434,
+      "stars": 27448,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:32:58Z",
+      "pushedAt": "2026-09-30T00:39:20Z",
       "description": "Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models",
       "archived": false
     },
     "Kuberwastaken/claurst": {
       "nameWithOwner": "Kuberwastaken/claurst",
       "url": "https://github.com/Kuberwastaken/claurst",
-      "stars": 10311,
+      "stars": 10312,
       "language": "Rust",
       "pushedAt": "2026-09-02T15:57:58Z",
       "description": "Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta",
@@ -85,7 +85,7 @@
     "MoonshotAI/kimi-cli": {
       "nameWithOwner": "MoonshotAI/kimi-cli",
       "url": "https://github.com/MoonshotAI/kimi-cli",
-      "stars": 11430,
+      "stars": 11431,
       "language": "Python",
       "pushedAt": "2026-09-22T09:42:54Z",
       "description": "Moonshot's legacy Python terminal agent for Kimi models; archived upstream and succeeded by Kimi Code CLI",
@@ -94,25 +94,25 @@
     "OpenHands/OpenHands": {
       "nameWithOwner": "OpenHands/OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
-      "stars": 89442,
+      "stars": 89561,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T04:12:15Z",
+      "pushedAt": "2026-09-30T04:32:17Z",
       "description": "Self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud",
       "archived": false
     },
     "PrimeIntellect-ai/prime-agent": {
       "nameWithOwner": "PrimeIntellect-ai/prime-agent",
       "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-      "stars": 21375,
-      "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:59:50Z",
+      "stars": 21388,
+      "language": "Rust",
+      "pushedAt": "2026-09-30T04:30:17Z",
       "description": "Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness",
       "archived": false
     },
     "Pythagora-io/gpt-pilot": {
       "nameWithOwner": "Pythagora-io/gpt-pilot",
       "url": "https://github.com/Pythagora-io/gpt-pilot",
-      "stars": 33659,
+      "stars": 33658,
       "language": "Python",
       "pushedAt": "2026-06-18T18:38:25Z",
       "description": "AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream",
@@ -121,16 +121,16 @@
     "QwenLM/qwen-code": {
       "nameWithOwner": "QwenLM/qwen-code",
       "url": "https://github.com/QwenLM/qwen-code",
-      "stars": 28206,
+      "stars": 28231,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T06:07:17Z",
+      "pushedAt": "2026-09-30T04:04:56Z",
       "description": "Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models",
       "archived": false
     },
     "SWE-agent/SWE-agent": {
       "nameWithOwner": "SWE-agent/SWE-agent",
       "url": "https://github.com/SWE-agent/SWE-agent",
-      "stars": 20439,
+      "stars": 20450,
       "language": "Python",
       "pushedAt": "2026-09-28T22:56:26Z",
       "description": "Research agent that lets a language model autonomously fix GitHub issues; superseded upstream by mini-swe-agent",
@@ -139,7 +139,7 @@
     "TabbyML/tabby": {
       "nameWithOwner": "TabbyML/tabby",
       "url": "https://github.com/TabbyML/tabby",
-      "stars": 33891,
+      "stars": 33888,
       "language": "Rust",
       "pushedAt": "2026-06-30T20:38:02Z",
       "description": "Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot",
@@ -148,61 +148,61 @@
     "The-PR-Agent/pr-agent": {
       "nameWithOwner": "The-PR-Agent/pr-agent",
       "url": "https://github.com/The-PR-Agent/pr-agent",
-      "stars": 13180,
+      "stars": 13193,
       "language": "Python",
-      "pushedAt": "2026-09-28T23:20:38Z",
+      "pushedAt": "2026-09-29T13:47:23Z",
       "description": "Pull request review agent for GitHub, GitLab, Bitbucket, and more, run as a CLI, GitHub Action, or webhook",
       "archived": false
     },
     "XiaomiMiMo/MiMo-Code": {
       "nameWithOwner": "XiaomiMiMo/MiMo-Code",
       "url": "https://github.com/XiaomiMiMo/MiMo-Code",
-      "stars": 13541,
+      "stars": 13562,
       "language": "TypeScript",
-      "pushedAt": "2026-09-28T17:55:03Z",
+      "pushedAt": "2026-09-29T11:57:10Z",
       "description": "Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider",
       "archived": false
     },
     "aaif-goose/goose": {
       "nameWithOwner": "aaif-goose/goose",
       "url": "https://github.com/aaif-goose/goose",
-      "stars": 54753,
+      "stars": 54788,
       "language": "Rust",
-      "pushedAt": "2026-09-29T02:59:10Z",
+      "pushedAt": "2026-09-30T04:35:12Z",
       "description": "Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions",
       "archived": false
     },
     "alibaba/open-code-review": {
       "nameWithOwner": "alibaba/open-code-review",
       "url": "https://github.com/alibaba/open-code-review",
-      "stars": 42389,
+      "stars": 42660,
       "language": "Go",
-      "pushedAt": "2026-09-29T03:46:45Z",
+      "pushedAt": "2026-09-29T14:33:37Z",
       "description": "AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent",
       "archived": false
     },
     "anomalyco/opencode": {
       "nameWithOwner": "anomalyco/opencode",
       "url": "https://github.com/anomalyco/opencode",
-      "stars": 210689,
+      "stars": 210974,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:50:10Z",
+      "pushedAt": "2026-09-30T04:34:57Z",
       "description": "Open-source coding agent with a terminal UI and desktop app that works with any model provider",
       "archived": false
     },
     "anthropics/claude-code": {
       "nameWithOwner": "anthropics/claude-code",
       "url": "https://github.com/anthropics/claude-code",
-      "stars": 148511,
+      "stars": 148614,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:54:23Z",
+      "pushedAt": "2026-09-30T01:03:20Z",
       "description": "Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows",
       "archived": false
     },
     "avante-corp/avante.nvim": {
       "nameWithOwner": "avante-corp/avante.nvim",
       "url": "https://github.com/avante-corp/avante.nvim",
-      "stars": 18166,
+      "stars": 18169,
       "language": "Lua",
       "pushedAt": "2026-09-26T15:40:11Z",
       "description": "Neovim plugin that brings Cursor-style AI editing to Neovim, applying suggestions directly to source files",
@@ -211,90 +211,90 @@
     "can1357/oh-my-pi": {
       "nameWithOwner": "can1357/oh-my-pi",
       "url": "https://github.com/can1357/oh-my-pi",
-      "stars": 33675,
+      "stars": 33791,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T04:53:02Z",
+      "pushedAt": "2026-09-30T04:30:21Z",
       "description": "Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in",
       "archived": false
     },
     "charmbracelet/crush": {
       "nameWithOwner": "charmbracelet/crush",
       "url": "https://github.com/charmbracelet/crush",
-      "stars": 28354,
+      "stars": 28372,
       "language": "Go",
-      "pushedAt": "2026-09-29T02:49:23Z",
+      "pushedAt": "2026-09-30T03:32:49Z",
       "description": "Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context",
       "archived": false
     },
     "cline/cline": {
       "nameWithOwner": "cline/cline",
       "url": "https://github.com/cline/cline",
-      "stars": 69518,
+      "stars": 69582,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:53:26Z",
+      "pushedAt": "2026-09-30T04:10:10Z",
       "description": "Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI",
       "archived": false
     },
     "deepseek-ai/deepseek-harness": {
       "nameWithOwner": "deepseek-ai/deepseek-harness",
       "url": "https://github.com/deepseek-ai/deepseek-harness",
-      "stars": 239056,
+      "stars": 240357,
       "language": "TypeScript",
-      "pushedAt": "2026-09-28T12:35:34Z",
+      "pushedAt": "2026-09-29T09:41:57Z",
       "description": "DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI",
       "archived": false
     },
     "dyad-sh/dyad": {
       "nameWithOwner": "dyad-sh/dyad",
       "url": "https://github.com/dyad-sh/dyad",
-      "stars": 21616,
+      "stars": 21618,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T00:37:58Z",
+      "pushedAt": "2026-09-30T04:27:02Z",
       "description": "Local, open-source desktop AI app builder that uses your own API keys",
       "archived": false
     },
     "earendil-works/pi": {
       "nameWithOwner": "earendil-works/pi",
       "url": "https://github.com/earendil-works/pi",
-      "stars": 110184,
+      "stars": 110472,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T05:49:21Z",
+      "pushedAt": "2026-09-30T00:20:52Z",
       "description": "Toolkit with a unified multi-provider LLM API, an agent runtime, a terminal UI, and an extensible coding agent CLI",
       "archived": false
     },
     "esengine/DeepSeek-Reasonix": {
       "nameWithOwner": "esengine/DeepSeek-Reasonix",
       "url": "https://github.com/esengine/DeepSeek-Reasonix",
-      "stars": 35707,
+      "stars": 35718,
       "language": "Go",
-      "pushedAt": "2026-09-29T06:08:07Z",
+      "pushedAt": "2026-09-30T03:41:18Z",
       "description": "DeepSeek-native coding agent as a single Go binary with terminal, desktop, browser, and ACP clients, built around prefix caching",
       "archived": false
     },
     "getpaseo/paseo": {
       "nameWithOwner": "getpaseo/paseo",
       "url": "https://github.com/getpaseo/paseo",
-      "stars": 18926,
+      "stars": 19037,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T06:02:00Z",
+      "pushedAt": "2026-09-30T01:05:08Z",
       "description": "Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI",
       "archived": false
     },
     "github/copilot-cli": {
       "nameWithOwner": "github/copilot-cli",
       "url": "https://github.com/github/copilot-cli",
-      "stars": 11222,
+      "stars": 11228,
       "language": "Shell",
-      "pushedAt": "2026-09-29T02:11:48Z",
+      "pushedAt": "2026-09-29T21:25:00Z",
       "description": "GitHub Copilot's terminal coding agent, with built-in GitHub integration, MCP support, and per-action approval",
       "archived": false
     },
     "google-gemini/gemini-cli": {
       "nameWithOwner": "google-gemini/gemini-cli",
       "url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 107183,
+      "stars": 107194,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T01:19:34Z",
+      "pushedAt": "2026-09-30T01:33:54Z",
       "description": "Google's open-source terminal agent for Gemini models, with built-in search, file and shell tools, and MCP",
       "archived": false
     },
@@ -303,14 +303,14 @@
       "url": "https://github.com/langchain-ai/open-swe",
       "stars": 10773,
       "language": "Python",
-      "pushedAt": "2026-09-29T05:05:39Z",
+      "pushedAt": "2026-09-30T01:35:03Z",
       "description": "Asynchronous coding agent that investigates issues, opens pull requests, and reviews them, built on LangChain Deep Agents",
       "archived": false
     },
     "onlook-dev/onlook": {
       "nameWithOwner": "onlook-dev/onlook",
       "url": "https://github.com/onlook-dev/onlook",
-      "stars": 26828,
+      "stars": 26831,
       "language": "TypeScript",
       "pushedAt": "2026-08-25T01:06:22Z",
       "description": "Open-source visual design tool for editing React apps with AI directly on top of your codebase",
@@ -319,16 +319,16 @@
     "openai/codex": {
       "nameWithOwner": "openai/codex",
       "url": "https://github.com/openai/codex",
-      "stars": 127022,
+      "stars": 127253,
       "language": "Rust",
-      "pushedAt": "2026-09-29T05:13:22Z",
+      "pushedAt": "2026-09-30T04:30:19Z",
       "description": "OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options",
       "archived": false
     },
     "openinterpreter/openinterpreter": {
       "nameWithOwner": "openinterpreter/openinterpreter",
       "url": "https://github.com/openinterpreter/openinterpreter",
-      "stars": 68468,
+      "stars": 68478,
       "language": "Rust",
       "pushedAt": "2026-09-27T09:51:50Z",
       "description": "Terminal coding agent written in Rust, tuned for low-cost open-weight models",
@@ -337,36 +337,36 @@
     "stablyai/orca": {
       "nameWithOwner": "stablyai/orca",
       "url": "https://github.com/stablyai/orca",
-      "stars": 80952,
+      "stars": 81761,
       "language": "TypeScript",
-      "pushedAt": "2026-09-29T06:06:54Z",
+      "pushedAt": "2026-09-30T04:34:08Z",
       "description": "Desktop agent development environment that runs Codex, Claude Code, OpenCode, or Pi side by side, each in its own git worktree",
       "archived": false
     },
     "warpdotdev/warp": {
       "nameWithOwner": "warpdotdev/warp",
       "url": "https://github.com/warpdotdev/warp",
-      "stars": 65243,
+      "stars": 65285,
       "language": "Rust",
-      "pushedAt": "2026-09-29T03:58:18Z",
+      "pushedAt": "2026-09-30T04:01:44Z",
       "description": "Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents",
       "archived": false
     },
     "xai-org/grok-build": {
       "nameWithOwner": "xai-org/grok-build",
       "url": "https://github.com/xai-org/grok-build",
-      "stars": 27143,
+      "stars": 27158,
       "language": "Rust",
-      "pushedAt": "2026-09-23T16:52:48Z",
+      "pushedAt": "2026-09-29T16:57:13Z",
       "description": "xAI's terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP",
       "archived": false
     },
     "zed-industries/zed": {
       "nameWithOwner": "zed-industries/zed",
       "url": "https://github.com/zed-industries/zed",
-      "stars": 91028,
+      "stars": 91084,
       "language": "Rust",
-      "pushedAt": "2026-09-29T05:28:00Z",
+      "pushedAt": "2026-09-30T04:21:44Z",
       "description": "High-performance multiplayer code editor with a built-in agent panel that also hosts external agents over ACP",
       "archived": false
     }
