@@ -187,3 +187,8 @@ agents:
     repo: open-swe
     description: "Asynchronous coding agent that investigates issues, opens pull requests, and reviews them, built on LangChain Deep Agents"
     tags: [self-hosted, web, byo-model, autonomous, review, mcp, community]
+  - owner: pingdotgg
+    repo: t3code
+    description: "Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile"
+    tags: [desktop, web, self-hosted, byo-model, orchestration, community]
+    notes: "ADE: local server that drives your existing Claude Code, Codex, Cursor, Grok Build, OpenCode and Antigravity installs, with remote access from mobile."
