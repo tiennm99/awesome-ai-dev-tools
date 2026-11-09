@@ -5,53 +5,53 @@
 
 📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)**
 
-**Last updated:** 2026-11-08 05:01 UTC · **Tracked:** 42 repos
-**Top 7-day mover:** [pingdotgg/t3code](https://github.com/pingdotgg/t3code) (+15556 stars)
+**Last updated:** 2026-11-09 05:12 UTC · **Tracked:** 42 repos
+**Top 7-day mover:** [pingdotgg/t3code](https://github.com/pingdotgg/t3code) (+14217 stars)
 
 | # | Repo | Stars | Δ7d | Language | Last push | Description |
 |---|------|------:|----:|----------|-----------|-------------|
-| 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 275.9k | +8282 | TypeScript | 2026-11-04 | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
-| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 225.3k | +1681 | TypeScript | 2026-11-08 | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
-| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 154.9k | +831 | TypeScript | 2026-11-06 | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
-| 4 | [openai/codex](https://github.com/openai/codex) | 133.6k | +1040 | Rust | 2026-11-08 | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
-| 5 | [earendil-works/pi](https://github.com/earendil-works/pi) | 120.7k | +1453 | TypeScript | 2026-11-07 | Toolkit with a unified multi-provider LLM API, an agent runtime, a terminal UI, and an extensible coding agent CLI |
-| 6 | [stablyai/orca](https://github.com/stablyai/orca) | 118.7k | +6865 | TypeScript | 2026-11-08 | Desktop agent development environment that runs Codex, Claude Code, OpenCode, or Pi side by side, each in its own git worktree |
-| 7 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 108.8k | +134 | TypeScript | 2026-11-08 | Google's open-source terminal agent for Gemini models, with built-in search, file and shell tools, and MCP |
-| 8 | [zed-industries/zed](https://github.com/zed-industries/zed) | 94.3k | +1868 | Rust | 2026-11-08 | High-performance multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
-| 9 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 92.9k | +535 | TypeScript | 2026-11-08 | Self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
-| 10 | [cline/cline](https://github.com/cline/cline) | 71.5k | +323 | TypeScript | 2026-11-07 | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
-| 11 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 68.8k | +65 | Rust | 2026-11-07 | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
-| 12 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 65.9k | +105 | Rust | 2026-11-07 | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
-| 13 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 56.3k | +281 | Rust | 2026-11-08 | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
-| 14 | [AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer) | 55.0k | -21 | Python | 2025-05-14 | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
-| 15 | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | 51.5k | +15556 | TypeScript | 2026-11-08 | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
-| 16 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 50.0k | +159 | Python | 2026-05-22 | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
-| 17 | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 49.6k | +439 | Go | 2026-11-06 | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
-| 18 | [codewhale-hq/Codewhale](https://github.com/codewhale-hq/Codewhale) | 41.2k | -2 | Rust | 2026-11-08 | Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents |
-| 19 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | 38.2k | +813 | TypeScript | 2026-11-08 | Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in |
-| 20 | [esengine/DeepSeek-Reasonix](https://github.com/esengine/DeepSeek-Reasonix) | 36.1k | +107 | Go | 2026-11-08 | DeepSeek-native coding agent as a single Go binary with terminal, desktop, browser, and ACP clients, built around prefix caching |
-| 21 | [Twigpine/openclaude](https://github.com/Twigpine/openclaude) | 34.3k | +70 | TypeScript | 2026-11-06 | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
-| 22 | [TabbyML/tabby](https://github.com/TabbyML/tabby) | 33.9k | +1 | Rust | 2026-06-30 | Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot |
-| 23 | [Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot) | 33.6k | -6 | Python | 2026-06-18 | AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream |
-| 24 | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | 29.1k | +226 | TypeScript | 2026-11-08 | Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models |
-| 25 | [charmbracelet/crush](https://github.com/charmbracelet/crush) | 29.0k | +88 | Go | 2026-11-08 | Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context |
-| 26 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | 27.9k | +85 | TypeScript | 2026-11-07 | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
-| 27 | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 27.7k | +75 | Rust | 2026-09-29 | xAI's terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
-| 28 | [onlook-dev/onlook](https://github.com/onlook-dev/onlook) | 27.1k | +73 | TypeScript | 2026-10-21 | Open-source visual design tool for editing React apps with AI directly on top of your codebase |
-| 29 | [getpaseo/paseo](https://github.com/getpaseo/paseo) | 23.4k | +780 | TypeScript | 2026-11-08 | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
-| 30 | [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) | 22.6k | +140 | Rust | 2026-11-07 | Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness |
-| 31 | [dyad-sh/dyad](https://github.com/dyad-sh/dyad) | 22.2k | +84 | TypeScript | 2026-11-06 | Local, open-source desktop AI app builder that uses your own API keys |
-| 32 | [1jehuang/jcode](https://github.com/1jehuang/jcode) | 21.6k | +225 | Rust | 2026-11-08 | Terminal coding agent harness with a TUI and SDK, built for low memory use |
-| 33 | [SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent) | 20.8k | +58 | Python | 2026-11-02 | Research agent that lets a language model autonomously fix GitHub issues; superseded upstream by mini-swe-agent |
-| 34 | [avante-corp/avante.nvim](https://github.com/avante-corp/avante.nvim) | 18.2k | 0 | Lua | 2026-11-07 | Neovim plugin that brings Cursor-style AI editing to Neovim, applying suggestions directly to source files |
-| 35 | [HKUDS/DeepCode](https://github.com/HKUDS/DeepCode) | 16.8k | +40 | Python | 2026-11-02 | Multi-agent coding tool with terminal, desktop, and web clients sharing one local service |
-| 36 | [The-PR-Agent/pr-agent](https://github.com/The-PR-Agent/pr-agent) | 15.5k | +1628 | Python | 2026-11-07 | Pull request review agent for GitHub, GitLab, Bitbucket, and more, run as a CLI, GitHub Action, or webhook |
-| 37 | [CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff) | 14.0k | +113 | TypeScript | 2026-11-08 | Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos |
-| 38 | [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | 13.8k | +27 | TypeScript | 2026-11-05 | Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider |
-| 39 | [MoonshotAI/kimi-cli](https://github.com/MoonshotAI/kimi-cli) | 11.4k | -2 | Python | 2026-09-22 | Moonshot's legacy Python terminal agent for Kimi models; archived upstream and succeeded by Kimi Code CLI |
+| 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 276.7k | +8107 | TypeScript | 2026-11-04 | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
+| 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 225.6k | +1669 | TypeScript | 2026-11-09 | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
+| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 155.0k | +838 | TypeScript | 2026-11-06 | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
+| 4 | [openai/codex](https://github.com/openai/codex) | 133.9k | +1171 | Rust | 2026-11-09 | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
+| 5 | [earendil-works/pi](https://github.com/earendil-works/pi) | 120.9k | +1506 | TypeScript | 2026-11-08 | Toolkit with a unified multi-provider LLM API, an agent runtime, a terminal UI, and an extensible coding agent CLI |
+| 6 | [stablyai/orca](https://github.com/stablyai/orca) | 119.5k | +6743 | TypeScript | 2026-11-09 | Desktop agent development environment that runs Codex, Claude Code, OpenCode, or Pi side by side, each in its own git worktree |
+| 7 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 108.8k | +134 | TypeScript | 2026-11-09 | Google's open-source terminal agent for Gemini models, with built-in search, file and shell tools, and MCP |
+| 8 | [zed-industries/zed](https://github.com/zed-industries/zed) | 94.5k | +1984 | Rust | 2026-11-09 | High-performance multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
+| 9 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 93.0k | +532 | TypeScript | 2026-11-09 | Self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
+| 10 | [cline/cline](https://github.com/cline/cline) | 71.5k | +289 | TypeScript | 2026-11-07 | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
+| 11 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 68.8k | +67 | Rust | 2026-11-09 | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
+| 12 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 65.9k | +105 | Rust | 2026-11-08 | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
+| 13 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 56.4k | +277 | Rust | 2026-11-09 | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
+| 14 | [AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer) | 55.0k | -27 | Python | 2025-05-14 | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
+| 15 | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | 52.8k | +14217 | TypeScript | 2026-11-09 | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
+| 16 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 50.0k | +139 | Python | 2026-05-22 | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
+| 17 | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 49.7k | +412 | Go | 2026-11-09 | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
+| 18 | [codewhale-hq/Codewhale](https://github.com/codewhale-hq/Codewhale) | 41.2k | -10 | Rust | 2026-11-09 | Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents |
+| 19 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | 38.3k | +858 | TypeScript | 2026-11-09 | Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in |
+| 20 | [esengine/DeepSeek-Reasonix](https://github.com/esengine/DeepSeek-Reasonix) | 36.1k | +105 | Go | 2026-11-09 | DeepSeek-native coding agent as a single Go binary with terminal, desktop, browser, and ACP clients, built around prefix caching |
+| 21 | [Twigpine/openclaude](https://github.com/Twigpine/openclaude) | 34.3k | +61 | TypeScript | 2026-11-06 | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
+| 22 | [TabbyML/tabby](https://github.com/TabbyML/tabby) | 33.9k | +3 | Rust | 2026-06-30 | Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot |
+| 23 | [Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot) | 33.6k | -12 | Python | 2026-06-18 | AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream |
+| 24 | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | 29.1k | +241 | TypeScript | 2026-11-09 | Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models |
+| 25 | [charmbracelet/crush](https://github.com/charmbracelet/crush) | 29.0k | +95 | Go | 2026-11-08 | Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context |
+| 26 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | 27.9k | +83 | TypeScript | 2026-11-08 | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
+| 27 | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 27.7k | +66 | Rust | 2026-09-29 | xAI's terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
+| 28 | [onlook-dev/onlook](https://github.com/onlook-dev/onlook) | 27.1k | +68 | TypeScript | 2026-10-21 | Open-source visual design tool for editing React apps with AI directly on top of your codebase |
+| 29 | [getpaseo/paseo](https://github.com/getpaseo/paseo) | 23.6k | +818 | TypeScript | 2026-11-09 | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
+| 30 | [PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent) | 22.6k | +114 | Rust | 2026-11-09 | Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness |
+| 31 | [dyad-sh/dyad](https://github.com/dyad-sh/dyad) | 22.2k | +79 | TypeScript | 2026-11-06 | Local, open-source desktop AI app builder that uses your own API keys |
+| 32 | [1jehuang/jcode](https://github.com/1jehuang/jcode) | 21.6k | +223 | Rust | 2026-11-09 | Terminal coding agent harness with a TUI and SDK, built for low memory use |
+| 33 | [SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent) | 20.8k | +54 | Python | 2026-11-02 | Research agent that lets a language model autonomously fix GitHub issues; superseded upstream by mini-swe-agent |
+| 34 | [avante-corp/avante.nvim](https://github.com/avante-corp/avante.nvim) | 18.2k | -1 | Lua | 2026-11-09 | Neovim plugin that brings Cursor-style AI editing to Neovim, applying suggestions directly to source files |
+| 35 | [HKUDS/DeepCode](https://github.com/HKUDS/DeepCode) | 16.8k | +42 | Python | 2026-11-02 | Multi-agent coding tool with terminal, desktop, and web clients sharing one local service |
+| 36 | [The-PR-Agent/pr-agent](https://github.com/The-PR-Agent/pr-agent) | 15.6k | +1759 | Python | 2026-11-08 | Pull request review agent for GitHub, GitLab, Bitbucket, and more, run as a CLI, GitHub Action, or webhook |
+| 37 | [CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff) | 14.1k | +137 | TypeScript | 2026-11-09 | Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos |
+| 38 | [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | 13.8k | +26 | TypeScript | 2026-11-05 | Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider |
+| 39 | [MoonshotAI/kimi-cli](https://github.com/MoonshotAI/kimi-cli) | 11.4k | -4 | Python | 2026-09-22 | Moonshot's legacy Python terminal agent for Kimi models; archived upstream and succeeded by Kimi Code CLI |
 | 40 | [github/copilot-cli](https://github.com/github/copilot-cli) | 11.4k | +59 | Python | 2026-11-07 | GitHub Copilot's terminal coding agent, with built-in GitHub integration, MCP support, and per-action approval |
-| 41 | [langchain-ai/open-swe](https://github.com/langchain-ai/open-swe) | 11.2k | +23 | Python | 2026-11-08 | Asynchronous coding agent that investigates issues, opens pull requests, and reviews them, built on LangChain Deep Agents |
-| 42 | [Kuberwastaken/claurst](https://github.com/Kuberwastaken/claurst) | 10.3k | +6 | Rust | 2026-10-26 | Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta |
+| 41 | [langchain-ai/open-swe](https://github.com/langchain-ai/open-swe) | 11.2k | +21 | Python | 2026-11-09 | Asynchronous coding agent that investigates issues, opens pull requests, and reviews them, built on LangChain Deep Agents |
+| 42 | [Kuberwastaken/claurst](https://github.com/Kuberwastaken/claurst) | 10.3k | +3 | Rust | 2026-10-26 | Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta |
 
 ---
 
