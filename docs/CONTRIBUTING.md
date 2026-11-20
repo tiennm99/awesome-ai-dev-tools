@@ -101,7 +101,7 @@ the generated `dist/data.json`, so it is defined exactly once.
 - **review** — reviews diffs or existing code rather than writing it
 - **app-builder** — prompt-to-app scaffolding, with preview and deploy
 - **research** — published as a research artifact or proof of concept
-- **orchestration** — runs and coordinates *other* coding agents as its primary purpose (an ADE), rather than editing code itself
+- **orchestration** — runs and coordinates *other* coding agents as its primary purpose (an ADE), rather than editing code itself. It needs both: the tool drives a separately installed agent, and its main job is managing that agent's sessions (several at once, worktrees, background runs, or remote/mobile control). A tool that embeds the agent loop, or is a chat panel over one CLI session at a time, is `interactive`
 
 **Integration** — what it plugs into.
 
@@ -111,7 +111,7 @@ the generated `dist/data.json`, so it is defined exactly once.
 
 **Origin** — who publishes it. At most one.
 
-- **vendor** — first-party tool from a model lab (Anthropic, OpenAI, Google, xAI, DeepSeek, Alibaba, Moonshot, …)
+- **vendor** — first-party tool from a model lab (Anthropic, OpenAI, Google, xAI, DeepSeek, Alibaba, Moonshot, …): a company that trains and sells access to its own general-purpose models, whether or not the tool is tied to those models. A company that only ships small in-product models (Zed, JetBrains) or hosts others' models (Hugging Face, Vercel) is `community`
 - **community** — everyone else
 
 ### The evidence rule

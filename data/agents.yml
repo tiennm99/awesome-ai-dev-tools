@@ -16,6 +16,7 @@ agents:
     repo: aider
     description: "Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs"
     tags: [terminal, byo-model, local-models, interactive, community]
+    notes: No push since May 2026; kept for historical significance
   - owner: cline
     repo: cline
     description: "Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI"
@@ -30,8 +31,9 @@ agents:
     tags: [terminal, byo-model, local-models, interactive, mcp, community]
   - owner: google-gemini
     repo: gemini-cli
-    description: "Google's open-source terminal agent for Gemini models, with built-in search, file and shell tools, and MCP"
+    description: "Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support"
     tags: [terminal, single-vendor, interactive, headless, mcp, vendor]
+    notes: Free and Google AI plan access moved to Antigravity CLI in Jun 2026; this repo now serves Gemini Code Assist Standard and Enterprise
   - owner: openai
     repo: codex
     description: "OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options"
@@ -57,7 +59,7 @@ agents:
     tags: [self-hosted, editor-plugin, local-models, interactive, community]
   - owner: zed-industries
     repo: zed
-    description: "High-performance multiplayer code editor with a built-in agent panel that also hosts external agents over ACP"
+    description: "Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP"
     tags: [ide, byo-model, local-models, interactive, acp, community]
   - owner: anthropics
     repo: claude-code
@@ -69,12 +71,12 @@ agents:
     tags: [editor-plugin, byo-model, local-models, interactive, mcp, acp, community]
   - owner: earendil-works
     repo: pi
-    description: "Toolkit with a unified multi-provider LLM API, an agent runtime, a terminal UI, and an extensible coding agent CLI"
-    tags: [terminal, byo-model, interactive, community]
+    description: "Minimal, extensible terminal coding agent harness you customize with extensions, skills, and packages, with an SDK and RPC mode"
+    tags: [terminal, byo-model, interactive, headless, community]
   - owner: OpenHands
     repo: OpenHands
-    description: "Self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud"
-    tags: [web, self-hosted, terminal, byo-model, autonomous, acp, community]
+    description: "Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud"
+    tags: [web, self-hosted, byo-model, autonomous, orchestration, acp, community]
   - owner: warpdotdev
     repo: warp
     description: "Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents"
@@ -84,7 +86,7 @@ agents:
     repo: gpt-pilot
     description: "AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream"
     tags: [terminal, editor-plugin, byo-model, autonomous, community]
-    notes: Unmaintained upstream; README carries a notice about malicious telemetry code (2025-08 to 2026-06), since removed
+    notes: Unmaintained upstream; kept for historical significance. README carries a notice about malicious telemetry code (2025-08 to 2026-06), since removed
   - owner: QwenLM
     repo: qwen-code
     description: "Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models"
@@ -95,8 +97,9 @@ agents:
     tags: [editor-plugin, terminal, byo-model, interactive, autonomous, headless, mcp, community]
   - owner: onlook-dev
     repo: onlook
-    description: "Open-source visual design tool for editing React apps with AI directly on top of your codebase"
-    tags: [desktop, web, byo-model, app-builder, mcp, community]
+    description: "Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code"
+    tags: [desktop, byo-model, app-builder, mcp, community]
+    notes: The earlier browser-based version lives on the repo's v1 branch
   - owner: dyad-sh
     repo: dyad
     description: "Local, open-source desktop AI app builder that uses your own API keys"
@@ -113,27 +116,23 @@ agents:
   - owner: openinterpreter
     repo: openinterpreter
     description: "Terminal coding agent written in Rust, tuned for low-cost open-weight models"
-    tags: [terminal, byo-model, local-models, interactive, mcp, acp, community]
-  - owner: Hmbown
+    tags: [terminal, byo-model, local-models, interactive, headless, mcp, acp, community]
+  - owner: codewhale-hq
     repo: Codewhale
     description: "Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents"
-    tags: [terminal, editor-plugin, desktop, byo-model, local-models, interactive, mcp, community]
-  - owner: esengine
-    repo: DeepSeek-Reasonix
-    description: "DeepSeek-native coding agent as a single Go binary with terminal, desktop, browser, and ACP clients, built around prefix caching"
-    tags: [terminal, desktop, web, editor-plugin, single-vendor, interactive, autonomous, mcp, acp, community]
-  - owner: Gitlawb
+    tags: [terminal, web, editor-plugin, byo-model, local-models, interactive, headless, mcp, acp, community]
+  - owner: Twigpine
     repo: openclaude
     description: "Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension"
     tags: [terminal, editor-plugin, byo-model, local-models, interactive, headless, mcp, community]
   - owner: can1357
     repo: oh-my-pi
     description: "Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in"
-    tags: [terminal, editor-plugin, byo-model, local-models, interactive, mcp, acp, headless, community]
+    tags: [terminal, byo-model, local-models, interactive, mcp, acp, headless, community]
   - owner: xai-org
     repo: grok-build
-    description: "xAI's terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP"
-    tags: [terminal, editor-plugin, single-vendor, interactive, headless, mcp, acp, vendor]
+    description: "SpaceXAI's Grok Build terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP"
+    tags: [terminal, single-vendor, interactive, headless, mcp, acp, vendor]
   - owner: alibaba
     repo: open-code-review
     description: "AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent"
@@ -141,7 +140,7 @@ agents:
   - owner: PrimeIntellect-ai
     repo: prime-agent
     description: "Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness"
-    tags: [terminal, byo-model, autonomous, headless, vendor]
+    tags: [terminal, byo-model, autonomous, headless, mcp, vendor]
   - owner: 1jehuang
     repo: jcode
     description: "Terminal coding agent harness with a TUI and SDK, built for low memory use"
@@ -153,26 +152,21 @@ agents:
   - owner: CodebuffAI
     repo: freebuff
     description: "Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos"
-    tags: [terminal, interactive, community]
-  - owner: MoonshotAI
-    repo: kimi-cli
-    description: "Moonshot's legacy Python terminal agent for Kimi models; archived upstream and succeeded by Kimi Code CLI"
-    tags: [terminal, editor-plugin, single-vendor, interactive, mcp, acp, vendor]
-    notes: Archived upstream; succeeded by MoonshotAI/kimi-code
+    tags: [terminal, desktop, web, interactive, app-builder, community]
   - owner: Kuberwastaken
     repo: claurst
     description: "Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta"
-    tags: [terminal, byo-model, interactive, headless, acp, community]
+    tags: [terminal, byo-model, interactive, headless, mcp, acp, community]
   - owner: stablyai
     repo: orca
-    description: "Desktop agent development environment that runs Codex, Claude Code, OpenCode, or Pi side by side, each in its own git worktree"
+    description: "Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree"
     tags: [desktop, terminal, byo-model, orchestration, headless, community]
-    notes: "ADE: runs Codex, Claude Code, OpenCode and Pi side-by-side, each in its own git worktree, with a mobile companion app."
+    notes: "ADE: runs any terminal coding agent side by side, each in its own git worktree, with remote servers and a mobile companion app."
   - owner: getpaseo
     repo: paseo
     description: "Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI"
     tags: [desktop, web, terminal, editor-plugin, self-hosted, byo-model, orchestration, headless, mcp, community]
-    notes: "ADE: self-hosted daemon that runs Claude Code, Codex, Copilot, OpenCode and Pi on your own machines, driven from desktop, mobile, web or CLI."
+    notes: "ADE: self-hosted daemon that runs Claude Code, Codex, Copilot, OpenCode, Pi, Antigravity and Muse Code on your own machines, driven from desktop, mobile, web or CLI."
   - owner: XiaomiMiMo
     repo: MiMo-Code
     description: "Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider"
@@ -185,10 +179,208 @@ agents:
     notes: Community-maintained legacy project of Qodo, not the Qodo product
   - owner: langchain-ai
     repo: open-swe
-    description: "Asynchronous coding agent that investigates issues, opens pull requests, and reviews them, built on LangChain Deep Agents"
+    description: "Robin, LangChain's deployable coding agent that turns issues into pull requests, reviews PRs, and monitors CI, built on Deep Agents"
     tags: [self-hosted, web, byo-model, autonomous, review, mcp, community]
+    notes: Renamed Robin in its README; deploying it as-is requires LangSmith Managed Deep Agents
   - owner: pingdotgg
     repo: t3code
     description: "Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile"
-    tags: [desktop, web, self-hosted, byo-model, orchestration, community]
-    notes: "ADE: local server that drives your existing Claude Code, Codex, Cursor, Grok Build, OpenCode and Antigravity installs, with remote access from mobile."
+    tags: [desktop, web, self-hosted, byo-model, orchestration, mcp, acp, community]
+    notes: "ADE: local server that drives your existing Claude Code, Codex, Cursor, OpenCode, Grok Build, Antigravity, Pi and any ACP agent, with remote access from mobile."
+  - owner: herdrdev
+    repo: herdr
+    description: "Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked"
+    tags: [terminal, orchestration, community]
+    notes: "ADE: owns the terminals of the agents you already run, locally or on SSH machines, without wrapping them."
+  - owner: manaflow-ai
+    repo: cmux
+    description: "Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents"
+    tags: [desktop, terminal, orchestration, community]
+    notes: "ADE. Client is GPL-3.0-or-later; the server directories are BUSL-1.1."
+  - owner: slopus
+    repo: happy
+    description: "Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync"
+    tags: [web, terminal, byo-model, orchestration, acp, community]
+    notes: "ADE. Desktop app lives in slopus/happy-desktop."
+  - owner: wavetermdev
+    repo: waveterm
+    description: "Cross-platform terminal with a built-in AI assistant that reads terminal output, plus durable SSH sessions and a graphical editor"
+    tags: [terminal, desktop, byo-model, local-models, interactive, community]
+  - owner: winfunc
+    repo: opcode
+    description: "Desktop GUI for Claude Code that manages interactive sessions, custom agents, background runs, and MCP servers"
+    tags: [desktop, orchestration, community]
+    notes: "ADE for Claude Code only; not affiliated with Anthropic."
+  - owner: ParadevAI
+    repo: Paradev
+    description: "Desktop app that runs Claude Code, Codex, and other CLI agents in parallel, each in its own git worktree with review and previews"
+    tags: [desktop, orchestration, community]
+    notes: "ADE. Formerly superset-sh/superset."
+  - owner: OrchestratorInc
+    repo: agent-orchestrator
+    description: "Desktop workspace where an orchestrator splits work across coding agents in separate worktrees and follows it through CI and review"
+    tags: [desktop, orchestration, community]
+    notes: "ADE with iPhone and Android companion apps."
+  - owner: siteboon
+    repo: claudecodeui
+    description: "Self-hostable web, desktop, and mobile UI for Claude Code, Cursor CLI, and Codex sessions, with files, git, and a shell"
+    tags: [web, desktop, self-hosted, orchestration, community]
+    notes: "ADE, published as CloudCLI UI."
+  - owner: openchamber
+    repo: openchamber
+    description: "Workspace for running and reviewing OpenCode agent sessions from desktop, web, VS Code, and mobile"
+    tags: [desktop, web, editor-plugin, orchestration, community]
+    notes: "ADE built on OpenCode; independent of the OpenCode team."
+  - owner: SWE-agent
+    repo: mini-swe-agent
+    description: "Minimal bash-only software engineering agent from the SWE-bench team that runs with any model, locally or in sandboxes"
+    tags: [terminal, byo-model, autonomous, research, community]
+  - owner: smtg-ai
+    repo: claude-squad
+    description: "Terminal app that manages several Claude Code, Codex, Gemini, or Aider sessions, each in its own git worktree"
+    tags: [terminal, orchestration, community]
+  - owner: zai-org
+    repo: ZCode
+    description: "Z.ai's AI coding workspace with desktop, browser, and terminal interfaces on one agent runtime"
+    tags: [desktop, web, terminal, vendor]
+  - owner: JetBrains
+    repo: thinkrail
+    description: "Agentic IDE built around the pi agent, with git worktree workspaces and a spec graph that keeps project knowledge"
+    tags: [ide, desktop, web, byo-model, local-models, interactive, mcp, community]
+    notes: JetBrains incubator project
+  - owner: MoonshotAI
+    repo: kimi-code
+    description: "Moonshot's terminal coding agent for Kimi models, configurable for other providers and drivable from editors over ACP"
+    tags: [terminal, byo-model, interactive, mcp, acp, vendor]
+    notes: Successor to the archived MoonshotAI/kimi-cli
+  - owner: intitni
+    repo: CopilotForXcode
+    description: "Xcode source editor extension that adds GitHub Copilot, Codeium, and ChatGPT suggestions, chat, and code modification"
+    tags: [editor-plugin, byo-model, interactive, community]
+  - owner: tailcallhq
+    repo: forgecode
+    description: "Terminal coding agent with an interactive TUI, a one-shot prompt mode, and a zsh plugin, working with many LLM providers"
+    tags: [terminal, byo-model, interactive, headless, mcp, community]
+  - owner: olimorris
+    repo: codecompanion.nvim
+    description: "Neovim plugin for chatting with LLMs and driving CLI agents over ACP, with MCP support and many providers"
+    tags: [editor-plugin, byo-model, local-models, interactive, acp, mcp, community]
+  - owner: stagewise-io
+    repo: stagewise
+    description: "Agentic IDE with a built-in browser whose coding agent can read the page's console and debugger"
+    tags: [ide, byo-model, local-models, interactive, community]
+  - owner: PawanOsman
+    repo: OpenCursor
+    description: "VS Code coding agent that works with your API keys, existing subscriptions, or local Ollama and llama.cpp models"
+    tags: [editor-plugin, byo-model, local-models, interactive, mcp, community]
+  - owner: get-bb
+    repo: bb
+    description: "Agentic IDE that drives Claude Code, Codex, Pi, and OpenCode from a desktop app, web app, CLI, or HTTP API"
+    tags: [desktop, web, terminal, orchestration, community]
+    notes: "ADE; in active development."
+  - owner: mistralai
+    repo: mistral-vibe
+    description: "Mistral's terminal coding agent that asks before risky actions, with a programmatic mode and ACP editor support"
+    tags: [terminal, interactive, headless, acp, vendor]
+  - owner: tiann
+    repo: hapi
+    description: "Local-first remote control for Claude Code, Codex, OpenCode, and other agents from mobile apps, web, or Telegram"
+    tags: [web, terminal, self-hosted, orchestration, community]
+  - owner: Tencent
+    repo: LoopForge
+    description: "Self-hosted team workspace that runs Claude Code, Codex, CodeBuddy, and other agent CLIs in Docker sandboxes via chat or SOPs"
+    tags: [self-hosted, orchestration, vendor]
+  - owner: agent-of-empires
+    repo: agent-of-empires
+    description: "Session manager for coding agents on Linux and macOS, with a TUI, a web dashboard, worktrees, and optional containers"
+    tags: [terminal, web, orchestration, community]
+  - owner: gptme
+    repo: gptme
+    description: "Terminal agent that writes code, runs shell and Python, and browses the web, with any provider or local models"
+    tags: [terminal, web, desktop, byo-model, local-models, interactive, headless, mcp, acp, community]
+  - owner: zgsm-ai
+    repo: costrict
+    description: "VS Code and JetBrains coding agent for enterprises, with a strict spec-first mode and private deployment"
+    tags: [editor-plugin, byo-model, local-models, interactive, mcp, community]
+  - owner: vercel-labs
+    repo: fx
+    description: "Minimal native coding agent CLI, scriptable with fx ask and drivable from editors over ACP"
+    tags: [terminal, byo-model, local-models, interactive, headless, acp, mcp, community]
+    notes: Experimental upstream
+  - owner: twinnydotdev
+    repo: twinny
+    description: "VS Code assistant for completion, chat, inline edits, and code review against local or self-hosted model servers"
+    tags: [editor-plugin, byo-model, local-models, interactive, community]
+  - owner: CopilotC-Nvim
+    repo: CopilotChat.nvim
+    description: "Neovim plugin for GitHub Copilot Chat with tool calling and custom providers such as Ollama"
+    tags: [editor-plugin, byo-model, local-models, interactive, community]
+  - owner: RunMaestro
+    repo: Maestro
+    description: "Desktop app for orchestrating Claude Code, Codex, OpenCode, and other agents across projects, with Auto Run and a headless CLI"
+    tags: [desktop, orchestration, headless, community]
+  - owner: huggingface
+    repo: tau
+    description: "Small, readable Python terminal coding agent ported from Pi, with a TUI and a print mode"
+    tags: [terminal, byo-model, local-models, interactive, headless, community]
+  - owner: Nano-Collective
+    repo: nanocoder
+    description: "Community-built terminal coding agent that runs on local Ollama models or any OpenAI-compatible API"
+    tags: [terminal, byo-model, local-models, interactive, headless, mcp, community]
+  - owner: MiniMax-AI
+    repo: minimax-code
+    description: "MiniMax's terminal coding agent with a headless exec mode, ACP support, and custom OpenAI- or Anthropic-compatible providers"
+    tags: [terminal, byo-model, interactive, headless, mcp, acp, vendor]
+    notes: Desktop app is not part of the published source
+  - owner: nimbalyst
+    repo: nimbalyst
+    description: "Desktop workspace with visual editors, a session kanban, and worktrees for running Codex, Claude Code, and other agents"
+    tags: [desktop, orchestration, mcp, community]
+    notes: "ADE. Successor to stravu/crystal."
+  - owner: coder
+    repo: xum
+    description: "Desktop coding agent multiplexer that runs parallel agent workspaces locally, in git worktrees, or over SSH"
+    tags: [desktop, byo-model, local-models, community]
+    notes: Renamed from coder/mux
+  - owner: kodustech
+    repo: kodus-ai
+    description: "Self-hostable AI code review for pull requests on GitHub, GitLab, Bitbucket, Azure DevOps, and Forgejo, with any LLM"
+    tags: [self-hosted, byo-model, review, headless, community]
+    notes: AGPL-3.0, with ee/ files under a separate enterprise license
+  - owner: ggml-org
+    repo: llama.vscode
+    description: "VS Code extension from the llama.cpp project for local code completion, chat, and agentic coding"
+    tags: [editor-plugin, local-models, interactive, community]
+  - owner: magiksoft
+    repo: aider-desk
+    description: "Desktop app for AI-assisted development built on Aider and its own agent, with git worktrees and MCP"
+    tags: [desktop, byo-model, local-models, interactive, mcp, community]
+  - owner: microsoft
+    repo: intelligent-terminal
+    description: "Windows Terminal fork that runs ACP-compatible coding agents, GitHub Copilot by default, beside your shells"
+    tags: [terminal, desktop, interactive, acp, vendor]
+  - owner: gastownhall
+    repo: gastown
+    description: "Workspace manager that coordinates Claude Code, Copilot, Codex, and other agents with git-backed work tracking and handoffs"
+    tags: [terminal, orchestration, community]
+  - owner: humanlayer
+    repo: humanlayer
+    description: "Platform that runs Claude Code, Codex, OpenCode, and Pi on your machines so a team can steer them from desktop, web, or CLI"
+    tags: [desktop, web, terminal, orchestration, community]
+  - owner: agegr
+    repo: pi-web
+    description: "Local browser UI for the pi coding agent that browses, resumes, and branches sessions on the same config and files"
+    tags: [web, byo-model, interactive, community]
+  - owner: vastsa
+    repo: PI-Desktop
+    description: "Plugin-based desktop coding agent built on the pi harness, with any provider, local models, and MCP servers"
+    tags: [desktop, byo-model, local-models, interactive, mcp, community]
+  - owner: zhukunpenglinyutong
+    repo: jetbrains-cc-gui
+    description: "IntelliJ plugin that gives Claude Code, Codex, and other coding CLIs a chat panel inside JetBrains IDEs"
+    tags: [editor-plugin, interactive, community]
+    notes: "Renamed from Claude Code GUI to CC GUI."
+  - owner: Gaurav-Gosain
+    repo: tuios
+    description: "Terminal multiplexer and tiling window manager that tracks coding agent state and can fan one prompt out to several agents"
+    tags: [terminal, orchestration, acp, mcp, community]

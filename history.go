@@ -26,11 +26,15 @@ type Snapshot struct {
 //   - opencode moved sst → anomalyco
 //   - gpt-engineer moved gpt-engineer-org → AntonOsika
 //   - avante.nvim moved yetone → avante-corp
+//   - openclaude moved Gitlawb → Twigpine
+//   - Codewhale moved Hmbown → codewhale-hq
 var canonicalKeyMigrations = map[string]string{
 	"block/goose":                   "aaif-goose/goose",
 	"sst/opencode":                  "anomalyco/opencode",
 	"gpt-engineer-org/gpt-engineer": "AntonOsika/gpt-engineer",
 	"yetone/avante.nvim":            "avante-corp/avante.nvim",
+	"Gitlawb/openclaude":            "Twigpine/openclaude",
+	"Hmbown/Codewhale":              "codewhale-hq/Codewhale",
 }
 
 // timeNow is a seam for tests: production code always calls time.Now, but
