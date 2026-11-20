@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-20T15:40:29.134642027Z",
+  "fetchedAt": "2026-11-20T15:40:51.98389621Z",
   "repos": {
     "1jehuang/jcode": {
       "nameWithOwner": "1jehuang/jcode",
@@ -58,7 +58,7 @@
     "HKUDS/DeepCode": {
       "nameWithOwner": "HKUDS/DeepCode",
       "url": "https://github.com/HKUDS/DeepCode",
-      "stars": 16855,
+      "stars": 16856,
       "language": "Python",
       "pushedAt": "2026-11-17T13:29:49Z",
       "description": "Multi-agent coding tool with terminal, desktop, and web clients sharing one local service",
@@ -519,7 +519,7 @@
       "url": "https://github.com/manaflow-ai/cmux",
       "stars": 28841,
       "language": "Swift",
-      "pushedAt": "2026-11-20T15:40:24Z",
+      "pushedAt": "2026-11-20T15:40:46Z",
       "description": "Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents",
       "archived": false
     },
