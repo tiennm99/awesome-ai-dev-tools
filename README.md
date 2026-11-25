@@ -3,7 +3,7 @@
 > Curated ranking of AI-powered developer tools, sorted by GitHub stars.
 > Updated daily by GitHub Actions.
 
-📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)**
+📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)** (mirror: [GitHub Pages](https://tiennm99.github.io/awesome-ai-dev-tools/))
 
 **Last updated:** 2026-11-25 03:06 UTC · **Tracked:** 88 repos
 **Top 7-day mover:** [pingdotgg/t3code](https://github.com/pingdotgg/t3code) (+13339 stars)

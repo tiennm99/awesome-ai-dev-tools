@@ -1,0 +1,53 @@
+name: GitHub Pages
+
+# Publishes the same `go run . -build` output that Cloudflare Pages serves, as a
+# mirror at github.io for networks that block pages.dev.
+on:
+  push:
+    branches: [main]
+  # The nightly refresh commits with GITHUB_TOKEN, and such pushes do not fire
+  # `push` workflows. Chaining on the updater's completion picks those commits up.
+  workflow_run:
+    workflows: [Update rankings]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Check out the branch head, not the triggering SHA, so a run chained on
+      # the updater builds the data commit it just pushed.
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version: 'stable'
+          cache: true
+
+      - run: go run . -build
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v5

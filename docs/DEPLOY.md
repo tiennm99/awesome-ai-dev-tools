@@ -3,6 +3,13 @@
 The site is published by Cloudflare Pages' Git integration. Cloudflare builds
 from the repository on every push to `main` and never holds a GitHub token.
 
+A mirror at <https://tiennm99.github.io/awesome-ai-dev-tools/> is published by
+`.github/workflows/pages.yml` from the same `go run . -build` output, for
+networks that block `pages.dev`. It runs on every push to `main` and after each
+successful **Update rankings** run, since the bot's `GITHUB_TOKEN` push does not
+fire `push` workflows. It needs **Settings → Pages → Source: GitHub Actions**,
+which is already set.
+
 ## How the split works
 
 Data refresh and site build are two separate steps, in two separate places:
@@ -10,7 +17,7 @@ Data refresh and site build are two separate steps, in two separate places:
 | Step | Command | Runs where | Needs a token? | Writes |
 | --- | --- | --- | --- | --- |
 | Update | `go run .` | GitHub Actions (`update.yml`, nightly + manual) | Yes — `GITHUB_TOKEN` | `README.md`, `data/history.jsonl`, `data/metadata.json` (all committed) |
-| Build | `go run . -build` | Cloudflare Pages | No | `dist/` (never committed) |
+| Build | `go run . -build` | Cloudflare Pages, and GitHub Actions (`pages.yml`) for the mirror | No | `dist/` (never committed) |
 
 `data/metadata.json` is the handoff. The update step records every GitHub-sourced
 field there — stars, language, description, push date, archived flag — so the
