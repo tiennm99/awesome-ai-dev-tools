@@ -1,15 +1,19 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
 	"io"
 	"path/filepath"
+	"slices"
+	"strconv"
 	"strings"
 	"text/template"
 )
 
 type Row struct {
 	Rank          int
+	RankLabel     string // medal for the top three, the number otherwise
 	NameWithOwner string
 	URL           string
 	Stars         int
@@ -18,26 +22,28 @@ type Row struct {
 	Language      string
 	PushedAt      string
 	Description   string
+	Surface       string // the entry's surface tags, as inline code
 }
 
-// TopMover is the biggest 7-day gainer, surfaced as a one-line callout above
-// the README table. HasMover is false when no repo has a 7-day delta yet
-// (e.g. history younger than 7 days) — the template omits the line then.
-type TopMover struct {
-	NameWithOwner string
-	URL           string
-	Delta         int
-	HasMover      bool
-}
+// trendingCount is how many of the biggest 7-day gainers the README lists
+// above the ranking.
+const trendingCount = 5
+
+// rankMedals labels the top three rows.
+var rankMedals = []string{"🥇", "🥈", "🥉"}
 
 func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int) error {
 	rows := make([]Row, len(stats))
-	var topMover TopMover
 	for i, s := range stats {
 		// Deltas are keyed by CanonicalKey (owner/repo from agents.yml).
 		delta, has := deltas[s.CanonicalKey]
+		label := strconv.Itoa(i + 1)
+		if i < len(rankMedals) {
+			label = rankMedals[i]
+		}
 		rows[i] = Row{
 			Rank:          i + 1,
+			RankLabel:     label,
 			NameWithOwner: s.NameWithOwner,
 			URL:           s.URL,
 			Stars:         s.Stars,
@@ -46,9 +52,7 @@ func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int)
 			Language:      s.Language,
 			PushedAt:      s.PushedAt.Format("2006-01-02"),
 			Description:   sanitizeCell(s.Description),
-		}
-		if has && (!topMover.HasMover || delta > topMover.Delta) {
-			topMover = TopMover{NameWithOwner: s.NameWithOwner, URL: s.URL, Delta: delta, HasMover: true}
+			Surface:       surfaceCell(s.Tags),
 		}
 	}
 
@@ -58,10 +62,10 @@ func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int)
 				return "—"
 			}
 			if d > 0 {
-				return fmt.Sprintf("+%d", d)
+				return "+" + groupThousands(d)
 			}
 			if d < 0 {
-				return fmt.Sprintf("%d", d)
+				return "-" + groupThousands(-d)
 			}
 			return "0"
 		},
@@ -87,9 +91,46 @@ func renderReadme(tmplPath, outPath string, stats []Stat, deltas map[string]int)
 			"Rows":      rows,
 			"UpdatedAt": timeNow().UTC().Format("2006-01-02 15:04 UTC"),
 			"Total":     len(rows),
-			"TopMover":  topMover,
+			"Trending":  trending(rows),
 		})
 	})
+}
+
+// groupThousands formats a non-negative n with comma thousands separators.
+func groupThousands(n int) string {
+	s := strconv.Itoa(n)
+	for i := len(s) - 3; i > 0; i -= 3 {
+		s = s[:i] + "," + s[i:]
+	}
+	return s
+}
+
+// trending returns up to trendingCount rows with the biggest positive 7-day
+// gain, biggest first. It is empty while history is younger than 7 days.
+func trending(rows []Row) []Row {
+	var out []Row
+	for _, r := range rows {
+		if r.HasDelta && r.Delta7d > 0 {
+			out = append(out, r)
+		}
+	}
+	slices.SortStableFunc(out, func(a, b Row) int { return cmp.Compare(b.Delta7d, a.Delta7d) })
+	if len(out) > trendingCount {
+		out = out[:trendingCount]
+	}
+	return out
+}
+
+// surfaceCell renders the surface-facet tags (where a tool runs) as inline
+// code for one table cell.
+func surfaceCell(tags []string) string {
+	var parts []string
+	for _, t := range tags {
+		if tagFacetIDs[t] == facetSurface {
+			parts = append(parts, "`"+t+"`")
+		}
+	}
+	return strings.Join(parts, " ")
 }
 
 // sanitizeCell makes a third-party repo description safe to embed in a

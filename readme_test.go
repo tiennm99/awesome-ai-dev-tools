@@ -138,7 +138,7 @@ func TestRenderReadme_TableRowsAndCallout(t *testing.T) {
 	}
 	// org/small has no delta: its row must show the em dash, and it must not
 	// win the top-mover callout.
-	deltas := map[string]int{"org/big": 12, "org/mid": -3}
+	deltas := map[string]int{"org/big": 12345, "org/mid": -3}
 
 	out := t.TempDir() + "/README.md"
 	if err := renderReadme("templates/readme.tmpl", out, stats, deltas); err != nil {
@@ -151,20 +151,25 @@ func TestRenderReadme_TableRowsAndCallout(t *testing.T) {
 	got := string(raw)
 
 	want := []string{
-		"**Last updated:** 2026-09-11 03:39 UTC · **Tracked:** 3 repos",
-		"**Top 7-day mover:** [org/big](https://github.com/org/big) (+12 stars)",
-		"| 1 | [org/big](https://github.com/org/big) | 1.5M | +12 | Go | 2026-09-11 | huge \\| agent |",
-		"| 2 | [org/mid](https://github.com/org/mid) | 1.2k | -3 | Rust | 2026-09-11 | mid agent |",
-		"| 3 | [org/small](https://github.com/org/small) | 999 | — |  | 2026-09-11 | small agent |",
+		"Last updated 2026-09-11 03:39 UTC",
+		"tools-3-blue",
+		"| [org/big](https://github.com/org/big) | +12,345 |",
+		"| 🥇 | **[org/big](https://github.com/org/big)** | 1.5M | +12,345 | `terminal` | huge \\| agent |",
+		"| 🥈 | **[org/mid](https://github.com/org/mid)** | 1.2k | -3 | `terminal` | mid agent |",
+		"| 🥉 | **[org/small](https://github.com/org/small)** | 999 | — | `terminal` | small agent |",
 	}
 	for _, w := range want {
 		if !strings.Contains(got, w) {
 			t.Errorf("README missing line:\n%s\n--- got ---\n%s", w, got)
 		}
 	}
+	// A loss or a missing delta never counts as trending.
+	if strings.Contains(got, "| [org/mid](https://github.com/org/mid) | -3 |") {
+		t.Error("a repo that lost stars is listed as trending")
+	}
 }
 
-func TestRenderReadme_NoDeltasOmitsTopMover(t *testing.T) {
+func TestRenderReadme_NoDeltasOmitsTrending(t *testing.T) {
 	fixed := time.Date(2026, 9, 11, 3, 39, 0, 0, time.UTC)
 	orig := timeNow
 	timeNow = func() time.Time { return fixed }
@@ -181,8 +186,8 @@ func TestRenderReadme_NoDeltasOmitsTopMover(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ReadFile: %v", err)
 	}
-	if strings.Contains(string(raw), "Top 7-day mover") {
-		t.Error("top-mover callout rendered with no deltas available")
+	if strings.Contains(string(raw), "Trending this week") {
+		t.Error("trending section rendered with no deltas available")
 	}
 }
 

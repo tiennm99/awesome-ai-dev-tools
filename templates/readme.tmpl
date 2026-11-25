@@ -1,35 +1,53 @@
-# Awesome AI Dev Tools
+<div align="center">
 
-> Curated ranking of AI-powered developer tools, sorted by GitHub stars.
-> Updated daily by GitHub Actions.
+# 🏆 Top 100 AI Dev Tools
 
-📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)** (mirror: [GitHub Pages](https://tiennm99.github.io/awesome-ai-dev-tools/))
+**The most-starred open-source AI coding agents and developer tools, re-ranked every day.**
 
-**Last updated:** {{.UpdatedAt}} · **Tracked:** {{.Total}} repos
-{{- if .TopMover.HasMover }}
-**Top 7-day mover:** [{{ .TopMover.NameWithOwner }}]({{ .TopMover.URL }}) ({{ formatDelta .TopMover.Delta true }} stars)
+[![Update rankings](https://github.com/tiennm99/awesome-ai-dev-tools/actions/workflows/update.yml/badge.svg)](https://github.com/tiennm99/awesome-ai-dev-tools/actions/workflows/update.yml)
+[![Tools tracked](https://img.shields.io/badge/tools-{{.Total}}-blue)](#-the-ranking)
+[![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+
+**[📊 Interactive dashboard](https://awesome-ai-dev-tools.pages.dev/)** · [GitHub Pages mirror](https://tiennm99.github.io/awesome-ai-dev-tools/) · [➕ Suggest a tool](#-contributing)
+
+<sub>Last updated {{.UpdatedAt}}</sub>
+
+</div>
+
+Every tool here is open source, actively maintained, and has at least 1,000 GitHub stars. The list is held at about 100 entries: a new tool gets in by beating the weakest one. The [dashboard](https://awesome-ai-dev-tools.pages.dev/) adds star-history charts and filters by where a tool runs, which models it drives, and how you work with it.
+{{- if .Trending }}
+
+## 🔥 Trending this week
+
+| Tool | Stars gained in 7 days |
+|------|-----------------------:|
+{{- range .Trending }}
+| [{{ .NameWithOwner }}]({{ .URL }}) | {{ formatDelta .Delta7d .HasDelta }} |
+{{- end }}
 {{- end }}
 
-| # | Repo | Stars | Δ7d | Language | Last push | Description |
-|---|------|------:|----:|----------|-----------|-------------|
+## 📋 The ranking
+
+| # | Tool | ⭐ Stars | Δ 7d | Runs in | What it is |
+|:-:|------|------:|-----:|---------|------------|
 {{- range .Rows }}
-| {{ .Rank }} | [{{ .NameWithOwner }}]({{ .URL }}) | {{ formatStars .Stars }} | {{ formatDelta .Delta7d .HasDelta }} | {{ .Language }} | {{ .PushedAt }} | {{ .Description }} |
+| {{ .RankLabel }} | **[{{ .NameWithOwner }}]({{ .URL }})** | {{ formatStars .Stars }} | {{ formatDelta .Delta7d .HasDelta }} | {{ .Surface }} | {{ .Description }} |
 {{- end }}
+
+<sub>**Δ 7d** is the change in stars over the past 7 days; `—` means the tool has less than 7 days of history here.</sub>
 
 ---
 
-## How it works
+## ⚙️ How it works
 
 1. `data/agents.yml` is the curated source list.
 2. A daily GitHub Actions workflow (`.github/workflows/update.yml`) runs the Go updater.
 3. The updater fetches live repo metadata via the GitHub GraphQL API in one batched query.
-4. Star counts are appended to `data/history.csv`, one row per day kept for a year, for the 7-day deltas and star-history charts.
+4. Star counts are appended to `data/history.jsonl`, one line per day kept for a year, for the 7-day deltas and star-history charts.
 5. This `README.md` and `data/metadata.json` are regenerated and committed back to the repo.
 6. That push triggers Cloudflare Pages, which runs `go run . -build` to render the [dashboard](https://awesome-ai-dev-tools.pages.dev/) from the committed data — no API token needed at build time. See [docs/DEPLOY.md](./docs/DEPLOY.md).
 
-**Δ7d:** Change in stars over the past 7 days; `—` means fewer than 7 days of history.
-
-## Contributing
+## 🤝 Contributing
 
 **Inclusion criteria** — a repo belongs on this list when it is:
 
@@ -65,6 +83,6 @@ Open a PR. The next daily run picks it up automatically.
 
 PRs are validated automatically by CI (`go run . -check`): owner/repo must be non-empty and look like a real GitHub slug, every tag must come from the vocabulary above with at least one surface tag and at most one origin tag, an optional `description` must be one line of at most 140 characters without `|`, and duplicates (case-insensitive) are rejected.
 
-## License
+## 📄 License
 
 Apache-2.0
