@@ -10,7 +10,7 @@
 
 **[📊 Interactive dashboard](https://awesome-ai-dev-tools.pages.dev/)** · [GitHub Pages mirror](https://tiennm99.github.io/awesome-ai-dev-tools/) · [➕ Suggest a tool](#-contributing)
 
-<sub>Last updated 2026-11-25 03:38 UTC</sub>
+<sub>Last updated 2026-11-25 03:39 UTC</sub>
 
 </div>
 
@@ -20,10 +20,10 @@ Every tool here is open source, actively maintained, and has at least 1,000 GitH
 
 | Tool | Stars gained in 7 days |
 |------|-----------------------:|
-| [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | +13,428 |
-| [stablyai/orca](https://github.com/stablyai/orca) | +8,268 |
+| [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | +13,429 |
+| [stablyai/orca](https://github.com/stablyai/orca) | +8,270 |
 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | +3,430 |
-| [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | +2,176 |
+| [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | +2,177 |
 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | +1,337 |
 
 ## 📋 The ranking
@@ -33,19 +33,19 @@ Every tool here is open source, actively maintained, and has at least 1,000 GitH
 | 🥇 | **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)** | 286.6k | +3,430 | `terminal` `web` | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
 | 🥈 | **[anomalyco/opencode](https://github.com/anomalyco/opencode)** | 229.0k | +1,337 | `terminal` `desktop` | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
 | 🥉 | **[anthropics/claude-code](https://github.com/anthropics/claude-code)** | 157.0k | +891 | `terminal` `editor-plugin` `desktop` | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
-| 4 | **[stablyai/orca](https://github.com/stablyai/orca)** | 136.4k | +8,268 | `desktop` `terminal` | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
+| 4 | **[stablyai/orca](https://github.com/stablyai/orca)** | 136.4k | +8,270 | `desktop` `terminal` | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
 | 5 | **[openai/codex](https://github.com/openai/codex)** | 136.4k | +651 | `terminal` `editor-plugin` `desktop` | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
 | 6 | **[earendil-works/pi](https://github.com/earendil-works/pi)** | 123.7k | +1,135 | `terminal` | Minimal, extensible terminal coding agent harness you customize with extensions, skills, and packages, with an SDK and RPC mode |
-| 7 | **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** | 109.1k | +162 | `terminal` | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
+| 7 | **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** | 109.1k | +163 | `terminal` | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
 | 8 | **[zed-industries/zed](https://github.com/zed-industries/zed)** | 95.7k | +435 | `ide` | Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
 | 9 | **[OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)** | 94.3k | +555 | `web` `self-hosted` | Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
-| 10 | **[pingdotgg/t3code](https://github.com/pingdotgg/t3code)** | 77.9k | +13,428 | `desktop` `web` `self-hosted` | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
+| 10 | **[pingdotgg/t3code](https://github.com/pingdotgg/t3code)** | 77.9k | +13,429 | `desktop` `web` `self-hosted` | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
 | 11 | **[cline/cline](https://github.com/cline/cline)** | 71.9k | +138 | `editor-plugin` `terminal` `desktop` | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
 | 12 | **[openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter)** | 69.0k | +56 | `terminal` | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
 | 13 | **[warpdotdev/warp](https://github.com/warpdotdev/warp)** | 66.1k | +91 | `terminal` `desktop` | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
 | 14 | **[multica-ai/multica](https://github.com/multica-ai/multica)** | 57.8k | — | `web` `desktop` `self-hosted` | Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop |
 | 15 | **[aaif-goose/goose](https://github.com/aaif-goose/goose)** | 57.0k | +220 | `terminal` `desktop` | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
-| 16 | **[alibaba/open-code-review](https://github.com/alibaba/open-code-review)** | 56.1k | +2,176 | `terminal` | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
+| 16 | **[alibaba/open-code-review](https://github.com/alibaba/open-code-review)** | 56.1k | +2,177 | `terminal` | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
 | 17 | **[AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer)** | 54.9k | -13 | `terminal` | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
 | 18 | **[herdrdev/herdr](https://github.com/herdrdev/herdr)** | 52.7k | — | `terminal` | Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked |
 | 19 | **[Aider-AI/aider](https://github.com/Aider-AI/aider)** | 50.2k | +85 | `terminal` | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
@@ -63,7 +63,7 @@ Every tool here is open source, actively maintained, and has at least 1,000 GitH
 | 31 | **[Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode)** | 28.1k | +70 | `editor-plugin` `terminal` | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
 | 32 | **[onlook-dev/onlook](https://github.com/onlook-dev/onlook)** | 27.9k | +645 | `desktop` | Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code |
 | 33 | **[xai-org/grok-build](https://github.com/xai-org/grok-build)** | 27.9k | +48 | `terminal` | SpaceXAI's Grok Build terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
-| 34 | **[getpaseo/paseo](https://github.com/getpaseo/paseo)** | 25.1k | +805 | `desktop` `web` `terminal` `editor-plugin` `self-hosted` | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
+| 34 | **[getpaseo/paseo](https://github.com/getpaseo/paseo)** | 25.1k | +807 | `desktop` `web` `terminal` `editor-plugin` `self-hosted` | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
 | 35 | **[slopus/happy](https://github.com/slopus/happy)** | 24.8k | — | `web` `terminal` | Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync |
 | 36 | **[coleam00/Archon](https://github.com/coleam00/Archon)** | 24.0k | — | `terminal` `web` `self-hosted` | Self-hosted engine that runs Claude Code, Codex and Pi through YAML workflows with fixed steps, approval gates and run logs |
 | 37 | **[PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent)** | 22.9k | +95 | `terminal` | Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness |
