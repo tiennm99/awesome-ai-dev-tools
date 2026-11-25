@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Awesome AI Dev Tools — Rankings &amp; History</title>
-<meta name="description" content="Daily-refreshed ranking of open-source AI developer tools — coding agents, ADEs, AI editors and code-review tools — by GitHub stars, with 7-day deltas and star-history charts.">
-<meta property="og:title" content="Awesome AI Dev Tools — Rankings &amp; History">
-<meta property="og:description" content="Daily-refreshed ranking of open-source AI developer tools — coding agents, ADEs, AI editors and code-review tools — by GitHub stars, with 7-day deltas and star-history charts.">
+<title>Top 100 AI Dev Tools — Rankings &amp; History</title>
+<meta name="description" content="Daily-refreshed ranking of the top 100 open-source AI developer tools — coding agents, ADEs, AI editors and code-review tools — by GitHub stars, with 7-day deltas and star-history charts.">
+<meta property="og:title" content="Top 100 AI Dev Tools — Rankings &amp; History">
+<meta property="og:description" content="Daily-refreshed ranking of the top 100 open-source AI developer tools — coding agents, ADEs, AI editors and code-review tools — by GitHub stars, with 7-day deltas and star-history charts.">
 <meta property="og:url" content="https://awesome-ai-dev-tools.pages.dev/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
@@ -16,14 +16,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600&family=Fira+Sans:wght@400;500;600&display=swap">
 <style>
-  /* Design system: "Data-Dense Dashboard" (ui-ux-pro-max) — blue primary,
-     amber accent, slate neutrals, Fira Code (data/headings) + Fira Sans (body). */
+  /* Design system: "Data-Dense Dashboard" — blue primary, amber accent,
+     slate neutrals, Fira Code (data/headings) + Fira Sans (body). Every colour
+     goes through these variables so both colour schemes stay in step. */
   :root {
     --bg: #f8fafc; --surface: #ffffff; --surface-2: #f1f5f9;
     --fg: #1e293b; --muted: #5b6779; --border: #e2e8f0;
     --primary: #2563eb; --primary-fg: #ffffff; --link: #1d4ed8;
     --accent: #b45309; --pos: #15803d; --neg: #b91c1c;
-    --row-hover: #f1f5f9; --shadow: 0 1px 2px rgb(15 23 42 / .06);
+    --pos-bg: #dcfce7; --neg-bg: #fee2e2;
+    --gold: #fde68a; --gold-fg: #78350f; --silver: #e2e8f0; --silver-fg: #334155;
+    --bronze: #fed7aa; --bronze-fg: #7c2d12;
+    --row-hover: #f8fafc; --shadow: 0 1px 2px rgb(15 23 42 / .06);
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
@@ -32,94 +36,134 @@
       --fg: #e2e8f0; --muted: #a5b1c5; --border: #334155;
       --primary: #3b82f6; --primary-fg: #ffffff; --link: #93c5fd;
       --accent: #fbbf24; --pos: #4ade80; --neg: #f87171;
-      --row-hover: #263449; --shadow: 0 1px 2px rgb(0 0 0 / .4);
+      --pos-bg: rgb(74 222 128 / .12); --neg-bg: rgb(248 113 113 / .14);
+      --gold: #a16207; --gold-fg: #fefce8; --silver: #475569; --silver-fg: #f1f5f9;
+      --bronze: #9a3412; --bronze-fg: #fff7ed;
+      --row-hover: #233148; --shadow: 0 1px 2px rgb(0 0 0 / .4);
     }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; padding: 1.5rem; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 "Fira Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
-    max-width: 1200px; margin-inline: auto;
+    font: 15px/1.5 "Fira Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    max-width: 1240px; margin-inline: auto;
   }
-  code, .mono, h1, h2, .stat b, td.num, th.num, a.repo, .cat, .stalebadge, .dir {
+  code, .mono, h1, h2, .stat b, td.num, a.repo, .rk, .dir, .count {
     font-family: "Fira Code", ui-monospace, SFMono-Regular, Consolas, monospace;
   }
-  header.hero { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
-  h1 { font-size: 1.55rem; font-weight: 600; margin: 0 0 .3rem; letter-spacing: -.02em; display: flex; align-items: center; gap: .55rem; }
-  h1 svg { color: var(--accent); flex: none; }
-  .sub { color: var(--muted); max-width: 46rem; }
-  .ghlink {
-    display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
-    border: 1px solid var(--border); background: var(--surface); color: var(--fg);
-    border-radius: 8px; padding: .45rem .9rem; text-decoration: none; font-weight: 500;
-    box-shadow: var(--shadow); transition: border-color .15s ease, background-color .15s ease;
-  }
-  .ghlink:hover { border-color: var(--primary); }
+  a { color: var(--link); }
   .vh {
     position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
-  /* KPI stat cards */
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .75rem; margin: 0 0 1.25rem; }
-  .stat {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    padding: .8rem 1rem; box-shadow: var(--shadow); min-width: 0;
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+
+  /* Header: title, one-line purpose, GitHub link, then a compact stats strip */
+  header.hero { margin-bottom: 1.25rem; }
+  .herotop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  h1 { font-size: 1.6rem; font-weight: 600; margin: 0; letter-spacing: -.02em; display: flex; align-items: center; gap: .55rem; line-height: 1.25; }
+  h1 svg { color: var(--accent); flex: none; }
+  .sub { color: var(--muted); margin: .3rem 0 0; max-width: 48rem; }
+  .ghlink {
+    display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
+    border: 1px solid var(--border); background: var(--surface); color: var(--fg);
+    border-radius: 8px; padding: .4rem .85rem; text-decoration: none; font-weight: 500;
+    box-shadow: var(--shadow); transition: border-color .15s ease;
   }
-  .stat small { display: block; color: var(--muted); font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .25rem; }
-  .stat b { display: block; font-size: 1.3rem; font-weight: 600; font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .stat .statsub { color: var(--muted); font-size: .82rem; }
+  .ghlink:hover { border-color: var(--primary); }
+  .stats {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 1rem;
+  }
+  .stat { padding: .65rem 1rem; min-width: 0; border-left: 1px solid var(--border); }
+  .stat:first-child { border-left: none; }
+  .stat small { display: block; color: var(--muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+  .stat b { display: block; font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stat .statsub { display: block; color: var(--muted); font-size: .78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .stat .statsub.pos { color: var(--pos); }
-  /* Toolbar */
-  .toolbar { display: flex; flex-wrap: wrap; gap: .6rem .75rem; align-items: center; margin: 0 0 .6rem; }
+
+  /* Filters: search + facet chips in one panel */
+  .filters { padding: .85rem 1rem; margin-bottom: 1rem; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: .6rem .75rem; align-items: center; }
   .searchbox { position: relative; flex: 1 1 15rem; max-width: 26rem; }
   .searchbox svg { position: absolute; left: .7rem; top: 50%; translate: 0 -50%; color: var(--muted); pointer-events: none; }
   #q {
-    width: 100%; border: 1px solid var(--border); background: var(--surface); color: var(--fg);
-    border-radius: 8px; padding: .5rem .75rem .5rem 2.2rem; font: inherit; box-shadow: var(--shadow);
+    width: 100%; border: 1px solid var(--border); background: var(--bg); color: var(--fg);
+    border-radius: 8px; padding: .45rem .75rem .45rem 2.2rem; font: inherit;
     transition: border-color .15s ease;
   }
   #q::placeholder { color: var(--muted); opacity: 1; }
   #q:hover { border-color: var(--primary); }
-  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1rem; }
-  .chips button, .btn {
+  .count { color: var(--muted); font-size: .82rem; margin-left: auto; white-space: nowrap; }
+  .btn, #sortSel {
     border: 1px solid var(--border); background: var(--surface); color: var(--fg);
-    border-radius: 999px; padding: .35rem .9rem; cursor: pointer; font: inherit; font-size: .9rem; font-weight: 500;
-    box-shadow: var(--shadow); transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+    border-radius: 8px; padding: .35rem .8rem; cursor: pointer; font: inherit; font-size: .88rem; font-weight: 500;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
   }
-  .btn { border-radius: 8px; }
-  .chips button.on, .btn[aria-pressed="true"] { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
-  .chips button:hover, .btn:hover { border-color: var(--primary); }
-  a:focus-visible, button:focus-visible, input:focus-visible, th[data-k]:focus-visible {
+  .btn[aria-pressed="true"] { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+  .btn:hover, #sortSel:hover { border-color: var(--primary); }
+  #clearfilters[hidden], .sortbox { display: none; }
+  .facets { display: grid; gap: .45rem; margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+  .facets:empty { display: none; }
+  .facet { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+  .facet > .flabel {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    font-weight: 600; min-width: 7rem;
+  }
+  .facet button {
+    border: 1px solid var(--border); background: var(--surface); color: var(--fg);
+    border-radius: 999px; padding: .18rem .65rem; cursor: pointer; font: inherit; font-size: .8rem;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .facet button:hover { border-color: var(--primary); }
+  .facet button[aria-pressed="true"] { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, th[data-k]:focus-visible {
     outline: 2px solid var(--primary); outline-offset: 2px;
   }
-  /* Table card */
-  .tablewrap {
-    overflow-x: auto; border: 1px solid var(--border); border-radius: 12px;
-    background: var(--surface); box-shadow: var(--shadow);
-  }
-  table { border-collapse: collapse; width: 100%; min-width: 840px; }
-  th, td { padding: .55rem .75rem; text-align: left; border-top: 1px solid var(--border); }
+
+  /* Ranking table */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 900px; }
+  th, td { padding: .6rem .7rem; text-align: left; vertical-align: top; border-top: 1px solid var(--border); }
   thead th {
     border-top: none; background: var(--surface-2); user-select: none; white-space: nowrap;
-    font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600;
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600;
   }
+  thead th:first-child { border-top-left-radius: 12px; }
+  thead th:last-child { border-top-right-radius: 12px; }
   thead th[data-k] { cursor: pointer; }
   thead th[data-k]:hover { color: var(--fg); }
   thead th .dir { color: var(--primary); }
   tbody tr { transition: background-color .15s ease; }
   tbody tr:hover { background: var(--row-hover); }
-  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-size: .92rem; }
-  td.rankcell { color: var(--muted); }
-  td.desc { color: var(--muted); font-size: .9rem; max-width: 34rem; }
-  td.lang { font-size: .92rem; }
-  a.repo { color: var(--link); text-decoration: none; font-weight: 500; white-space: nowrap; font-size: .92rem; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.num { font-size: .88rem; }
+  td.stars { font-weight: 600; }
+  td.rankcell { width: 3rem; }
+  /* Rank badge: the top three by star count get gold, silver and bronze,
+     keyed to the overall rank so sorting or filtering never moves the medals. */
+  .rk {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 1.85rem; height: 1.6rem;
+    padding: 0 .3rem; border-radius: 999px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .rk.r1 { background: var(--gold); color: var(--gold-fg); font-weight: 600; }
+  .rk.r2 { background: var(--silver); color: var(--silver-fg); font-weight: 600; }
+  .rk.r3 { background: var(--bronze); color: var(--bronze-fg); font-weight: 600; }
+  td.repocell { min-width: 17rem; max-width: 30rem; }
+  a.repo { color: var(--link); text-decoration: none; font-weight: 600; font-size: .9rem; overflow-wrap: anywhere; }
   a.repo:hover { text-decoration: underline; }
-  .pos { color: var(--pos); } .neg { color: var(--neg); }
-  /* Tag pills: tinted per facet; the text label carries the meaning */
-  td.tags { max-width: 20rem; }
+  .desc { color: var(--muted); font-size: .84rem; margin-top: .15rem; line-height: 1.45; }
+  .desc em { color: var(--fg); opacity: .8; }
+  .delta { display: inline-block; padding: 0 .4rem; border-radius: 6px; }
+  .delta.pos { color: var(--pos); background: var(--pos-bg); }
+  .delta.neg { color: var(--neg); background: var(--neg-bg); }
+  .none { color: var(--muted); }
+  td.lang, td.push { font-size: .85rem; white-space: nowrap; }
+  td.push { color: var(--muted); }
+  /* Tag chips: tinted per facet; the text label carries the meaning */
+  td.tags { min-width: 14rem; max-width: 19rem; }
   .taglist { display: flex; flex-wrap: wrap; gap: .25rem; }
   .tag {
-    display: inline-block; font-size: .72rem; font-weight: 500; padding: .1rem .5rem;
+    display: inline-block; font-size: .7rem; font-weight: 500; padding: 0 .45rem; line-height: 1.55;
     border: 1px solid var(--border); border-radius: 999px; color: var(--muted); background: var(--surface-2);
     white-space: nowrap;
   }
@@ -129,79 +173,121 @@
   .tag-integration { border-color: color-mix(in srgb, #ea580c 45%, var(--border)); background: color-mix(in srgb, #ea580c 12%, var(--surface)); }
   .tag-origin      { border-color: color-mix(in srgb, #db2777 45%, var(--border)); background: color-mix(in srgb, #db2777 12%, var(--surface)); }
   .tag-model, .tag-workflow, .tag-integration, .tag-origin { color: var(--fg); }
-  /* Facet filter rows */
-  .facets { margin: 0 0 1rem; display: grid; gap: .4rem; }
-  .facet { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
-  .facet > .flabel {
-    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
-    font-weight: 600; min-width: 6.5rem;
-  }
-  .facet button {
-    border: 1px solid var(--border); background: var(--surface); color: var(--fg);
-    border-radius: 999px; padding: .22rem .7rem; cursor: pointer; font: inherit; font-size: .82rem;
-    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
-  }
-  .facet button:hover { border-color: var(--primary); }
-  .facet button[aria-pressed="true"] { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
-  #clearfilters[hidden] { display: none; }
   tr.stale td { color: var(--muted); }
   .stalebadge {
-    display: inline-block; font-size: .7rem; padding: 0 .45rem; margin-left: .4rem;
+    display: inline-block; font-size: .65rem; padding: 0 .4rem; margin-left: .35rem;
     border: 1px solid var(--border); border-radius: 999px; color: var(--muted); background: var(--surface-2);
-    text-transform: uppercase; letter-spacing: .03em; vertical-align: middle;
+    text-transform: uppercase; letter-spacing: .03em; vertical-align: middle; font-weight: 600;
   }
   td.empty { text-align: center; color: var(--muted); padding: 1.5rem; }
+
   /* Chart card */
-  h2 { font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -.01em; }
-  section.chartcard {
-    margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; box-shadow: var(--shadow); padding: 1rem;
-  }
+  h2 { font-size: 1.05rem; font-weight: 600; margin: 0; letter-spacing: -.01em; }
+  section.chartcard { margin-top: 1.5rem; padding: 1rem; }
   .charthead { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: .75rem; flex-wrap: wrap; }
-  .chartwrap { position: relative; height: 460px; }
+  .chartwrap { position: relative; height: 480px; }
   .chartmsg { color: var(--muted); text-align: center; padding-top: 4rem; }
+  /* Series legend as HTML buttons: a canvas legend for 100 repos would take
+     over the chart, and buttons are reachable by keyboard and screen reader. */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: .25rem .35rem; margin-top: .75rem; max-height: 9.5rem; overflow-y: auto;
+    padding: .5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
+  }
+  .legend:empty { display: none; }
+  .legend button {
+    display: inline-flex; align-items: center; gap: .35rem; border: 1px solid transparent; background: none;
+    color: var(--fg); font: inherit; font-size: .75rem; padding: .05rem .4rem; border-radius: 6px; cursor: pointer;
+  }
+  .legend button:hover { border-color: var(--border); background: var(--surface); }
+  .legend button[aria-pressed="false"] { color: var(--muted); text-decoration: line-through; }
+  .legend .sw { width: .65rem; height: .65rem; aspect-ratio: 1; border-radius: 2px; flex: none; }
+  .legend button[aria-pressed="false"] .sw { opacity: .3; }
   /* Hover readout. Chart.js paints its tooltip on the canvas, which cannot
      bold one row, so the ranking is HTML and the built-in tooltip stays off. */
   #hovercard {
     position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; opacity: 0;
     background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-    box-shadow: 0 4px 16px rgb(0 0 0 / 18%); padding: .5rem .6rem; max-width: 100%;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 18%); padding: .45rem .6rem; width: max-content; max-width: 100%; max-height: 100%; overflow: hidden;
     transition: opacity .12s ease;
   }
   #hovercard .hdate {
     font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
-    color: var(--muted); font-weight: 600; margin-bottom: .35rem;
+    color: var(--muted); font-weight: 600; margin-bottom: .3rem;
   }
   #hovercard .cols { display: flex; gap: .85rem; align-items: flex-start; }
   #hovercard ul { list-style: none; margin: 0; padding: 0; }
   /* Grid, not flex: every row in a column shares the template, so names
      truncate at one width and the star counts line up. */
   #hovercard li {
-    display: grid; grid-template-columns: .5rem 1.15rem minmax(0, 9.5rem) auto;
-    align-items: center; gap: .35rem; font-size: .72rem; line-height: 1.6;
+    display: grid; grid-template-columns: .5rem 1.4rem minmax(0, 8.5rem) auto;
+    align-items: center; gap: .35rem; font-size: .7rem; line-height: 1.5;
     color: var(--muted);
   }
   #hovercard li.on { color: var(--fg); font-weight: 700; }
   #hovercard .sw { width: .5rem; height: .5rem; border-radius: 2px; opacity: .75; }
   #hovercard li.on .sw { opacity: 1; }
-  #hovercard .rk { text-align: right; font-variant-numeric: tabular-nums; opacity: .75; }
+  #hovercard .rk { display: block; min-width: 0; height: auto; padding: 0; text-align: right; font-size: inherit; color: inherit; opacity: .75; }
   #hovercard .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #hovercard .val { text-align: right; font-variant-numeric: tabular-nums; padding-left: .5rem; }
   /* Touch devices have no hover, so the card would only ever be in the way. */
   @media (hover: none) { #hovercard { display: none; } }
-  .hint { color: var(--muted); font-size: .85rem; margin: .75rem 0 0; }
+  .hint { color: var(--muted); font-size: .82rem; margin: .75rem 0 0; }
   #err { color: var(--neg); }
-  footer { color: var(--muted); font-size: .85rem; margin: 1.5rem 0 .5rem; display: flex; gap: .5rem; flex-wrap: wrap; }
-  footer a { color: var(--link); }
+  #err:not(:empty) { margin-bottom: 1rem; }
+  footer {
+    color: var(--muted); font-size: .84rem; margin: 2rem 0 .5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+    display: flex; gap: .4rem 1.25rem; flex-wrap: wrap; justify-content: space-between;
+  }
+  footer .links { display: flex; gap: .4rem 1rem; flex-wrap: wrap; }
   noscript p { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; background: var(--surface); }
-  noscript a { color: var(--link); }
   @media (pointer: coarse) {
-    .chips button, .btn, #q, .ghlink { min-height: 44px; }
+    .btn, #sortSel, #q, .ghlink { min-height: 44px; }
+    .facet button { min-height: 36px; }
     thead th { padding-block: .85rem; }
   }
-  @media (max-width: 480px) { body { padding: 1rem; } .stats { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat:nth-child(3) { border-left: none; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
+  }
+
+  /* Phones: each ranking row becomes a compact card. The column headers that
+     carry sorting are hidden, so a sort select takes their place. */
+  @media (max-width: 640px) {
+    body { padding: 1rem .75rem 5.5rem; } /* bottom room for the about-me bubble */
+    h1 { font-size: 1.3rem; }
+    .ghlink span { display: none; }
+    .stat { padding: .55rem .75rem; }
+    .stat b { font-size: 1rem; }
+    .searchbox { max-width: none; flex-basis: 100%; }
+    .sortbox { display: flex; align-items: center; gap: .4rem; font-size: .82rem; color: var(--muted); }
+    .count { margin-left: auto; }
+    .facet > .flabel { min-width: 100%; }
+    table { min-width: 0; }
+    thead { display: none; }
+    table, tbody, tr, td { display: block; }
+    tbody tr {
+      display: grid; grid-template-columns: 2.4rem repeat(3, minmax(0, 1fr)); column-gap: .5rem; row-gap: .4rem;
+      grid-template-areas: "rank repo repo repo" "rank stars d7 d30" "rank lang push push" "rank tags tags tags";
+      padding: .8rem .75rem; border-top: 1px solid var(--border);
+    }
+    tbody tr:first-child { border-top: none; }
+    td { padding: 0; border: none; min-width: 0; max-width: none; }
+    td.num { text-align: left; }
+    td.rankcell { grid-area: rank; width: auto; }
+    td.repocell { grid-area: repo; min-width: 0; max-width: none; }
+    td.stars { grid-area: stars; } td.d7 { grid-area: d7; } td.d30 { grid-area: d30; }
+    td.lang { grid-area: lang; } td.push { grid-area: push; }
+    td.tags { grid-area: tags; min-width: 0; max-width: none; }
+    td[data-label]::before {
+      content: attr(data-label); display: block; font-family: "Fira Sans", sans-serif; font-weight: 600;
+      font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    }
+    td.empty { grid-column: 1 / -1; padding: 1.5rem; }
+    tbody tr:has(td.empty) { display: block; }
+    .chartwrap { height: 340px; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    #hovercard { transition: none; }
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
@@ -210,17 +296,23 @@
 </head>
 <body>
   <header class="hero">
-    <div>
+    <div class="herotop">
       <h1>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26L21.5 9.1l-4.9 4.5 1.3 6.7L12 17l-5.9 3.3 1.3-6.7-4.9-4.5 6.6-.84L12 2z"/></svg>
-        Awesome AI Dev Tools
+        Top 100 AI Dev Tools
       </h1>
-      <div class="sub">Curated ranking of open-source AI coding agents by GitHub stars, refreshed daily. <span id="meta"></span></div>
+      <a class="ghlink" href="https://github.com/tiennm99/awesome-ai-dev-tools" aria-label="Project on GitHub">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
     </div>
-    <a class="ghlink" href="https://github.com/tiennm99/awesome-ai-dev-tools">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-      GitHub
-    </a>
+    <p class="sub">Curated ranking of the top 100 open-source AI coding agents by GitHub stars, refreshed daily.</p>
+    <div class="stats card" id="stats" hidden>
+      <div class="stat"><small>Entries</small><b id="statTracked">—</b><span class="statsub">ranked by GitHub stars</span></div>
+      <div class="stat"><small>Total stars</small><b id="statStars">—</b><span class="statsub">across all entries</span></div>
+      <div class="stat"><small>Top mover · 7d</small><b id="statGainer">—</b><span class="statsub pos" id="statGainerDelta"></span></div>
+      <div class="stat"><small>Last updated</small><b id="statUpdated">—</b><span class="statsub">UTC, daily via Actions</span></div>
+    </div>
   </header>
   <div id="err" role="alert"></div>
 
@@ -230,52 +322,64 @@
     <a href="https://github.com/tiennm99/awesome-ai-dev-tools#readme">project README on GitHub</a>.</p>
   </noscript>
 
-  <div class="stats" id="stats" hidden>
-    <div class="stat"><small>Tracked repos</small><b id="statTracked">—</b></div>
-    <div class="stat"><small>Total stars</small><b id="statStars">—</b></div>
-    <div class="stat"><small>Top 7-day gainer</small><b id="statGainer">—</b><span class="statsub pos" id="statGainerDelta"></span></div>
-    <div class="stat"><small>Last updated</small><b id="statUpdated">—</b><span class="statsub">UTC, daily via Actions</span></div>
-  </div>
-
-  <div class="toolbar">
-    <label class="vh" for="q">Search repositories by name, description, or tag</label>
-    <div class="searchbox">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="Search repos…" autocomplete="off">
+  <main>
+    <div class="filters card">
+      <div class="toolbar">
+        <label class="vh" for="q">Search repositories by name, description, or tag</label>
+        <div class="searchbox">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="q" type="search" placeholder="Search repos…" autocomplete="off">
+        </div>
+        <button type="button" class="btn" id="clearfilters" hidden>Clear filters</button>
+        <label class="sortbox">Sort
+          <select id="sortSel">
+            <option value="rank:asc">Rank</option>
+            <option value="delta7d:desc">Δ7d gain</option>
+            <option value="delta30d:desc">Δ30d gain</option>
+            <option value="nameWithOwner:asc">Name</option>
+            <option value="language:asc">Language</option>
+            <option value="pushedAt:desc">Last push</option>
+          </select>
+        </label>
+        <span class="count" id="count" aria-live="polite"></span>
+      </div>
+      <div class="facets" id="facets"></div>
     </div>
-    <button type="button" class="btn" id="clearfilters" hidden>Clear filters</button>
-  </div>
-  <div class="facets" id="facets"></div>
 
-  <div class="tablewrap"><table id="tbl">
-    <thead><tr>
-      <th scope="col" data-k="rank" class="num" tabindex="0">#</th>
-      <th scope="col" data-k="nameWithOwner" tabindex="0">Repo</th>
-      <th scope="col" data-k="stars" class="num" tabindex="0">Stars</th>
-      <th scope="col" data-k="delta7d" class="num" tabindex="0">Δ7d</th>
-      <th scope="col" data-k="delta30d" class="num" tabindex="0">Δ30d</th>
-      <th scope="col">Tags</th>
-      <th scope="col" data-k="language" tabindex="0">Language</th>
-      <th scope="col" data-k="pushedAt" tabindex="0">Last push</th>
-      <th scope="col">Description</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table></div>
+    <div class="tablewrap card"><table id="tbl">
+      <caption class="vh">Top AI developer tools ranked by GitHub stars</caption>
+      <thead><tr>
+        <th scope="col" data-k="rank" tabindex="0">#</th>
+        <th scope="col" data-k="nameWithOwner" tabindex="0">Repository</th>
+        <th scope="col" data-k="stars" class="num" tabindex="0">Stars</th>
+        <th scope="col" data-k="delta7d" class="num" tabindex="0">Δ7d</th>
+        <th scope="col" data-k="delta30d" class="num" tabindex="0">Δ30d</th>
+        <th scope="col">Tags</th>
+        <th scope="col" data-k="language" tabindex="0">Language</th>
+        <th scope="col" data-k="pushedAt" tabindex="0">Last push</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table></div>
 
-  <section class="chartcard">
-    <div class="charthead">
-      <h2>Star history</h2>
-      <button type="button" id="scaleToggle" class="btn" aria-pressed="false">Log scale</button>
-    </div>
-    <div class="chartwrap"><canvas id="chart" role="img"
-      aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas><div
-      id="hovercard" aria-hidden="true"></div></div>
-    <p class="hint">Every tracked repo is plotted — hover a date for the full ranking at that point, click legend entries to hide series. The tag filters and search above also filter the chart.</p>
-  </section>
+    <section class="chartcard card" aria-labelledby="charttitle">
+      <div class="charthead">
+        <h2 id="charttitle">Star history</h2>
+        <button type="button" id="scaleToggle" class="btn" aria-pressed="false">Log scale</button>
+      </div>
+      <div class="chartwrap"><canvas id="chart" role="img"
+        aria-label="Line chart of GitHub star history over time for the repositories listed in the table above."></canvas><div
+        id="hovercard" aria-hidden="true"></div></div>
+      <div class="legend" id="legend" role="group" aria-label="Show or hide chart series"></div>
+      <p class="hint">Every listed repo is plotted — hover a date for the full ranking at that point, click a name in the legend to hide or show its line. The tag filters and search above also filter the chart.</p>
+    </section>
+  </main>
 
   <footer>
-    <span>Data refreshed daily by <a href="https://github.com/tiennm99/awesome-ai-dev-tools/actions">GitHub Actions</a>.</span>
-    <span>Add an agent via <a href="https://github.com/tiennm99/awesome-ai-dev-tools#contributing">a pull request</a>.</span>
+    <div class="links">
+      <span>Data refreshed daily by <a href="https://github.com/tiennm99/awesome-ai-dev-tools/actions">GitHub Actions</a>.</span>
+      <span>Add an agent via <a href="https://github.com/tiennm99/awesome-ai-dev-tools#contributing">a pull request</a>.</span>
+    </div>
+    <span>Made by <a href="https://miti99.com">miti99</a> with ❤️</span>
   </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
@@ -294,15 +398,18 @@
   const rows = data.rows.map((r, i) => ({ ...r, rank: i + 1 }));
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmtStars = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(n);
+  const fmtDelta = n => (n > 0 ? '+' : '') + n.toLocaleString('en-US');
 
-  // KPI stat cards
+  // Header stats
   document.getElementById('stats').hidden = false;
   document.getElementById('statTracked').textContent = rows.length;
   document.getElementById('statStars').textContent = fmtStars(rows.reduce((s, r) => s + r.stars, 0));
   const gainer = rows.filter(r => r.hasDelta).sort((a, b) => b.delta7d - a.delta7d)[0];
   if (gainer) {
-    document.getElementById('statGainer').textContent = gainer.nameWithOwner.split('/')[1];
-    document.getElementById('statGainerDelta').textContent = '+' + gainer.delta7d.toLocaleString() + ' stars this week';
+    const name = document.getElementById('statGainer');
+    name.textContent = gainer.nameWithOwner.split('/')[1];
+    name.title = gainer.nameWithOwner;
+    document.getElementById('statGainerDelta').textContent = fmtDelta(gainer.delta7d) + ' stars this week';
   }
   document.getElementById('statUpdated').textContent = data.updatedAt.replace(' UTC', '');
 
@@ -398,6 +505,8 @@
       (r.tags || []).some(t => t.includes(query))));
 
   // --- sortable table ---
+  // Column headers sort on wide screens; on phones they are hidden and the
+  // sort select drives the same state.
   let sortKey = 'rank', sortAsc = true;
   document.querySelectorAll('thead th[data-k]').forEach(th => {
     const activate = () => {
@@ -411,10 +520,23 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
     });
   });
+  const sortSel = document.getElementById('sortSel');
+  sortSel.addEventListener('change', () => {
+    const [k, dir] = sortSel.value.split(':');
+    sortKey = k;
+    sortAsc = dir === 'asc';
+    renderTable();
+  });
 
   // tag → facet class; strict allowlist so third-party data can't inject class names
   const facetOf = new Map(facets.flatMap(f => (f.tags || []).map(t => [t, f.id])));
   const tagClass = t => /^[a-z][a-z0-9-]*$/.test(facetOf.get(t) || '') ? ' tag-' + facetOf.get(t) : '';
+
+  const deltaCell = (has, n, cls, label) => `<td class="num ${cls}" data-label="${label}">${has
+    ? `<span class="delta${n > 0 ? ' pos' : n < 0 ? ' neg' : ''}">${fmtDelta(n)}</span>`
+    : '<span class="none">—</span>'}</td>`;
+
+  const countEl = document.getElementById('count');
 
   function renderTable() {
     const list = [...visible()].sort((a, b) => {
@@ -438,25 +560,31 @@
         th.removeAttribute('aria-sort');
       }
     });
+    const selVal = sortKey + ':' + (sortAsc ? 'asc' : 'desc');
+    if ([...sortSel.options].some(o => o.value === selVal)) sortSel.value = selVal;
+
+    countEl.textContent = list.length === rows.length
+      ? rows.length + ' repos'
+      : list.length + ' of ' + rows.length + ' repos';
 
     const tbody = document.querySelector('#tbl tbody');
     if (!list.length) {
-      tbody.innerHTML = '<tr><td class="empty" colspan="9">No repos match your filters.</td></tr>';
+      tbody.innerHTML = '<tr><td class="empty" colspan="8">No repos match your filters.</td></tr>';
       return;
     }
     tbody.innerHTML = list.map(r => `
       <tr${(isStale(r) || r.archived) ? ' class="stale"' : ''}>
-        <td class="num rankcell">${r.rank}</td>
-        <td><a class="repo" href="${esc(r.url)}">${esc(r.nameWithOwner)}</a></td>
-        <td class="num">${fmtStars(r.stars)}</td>
-        <td class="num ${r.hasDelta && r.delta7d > 0 ? 'pos' : r.hasDelta && r.delta7d < 0 ? 'neg' : ''}">${r.hasDelta ? (r.delta7d > 0 ? '+' : '') + r.delta7d : '—'}</td>
-        <td class="num ${r.hasDelta30 && r.delta30d > 0 ? 'pos' : r.hasDelta30 && r.delta30d < 0 ? 'neg' : ''}">${r.hasDelta30 ? (r.delta30d > 0 ? '+' : '') + r.delta30d : '—'}</td>
+        <td class="rankcell"><span class="rk${r.rank <= 3 ? ' r' + r.rank : ''}">${r.rank}</span></td>
+        <td class="repocell"><a class="repo" href="${esc(r.url)}">${esc(r.nameWithOwner)}</a>${isStale(r) ? ' <span class="stalebadge">stale</span>' : ''}${r.archived ? ' <span class="stalebadge">archived</span>' : ''}
+          ${r.description || r.notes ? `<div class="desc">${esc(r.description)}${r.notes ? (r.description ? ' · ' : '') + '<em>' + esc(r.notes) + '</em>' : ''}</div>` : ''}</td>
+        <td class="num stars" data-label="Stars" title="${r.stars.toLocaleString('en-US')} stars">${fmtStars(r.stars)}</td>
+        ${deltaCell(r.hasDelta, r.delta7d, 'd7', 'Δ7d')}
+        ${deltaCell(r.hasDelta30, r.delta30d, 'd30', 'Δ30d')}
         <td class="tags">${(r.tags || []).length
           ? '<div class="taglist">' + r.tags.map(t => `<span class="tag${tagClass(t)}">${esc(t)}</span>`).join('') + '</div>'
-          : '—'}</td>
-        <td class="lang">${esc(r.language || '')}</td>
-        <td>${esc(r.pushedAt)}${isStale(r) ? ' <span class="stalebadge">stale</span>' : ''}${r.archived ? ' <span class="stalebadge">archived</span>' : ''}</td>
-        <td class="desc">${esc(r.description)}${r.notes ? ' · <em>' + esc(r.notes) + '</em>' : ''}</td>
+          : '<span class="none">—</span>'}</td>
+        <td class="lang" data-label="Language">${r.language ? esc(r.language) : '<span class="none">—</span>'}</td>
+        <td class="push" data-label="Last push">${esc(r.pushedAt)}</td>
       </tr>`).join('');
   }
 
@@ -464,8 +592,10 @@
 
   // --- star-history line chart ---
   const chartWrap = document.querySelector('.chartwrap');
+  const legendBox = document.getElementById('legend');
   if (!window.Chart) {
     chartWrap.innerHTML = '<p class="chartmsg">Chart could not be loaded (the Chart.js CDN is unreachable or blocked). The ranking table above still works.</p>';
+    chartWrap.style.height = 'auto';
     document.getElementById('scaleToggle').disabled = true;
     return;
   }
@@ -524,7 +654,7 @@
   };
 
   // The series under the cursor stays solid and thick; the rest go thin and
-  // dashed, so one line reads clearly out of forty overlapping ones.
+  // dashed, so one line reads clearly out of many overlapping ones.
   function paintEmphasis() {
     chart.data.datasets.forEach((ds, i) => {
       const on = i === hoverIdx;
@@ -543,9 +673,10 @@
   }
 
   // Rank every plotted series at the hovered date, highest first, and bold the
-  // one under the cursor. Columns keep forty rows inside the chart card.
+  // one under the cursor. Up to 25 rows per column keeps the full top 100
+  // inside the chart's height.
   function renderHoverCard(items) {
-    const cols = items.length > 28 ? 3 : items.length > 14 ? 2 : 1;
+    const cols = Math.min(4, Math.ceil(items.length / 25));
     const perCol = Math.ceil(items.length / cols);
     let html = '<div class="hdate">' + esc(dates[hoverAt]) + '</div><div class="cols">';
     for (let c = 0; c < cols; c++) {
@@ -630,6 +761,25 @@
   });
   canvas.addEventListener('mouseleave', () => { cursor = null; hideHover(); });
 
+  // HTML legend: one toggle button per plotted series, same color index as
+  // the line, writing the same hiddenState the chart reads on re-render.
+  function renderLegend() {
+    legendBox.innerHTML = chart.data.datasets.map((ds, i) =>
+      `<button type="button" data-i="${i}" aria-pressed="${chart.isDatasetVisible(i)}">`
+      + `<span class="sw" style="background:${ds.borderColor}"></span>${esc(ds.label)}</button>`).join('');
+  }
+  legendBox.addEventListener('click', e => {
+    const b = e.target.closest('button[data-i]');
+    if (!b || !chart) return;
+    const i = Number(b.dataset.i);
+    const show = !chart.isDatasetVisible(i);
+    chart.setDatasetVisibility(i, show);
+    hiddenState[chart.data.datasets[i].repoKey] = !show;
+    b.setAttribute('aria-pressed', String(show));
+    hideHover();
+    chart.update();
+  });
+
   function renderChart() {
     // Degraded mode: filter/search handlers still call this after the early
     // CDN-failure return; without the guard they hit TDZ consts and throw.
@@ -663,23 +813,16 @@
         responsive: true, maintainAspectRatio: false, animation: false,
         scales: {
           y: { type: yType, ticks: { callback: v => fmtStars(v) } },
-          x: { ticks: { maxTicksLimit: 12 } },
+          x: { ticks: { maxTicksLimit: innerWidth < 640 ? 4 : 12, maxRotation: 0 } },
         },
         plugins: {
-          legend: {
-            position: 'bottom',
-            labels: { boxWidth: 12, boxHeight: 12 },
-            onClick(e, item, legend) {
-              Chart.defaults.plugins.legend.onClick.call(this, e, item, legend);
-              const ds = legend.chart.data.datasets[item.datasetIndex];
-              hiddenState[ds.repoKey] = !legend.chart.isDatasetVisible(item.datasetIndex);
-            },
-          },
+          legend: { display: false }, // replaced by the HTML legend below the chart
           tooltip: { enabled: false }, // replaced by the HTML readout above
         },
       },
     });
-    document.getElementById('chart').setAttribute('aria-label',
+    renderLegend();
+    canvas.setAttribute('aria-label',
       'Line chart of GitHub star history over time for ' + list.length + ' repositories. The same data is in the table above.');
   }
 
