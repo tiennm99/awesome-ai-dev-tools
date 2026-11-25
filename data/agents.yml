@@ -384,3 +384,18 @@ agents:
     repo: tuios
     description: "Terminal multiplexer and tiling window manager that tracks coding agent state and can fan one prompt out to several agents"
     tags: [terminal, orchestration, acp, mcp, community]
+  - owner: generalaction
+    repo: emdash
+    description: "Desktop app that runs Claude Code, Codex, OpenCode, and other coding agents in parallel in separate git worktrees, locally or over SSH"
+    tags: [desktop, orchestration, community]
+    notes: "ADE; open-source desktop app published as Emdash Classic."
+  - owner: multica-ai
+    repo: multica
+    description: "Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop"
+    tags: [web, desktop, self-hosted, orchestration, community]
+    notes: "ADE; source-available under the Multica License (Apache-2.0 with commercial SaaS restrictions)."
+  - owner: coollabsio
+    repo: jean
+    description: "Desktop app and self-hosted server that runs Claude Code, Codex, OpenCode, and other coding agents in parallel in git worktrees"
+    tags: [desktop, web, self-hosted, orchestration, mcp, community]
+    notes: "ADE; runs locally as a desktop app or remotely via headless jean-server."
