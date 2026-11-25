@@ -101,19 +101,20 @@ func TestComputeDeltas_SevenDayWindow(t *testing.T) {
 }
 
 func TestReadSnapshots_MalformedLine(t *testing.T) {
-	// Rows with a bad date, a bad count or the wrong field count are skipped;
-	// the 3 valid rows survive.
+	// Lines that are not JSON or carry a bad date are skipped; blank lines
+	// are ignored; the 3 valid days survive. Unknown fields are ignored so a
+	// later schema can add per-day data without breaking this reader.
 
 	tmpDir := t.TempDir()
-	tmpFile := tmpDir + "/history.csv"
+	tmpFile := tmpDir + "/history.jsonl"
 
-	content := `date,org/repo
-2026-05-01,100
-not-a-date,150
-2026-05-02,200
-2026-05-02x,abc
-2026-05-03,300
-2026-05-04,400,extra
+	content := `{"schema":1,"repos":["org/repo"]}
+{"date":"2026-05-01","stars":[100]}
+not json at all { bad
+{"date":"not-a-date","stars":[150]}
+
+{"date":"2026-05-02","stars":[200],"forks":[7]}
+{"date":"2026-05-03","stars":[300]}
 `
 
 	if err := os.WriteFile(tmpFile, []byte(content), 0600); err != nil {
@@ -145,7 +146,7 @@ not-a-date,150
 
 func TestReadSnapshots_MissingFile(t *testing.T) {
 	// Non-existent file should return nil with no error (not os.IsNotExist error).
-	snapshots, err := readSnapshots("/nonexistent/path/history.csv")
+	snapshots, err := readSnapshots("/nonexistent/path/history.jsonl")
 	if err != nil {
 		t.Errorf("expected nil error on missing file, got %v", err)
 	}
@@ -348,7 +349,7 @@ func TestComputeDeltaOver_30Day_FixedNow(t *testing.T) {
 func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 	// Verify that writeSnapshots uses atomic rename (writes to .tmp first).
 	tmpDir := t.TempDir()
-	tmpFile := tmpDir + "/history.csv"
+	tmpFile := tmpDir + "/history.jsonl"
 
 	snapshots := []Snapshot{
 		{Date: "2026-05-01", Stars: map[string]int{"org/repo": 100}},
@@ -370,9 +371,12 @@ func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 		t.Fatalf("ReadFile failed: %v", err)
 	}
 
-	// Keys are sorted into the header once; a repo absent on a day is an
-	// empty cell.
-	want := "date,org/new,org/repo\n2026-05-01,,100\n2026-05-02,5,200\n"
+	// Keys are sorted into the header once; a repo absent on a day is null,
+	// and trailing nulls are trimmed.
+	want := `{"schema":1,"repos":["org/new","org/repo"]}
+{"date":"2026-05-01","stars":[null,100]}
+{"date":"2026-05-02","stars":[5,200]}
+`
 	if string(content) != want {
 		t.Errorf("file content = %q, want %q", content, want)
 	}
@@ -404,12 +408,12 @@ func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 func TestReadSnapshots_SortsOutOfOrderDates(t *testing.T) {
 	// A hand edit or a merge of two concurrent updater runs can leave lines
 	// out of date order; delta windows depend on ascending order.
-	path := t.TempDir() + "/history.csv"
-	lines := `date,org/repo
-2026-09-03,300
-2026-08-27,100
-2026-09-10,400
-2026-09-01,200
+	path := t.TempDir() + "/history.jsonl"
+	lines := `{"schema":1,"repos":["org/repo"]}
+{"date":"2026-09-03","stars":[300]}
+{"date":"2026-08-27","stars":[100]}
+{"date":"2026-09-10","stars":[400]}
+{"date":"2026-09-01","stars":[200]}
 `
 	if err := os.WriteFile(path, []byte(lines), 0o644); err != nil {
 		t.Fatalf("seed file: %v", err)
@@ -445,11 +449,11 @@ func TestReadSnapshots_SortsOutOfOrderDates(t *testing.T) {
 func TestAppendHistory_DropsSnapshotsPastRetention(t *testing.T) {
 	// A snapshot older than the retention window is dropped, taking with it
 	// a repo that only appears there; one inside the window is kept.
-	path := t.TempDir() + "/history.csv"
-	seed := `date,org/removed,org/repo
-2025-11-24,50,90
-2025-11-25,,95
-2026-11-24,,100
+	path := t.TempDir() + "/history.jsonl"
+	seed := `{"schema":1,"repos":["org/removed","org/repo"]}
+{"date":"2025-11-24","stars":[50,90]}
+{"date":"2025-11-25","stars":[null,95]}
+{"date":"2026-11-24","stars":[null,100]}
 `
 	if err := os.WriteFile(path, []byte(seed), 0o644); err != nil {
 		t.Fatalf("seed file: %v", err)
@@ -479,5 +483,46 @@ func TestAppendHistory_DropsSnapshotsPastRetention(t *testing.T) {
 	}
 	if strings.Contains(string(content), "org/removed") {
 		t.Errorf("repo seen only before the window should leave the file:\n%s", content)
+	}
+}
+
+func TestWriteSnapshots_KeepsExistingColumnOrder(t *testing.T) {
+	// A repo already in the file keeps its position and a new one is
+	// appended, so past lines do not change when a repo is added.
+	path := t.TempDir() + "/history.jsonl"
+	seed := `{"schema":1,"repos":["org/zeta","org/alpha"]}
+{"date":"2026-05-01","stars":[1,2]}
+`
+	if err := os.WriteFile(path, []byte(seed), 0o644); err != nil {
+		t.Fatalf("seed file: %v", err)
+	}
+	snaps := []Snapshot{
+		{Date: "2026-05-01", Stars: map[string]int{"org/zeta": 1, "org/alpha": 2}},
+		{Date: "2026-05-02", Stars: map[string]int{"org/zeta": 3, "org/alpha": 4, "org/beta": 5}},
+	}
+	if err := writeSnapshots(path, snaps); err != nil {
+		t.Fatalf("writeSnapshots: %v", err)
+	}
+	got, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	want := `{"schema":1,"repos":["org/zeta","org/alpha","org/beta"]}
+{"date":"2026-05-01","stars":[1,2]}
+{"date":"2026-05-02","stars":[3,4,5]}
+`
+	if string(got) != want {
+		t.Errorf("file = %q, want %q", got, want)
+	}
+}
+
+func TestReadSnapshots_RejectsNewerSchema(t *testing.T) {
+	// A file written by a newer tool must not be misread silently.
+	path := t.TempDir() + "/history.jsonl"
+	if err := os.WriteFile(path, []byte(`{"schema":99,"repos":[]}`+"\n"), 0o644); err != nil {
+		t.Fatalf("seed file: %v", err)
+	}
+	if _, err := readSnapshots(path); err == nil {
+		t.Error("expected an error for a newer schema")
 	}
 }

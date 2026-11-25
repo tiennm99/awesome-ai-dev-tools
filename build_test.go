@@ -10,7 +10,7 @@ import (
 )
 
 // writeBuildFixture lays down a minimal repo layout the build step can read:
-// agents.yml (curation), metadata.json (fetched figures), history.csv
+// agents.yml (curation), metadata.json (fetched figures), history.jsonl
 // (delta baselines) and a site/ source directory.
 func writeBuildFixture(t *testing.T, fetchedAt time.Time) (dir string) {
 	t.Helper()
@@ -59,9 +59,9 @@ func writeBuildFixture(t *testing.T, fetchedAt time.Time) (dir string) {
 	mustWrite("data/metadata.json", string(raw))
 
 	// Baseline 7 days before fetchedAt (2026-09-09) so deltas resolve.
-	mustWrite("data/history.csv", `date,org/big,org/small
-2026-09-09,4900,1990
-2026-09-16,5000,2000
+	mustWrite("data/history.jsonl", `{"schema":1,"repos":["org/big","org/small"]}
+{"date":"2026-09-09","stars":[4900,1990]}
+{"date":"2026-09-16","stars":[5000,2000]}
 `)
 
 	mustWrite("site/index.html", "<html>dashboard</html>")
@@ -88,7 +88,7 @@ func runBuildIn(t *testing.T, dir string) error {
 	return runBuild(
 		filepath.Join(dir, "data/agents.yml"),
 		filepath.Join(dir, "data/metadata.json"),
-		filepath.Join(dir, "data/history.csv"),
+		filepath.Join(dir, "data/history.jsonl"),
 		filepath.Join(dir, "site"),
 		filepath.Join(dir, "dist"),
 	)

@@ -8,7 +8,7 @@ import (
 )
 
 // runBuild renders the static dashboard into distDir from committed inputs
-// only — data/agents.yml, data/metadata.json and data/history.csv. It makes
+// only — data/agents.yml, data/metadata.json and data/history.jsonl. It makes
 // no network calls and needs no GITHUB_TOKEN, which is what lets an untrusted
 // build environment (Cloudflare Pages) run it.
 //

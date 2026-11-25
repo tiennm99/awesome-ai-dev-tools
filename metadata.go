@@ -23,7 +23,7 @@ type repoMeta struct {
 }
 
 // metadataFile is the on-disk shape of data/metadata.json. Repos is keyed by
-// canonical owner/repo (the same key history.csv uses), so entries survive
+// canonical owner/repo (the same key history.jsonl uses), so entries survive
 // renames and Go's sorted map marshalling keeps commit diffs minimal.
 type metadataFile struct {
 	FetchedAt time.Time           `json:"fetchedAt"`

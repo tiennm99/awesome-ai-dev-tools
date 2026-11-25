@@ -10,7 +10,7 @@ import (
 // Paths the updater reads and writes, relative to the repository root.
 const (
 	agentsPath   = "data/agents.yml"
-	historyPath  = "data/history.csv"
+	historyPath  = "data/history.jsonl"
 	metadataPath = "data/metadata.json"
 	readmeTmpl   = "templates/readme.tmpl"
 	readmePath   = "README.md"

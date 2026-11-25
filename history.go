@@ -1,14 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"cmp"
-	"encoding/csv"
+	"encoding/json"
 	"fmt"
 	"io"
 	"maps"
 	"os"
 	"slices"
-	"strconv"
 	"time"
 )
 
@@ -81,47 +81,43 @@ func appendHistory(path string, stats []Stat) (snapshots []Snapshot, deltas7 map
 	return kept, deltas7, deltas30, nil
 }
 
-// readSnapshots loads the history CSV: a header row of `date` followed by one
-// canonical owner/repo key per column, then one row per day. An empty cell
-// means the repo was not tracked that day. A missing file is an empty history.
+// historySchema is the version written in the history file's header line.
+// Bump it when a change would make an older reader misread the file;
+// adding a new per-day field (forks, say) does not need a bump, since
+// readers ignore fields they do not know.
+const historySchema = 1
+
+// historyHeader is the first line of the history file. Repos lists the
+// column order shared by every per-day array that follows.
+type historyHeader struct {
+	Schema int      `json:"schema"`
+	Repos  []string `json:"repos"`
+}
+
+// historyRow is one day. Stars[i] belongs to header.Repos[i]; null, or a
+// position past the end of a shorter array, means the repo was not tracked
+// that day.
+type historyRow struct {
+	Date  string `json:"date"`
+	Stars []*int `json:"stars"`
+}
+
+// readSnapshots loads the history file: JSON Lines whose first line is a
+// historyHeader and whose other lines are historyRows. A missing or empty
+// file is an empty history.
 func readSnapshots(path string) ([]Snapshot, error) {
-	f, err := os.Open(path)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return nil, nil
-		}
+	header, rows, err := readHistoryFile(path)
+	if err != nil || header == nil {
 		return nil, err
 	}
-	defer func() { _ = f.Close() }() // read-only; close error is not actionable
 
-	r := csv.NewReader(f)
-	r.FieldsPerRecord = -1 // a short or long row is logged and skipped below, not fatal
-	header, err := r.Read()
-	if err == io.EOF {
-		return nil, nil
-	}
-	if err != nil {
-		return nil, fmt.Errorf("%s header: %w", path, err)
-	}
-	if len(header) == 0 || header[0] != "date" {
-		return nil, fmt.Errorf("%s: header must start with \"date\", got %q", path, header)
-	}
-	keys := header[1:]
-
-	var out []Snapshot
-	for row := 2; ; row++ {
-		rec, err := r.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return nil, fmt.Errorf("%s row %d: %w", path, row, err)
-		}
-		s, err := parseSnapshotRow(rec, keys)
-		if err != nil {
-			// Log corruption so it's observable; don't silently drop rows.
-			fmt.Fprintf(os.Stderr, "%s row %d: skipping malformed entry: %v\n", path, row, err)
-			continue
+	out := make([]Snapshot, 0, len(rows))
+	for _, r := range rows {
+		s := Snapshot{Date: r.Date, Stars: map[string]int{}}
+		for i, v := range r.Stars {
+			if v != nil && i < len(header.Repos) {
+				s.Stars[header.Repos[i]] = *v
+			}
 		}
 		// Apply canonical-key migrations so history keyed under old names is
 		// transparently remapped to the current agents.yml canonical key.
@@ -131,32 +127,62 @@ func readSnapshots(path string) ([]Snapshot, error) {
 
 	// Delta windows pick the newest snapshot inside the window by scan order,
 	// so the slice must be date-ascending. Sort rather than trust the file:
-	// a hand edit or a merge of two concurrent runs can interleave rows.
+	// a hand edit or a merge of two concurrent runs can interleave lines.
 	slices.SortStableFunc(out, func(a, b Snapshot) int { return cmp.Compare(a.Date, b.Date) })
 
 	return out, nil
 }
 
-// parseSnapshotRow turns one CSV row into a Snapshot, given the header keys.
-func parseSnapshotRow(rec, keys []string) (Snapshot, error) {
-	if len(rec) != len(keys)+1 {
-		return Snapshot{}, fmt.Errorf("got %d fields, want %d", len(rec), len(keys)+1)
+// readHistoryFile parses the raw header and rows. Malformed day lines are
+// logged and skipped; a missing, malformed or too-new header is an error,
+// because without it no row can be read correctly.
+func readHistoryFile(path string) (*historyHeader, []historyRow, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil, nil, nil
+		}
+		return nil, nil, err
 	}
-	if _, err := time.Parse("2006-01-02", rec[0]); err != nil {
-		return Snapshot{}, fmt.Errorf("bad date %q", rec[0])
-	}
-	s := Snapshot{Date: rec[0], Stars: map[string]int{}}
-	for i, cell := range rec[1:] {
-		if cell == "" {
+	defer func() { _ = f.Close() }() // read-only; close error is not actionable
+
+	scanner := bufio.NewScanner(f)
+	scanner.Buffer(make([]byte, 1024*1024), 16*1024*1024)
+	var header *historyHeader
+	var rows []historyRow
+	lineNum := 0
+	for scanner.Scan() {
+		lineNum++
+		line := scanner.Bytes()
+		if len(line) == 0 {
 			continue
 		}
-		n, err := strconv.Atoi(cell)
-		if err != nil {
-			return Snapshot{}, fmt.Errorf("bad star count %q for %s", cell, keys[i])
+		if header == nil {
+			var h historyHeader
+			if err := json.Unmarshal(line, &h); err != nil || h.Schema == 0 {
+				return nil, nil, fmt.Errorf("%s line %d: want a header like {\"schema\":%d,\"repos\":[...]}", path, lineNum, historySchema)
+			}
+			if h.Schema > historySchema {
+				return nil, nil, fmt.Errorf("%s: schema %d is newer than this tool supports (%d)", path, h.Schema, historySchema)
+			}
+			header = &h
+			continue
 		}
-		s.Stars[keys[i]] = n
+		var r historyRow
+		if err := json.Unmarshal(line, &r); err != nil {
+			fmt.Fprintf(os.Stderr, "%s line %d: skipping malformed entry: %v\n", path, lineNum, err)
+			continue
+		}
+		if _, err := time.Parse("2006-01-02", r.Date); err != nil {
+			fmt.Fprintf(os.Stderr, "%s line %d: skipping entry with bad date %q\n", path, lineNum, r.Date)
+			continue
+		}
+		rows = append(rows, r)
 	}
-	return s, nil
+	if err := scanner.Err(); err != nil {
+		return nil, nil, err
+	}
+	return header, rows, nil
 }
 
 // applyMigrations rewrites any deprecated history keys to their current
@@ -214,39 +240,52 @@ func resolveCanonicalKey(key string) string {
 	return key
 }
 
-// writeSnapshots persists the snapshots as the wide CSV readSnapshots reads:
-// one column per repo that appears in any snapshot, sorted, one row per day.
-// Writing each key once in the header instead of on every row keeps the file
-// about a third of the size of one JSON object per day.
+// writeSnapshots persists the snapshots in the format readSnapshots reads.
+// Each repo is named once, in the header, instead of on every day's line.
+// Repos already in the file keep their column, and new ones are appended,
+// so adding a repo does not reshuffle every past line in the git diff.
+// Repos absent from every snapshot (aged out of retention) are dropped.
 func writeSnapshots(path string, snapshots []Snapshot) error {
-	keySet := map[string]bool{}
+	present := map[string]bool{}
 	for _, s := range snapshots {
 		for k := range s.Stars {
-			keySet[k] = true
+			present[k] = true
 		}
 	}
-	keys := slices.Sorted(maps.Keys(keySet))
+
+	var repos []string
+	if old, _, err := readHistoryFile(path); err == nil && old != nil {
+		for _, k := range old.Repos {
+			k = resolveCanonicalKey(k)
+			if present[k] {
+				repos = append(repos, k)
+				delete(present, k)
+			}
+		}
+	}
+	repos = append(repos, slices.Sorted(maps.Keys(present))...)
 
 	return atomicWriteFile(path, func(w io.Writer) error {
-		cw := csv.NewWriter(w)
-		if err := cw.Write(append([]string{"date"}, keys...)); err != nil {
+		enc := json.NewEncoder(w)
+		if err := enc.Encode(historyHeader{Schema: historySchema, Repos: repos}); err != nil {
 			return err
 		}
-		rec := make([]string, len(keys)+1)
 		for _, s := range snapshots {
-			rec[0] = s.Date
-			for i, k := range keys {
-				rec[i+1] = ""
+			row := historyRow{Date: s.Date, Stars: make([]*int, len(repos))}
+			for i, k := range repos {
 				if n, ok := s.Stars[k]; ok {
-					rec[i+1] = strconv.Itoa(n)
+					row.Stars[i] = &n
 				}
 			}
-			if err := cw.Write(rec); err != nil {
+			// Trailing nulls carry no data: a short array reads the same.
+			for len(row.Stars) > 0 && row.Stars[len(row.Stars)-1] == nil {
+				row.Stars = row.Stars[:len(row.Stars)-1]
+			}
+			if err := enc.Encode(row); err != nil {
 				return err
 			}
 		}
-		cw.Flush()
-		return cw.Error()
+		return nil
 	})
 }
 
