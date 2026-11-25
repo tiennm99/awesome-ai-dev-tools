@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"os"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 )
@@ -101,16 +101,19 @@ func TestComputeDeltas_SevenDayWindow(t *testing.T) {
 }
 
 func TestReadSnapshots_MalformedLine(t *testing.T) {
-	// Temp JSONL with: valid, malformed, empty, valid lines.
-	// Should skip malformed/empty and return only the 2 valid snapshots.
+	// Rows with a bad date, a bad count or the wrong field count are skipped;
+	// the 3 valid rows survive.
 
 	tmpDir := t.TempDir()
-	tmpFile := tmpDir + "/history.jsonl"
+	tmpFile := tmpDir + "/history.csv"
 
-	content := `{"date":"2026-05-01","stars":{"org/repo":100}}
-not json at all { bad
-{"date":"2026-05-02","stars":{"org/repo":200}}
-{"date":"2026-05-03","stars":{"org/repo":300}}
+	content := `date,org/repo
+2026-05-01,100
+not-a-date,150
+2026-05-02,200
+2026-05-02x,abc
+2026-05-03,300
+2026-05-04,400,extra
 `
 
 	if err := os.WriteFile(tmpFile, []byte(content), 0600); err != nil {
@@ -142,7 +145,7 @@ not json at all { bad
 
 func TestReadSnapshots_MissingFile(t *testing.T) {
 	// Non-existent file should return nil with no error (not os.IsNotExist error).
-	snapshots, err := readSnapshots("/nonexistent/path/history.jsonl")
+	snapshots, err := readSnapshots("/nonexistent/path/history.csv")
 	if err != nil {
 		t.Errorf("expected nil error on missing file, got %v", err)
 	}
@@ -345,11 +348,11 @@ func TestComputeDeltaOver_30Day_FixedNow(t *testing.T) {
 func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 	// Verify that writeSnapshots uses atomic rename (writes to .tmp first).
 	tmpDir := t.TempDir()
-	tmpFile := tmpDir + "/history.jsonl"
+	tmpFile := tmpDir + "/history.csv"
 
 	snapshots := []Snapshot{
 		{Date: "2026-05-01", Stars: map[string]int{"org/repo": 100}},
-		{Date: "2026-05-02", Stars: map[string]int{"org/repo": 200}},
+		{Date: "2026-05-02", Stars: map[string]int{"org/repo": 200, "org/new": 5}},
 	}
 
 	err := writeSnapshots(tmpFile, snapshots)
@@ -367,19 +370,23 @@ func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 		t.Fatalf("ReadFile failed: %v", err)
 	}
 
-	// Verify JSON is valid and correct.
-	var readBack []Snapshot
-	decoder := json.NewDecoder(bytes.NewReader(content))
-	for decoder.More() {
-		var s Snapshot
-		if err := decoder.Decode(&s); err != nil {
-			t.Fatalf("decode failed: %v", err)
-		}
-		readBack = append(readBack, s)
+	// Keys are sorted into the header once; a repo absent on a day is an
+	// empty cell.
+	want := "date,org/new,org/repo\n2026-05-01,,100\n2026-05-02,5,200\n"
+	if string(content) != want {
+		t.Errorf("file content = %q, want %q", content, want)
+	}
+
+	readBack, err := readSnapshots(tmpFile)
+	if err != nil {
+		t.Fatalf("readSnapshots failed: %v", err)
 	}
 
 	if len(readBack) != 2 {
 		t.Errorf("expected 2 snapshots, got %d", len(readBack))
+	}
+	if _, ok := readBack[0].Stars["org/new"]; ok {
+		t.Errorf("empty cell should read as absent: %+v", readBack[0])
 	}
 	if readBack[0].Date != "2026-05-01" || readBack[0].Stars["org/repo"] != 100 {
 		t.Errorf("snapshot 0 mismatch: %+v", readBack[0])
@@ -397,11 +404,12 @@ func TestWriteSnapshots_AtomicWrite(t *testing.T) {
 func TestReadSnapshots_SortsOutOfOrderDates(t *testing.T) {
 	// A hand edit or a merge of two concurrent updater runs can leave lines
 	// out of date order; delta windows depend on ascending order.
-	path := t.TempDir() + "/history.jsonl"
-	lines := `{"date":"2026-09-03","stars":{"org/repo":300}}
-{"date":"2026-08-27","stars":{"org/repo":100}}
-{"date":"2026-09-10","stars":{"org/repo":400}}
-{"date":"2026-09-01","stars":{"org/repo":200}}
+	path := t.TempDir() + "/history.csv"
+	lines := `date,org/repo
+2026-09-03,300
+2026-08-27,100
+2026-09-10,400
+2026-09-01,200
 `
 	if err := os.WriteFile(path, []byte(lines), 0o644); err != nil {
 		t.Fatalf("seed file: %v", err)
@@ -431,5 +439,45 @@ func TestReadSnapshots_SortsOutOfOrderDates(t *testing.T) {
 	deltas := computeDeltas(got, Snapshot{Date: "2026-09-10", Stars: map[string]int{"org/repo": 400}})
 	if deltas["org/repo"] != 100 {
 		t.Errorf("delta = %d, want 100", deltas["org/repo"])
+	}
+}
+
+func TestAppendHistory_DropsSnapshotsPastRetention(t *testing.T) {
+	// A snapshot older than the retention window is dropped, taking with it
+	// a repo that only appears there; one inside the window is kept.
+	path := t.TempDir() + "/history.csv"
+	seed := `date,org/removed,org/repo
+2025-11-24,50,90
+2025-11-25,,95
+2026-11-24,,100
+`
+	if err := os.WriteFile(path, []byte(seed), 0o644); err != nil {
+		t.Fatalf("seed file: %v", err)
+	}
+
+	fixed := time.Date(2026, 11, 25, 3, 0, 0, 0, time.UTC)
+	orig := timeNow
+	timeNow = func() time.Time { return fixed }
+	defer func() { timeNow = orig }()
+
+	got, _, _, err := appendHistory(path, []Stat{{CanonicalKey: "org/repo", Stars: 110}})
+	if err != nil {
+		t.Fatalf("appendHistory: %v", err)
+	}
+	var dates []string
+	for _, s := range got {
+		dates = append(dates, s.Date)
+	}
+	want := []string{"2025-11-25", "2026-11-24", "2026-11-25"}
+	if !slices.Equal(dates, want) {
+		t.Errorf("dates = %v, want %v", dates, want)
+	}
+
+	content, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("ReadFile: %v", err)
+	}
+	if strings.Contains(string(content), "org/removed") {
+		t.Errorf("repo seen only before the window should leave the file:\n%s", content)
 	}
 }

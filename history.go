@@ -1,13 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"cmp"
-	"encoding/json"
+	"encoding/csv"
 	"fmt"
 	"io"
+	"maps"
 	"os"
 	"slices"
+	"strconv"
 	"time"
 )
 
@@ -18,7 +19,7 @@ type Snapshot struct {
 
 // canonicalKeyMigrations remaps old history keys to the current canonical
 // owner/repo from agents.yml. Add entries here when a tracked repo is renamed
-// and history.jsonl contains the old name.
+// and the history file contains the old name.
 //
 // Known renames:
 //   - goose moved block → aaif-goose (Agentic AI Foundation); history contains
@@ -42,8 +43,13 @@ var canonicalKeyMigrations = map[string]string{
 // (delta window boundaries, migration+delta combinations) deterministically.
 var timeNow = time.Now
 
-// appendHistory persists today's snapshot and returns the full snapshot list
-// (oldest first, including today) plus the 7-day and 30-day deltas per
+// historyRetentionDays is how much star history is kept. Older snapshots are
+// dropped on each update, so an entry removed from agents.yml keeps its chart
+// data until its last snapshot ages past this window, then disappears.
+const historyRetentionDays = 365
+
+// appendHistory persists today's snapshot and returns the retained snapshot
+// list (oldest first, including today) plus the 7-day and 30-day deltas per
 // canonical key.
 func appendHistory(path string, stats []Stat) (snapshots []Snapshot, deltas7 map[string]int, deltas30 map[string]int, err error) {
 	today := timeNow().UTC().Format("2006-01-02")
@@ -63,8 +69,10 @@ func appendHistory(path string, stats []Stat) (snapshots []Snapshot, deltas7 map
 	deltas7 = computeDeltas(history, current)
 	deltas30 = computeDeltaOver(history, current, 30, 5)
 
-	// Drop any pre-existing snapshot for today, then append current.
-	kept := slices.DeleteFunc(history, func(s Snapshot) bool { return s.Date == today })
+	// Drop any pre-existing snapshot for today and any older than the
+	// retention window, then append current.
+	oldest := timeNow().UTC().AddDate(0, 0, -historyRetentionDays).Format("2006-01-02")
+	kept := slices.DeleteFunc(history, func(s Snapshot) bool { return s.Date == today || s.Date < oldest })
 	kept = append(kept, current)
 
 	if err := writeSnapshots(path, kept); err != nil {
@@ -73,6 +81,9 @@ func appendHistory(path string, stats []Stat) (snapshots []Snapshot, deltas7 map
 	return kept, deltas7, deltas30, nil
 }
 
+// readSnapshots loads the history CSV: a header row of `date` followed by one
+// canonical owner/repo key per column, then one row per day. An empty cell
+// means the repo was not tracked that day. A missing file is an empty history.
 func readSnapshots(path string) ([]Snapshot, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -83,20 +94,33 @@ func readSnapshots(path string) ([]Snapshot, error) {
 	}
 	defer func() { _ = f.Close() }() // read-only; close error is not actionable
 
+	r := csv.NewReader(f)
+	r.FieldsPerRecord = -1 // a short or long row is logged and skipped below, not fatal
+	header, err := r.Read()
+	if err == io.EOF {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, fmt.Errorf("%s header: %w", path, err)
+	}
+	if len(header) == 0 || header[0] != "date" {
+		return nil, fmt.Errorf("%s: header must start with \"date\", got %q", path, header)
+	}
+	keys := header[1:]
+
 	var out []Snapshot
-	scanner := bufio.NewScanner(f)
-	scanner.Buffer(make([]byte, 1024*1024), 16*1024*1024)
-	lineNum := 0
-	for scanner.Scan() {
-		lineNum++
-		line := scanner.Bytes()
-		if len(line) == 0 {
-			continue
+	for row := 2; ; row++ {
+		rec, err := r.Read()
+		if err == io.EOF {
+			break
 		}
-		var s Snapshot
-		if err := json.Unmarshal(line, &s); err != nil {
-			// Log corruption so it's observable; don't silently drop lines.
-			fmt.Fprintf(os.Stderr, "history.jsonl line %d: skipping malformed entry: %v\n", lineNum, err)
+		if err != nil {
+			return nil, fmt.Errorf("%s row %d: %w", path, row, err)
+		}
+		s, err := parseSnapshotRow(rec, keys)
+		if err != nil {
+			// Log corruption so it's observable; don't silently drop rows.
+			fmt.Fprintf(os.Stderr, "%s row %d: skipping malformed entry: %v\n", path, row, err)
 			continue
 		}
 		// Apply canonical-key migrations so history keyed under old names is
@@ -104,16 +128,35 @@ func readSnapshots(path string) ([]Snapshot, error) {
 		s.Stars = applyMigrations(s.Stars)
 		out = append(out, s)
 	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
 
 	// Delta windows pick the newest snapshot inside the window by scan order,
 	// so the slice must be date-ascending. Sort rather than trust the file:
-	// a hand edit or a merge of two concurrent runs can interleave lines.
+	// a hand edit or a merge of two concurrent runs can interleave rows.
 	slices.SortStableFunc(out, func(a, b Snapshot) int { return cmp.Compare(a.Date, b.Date) })
 
 	return out, nil
+}
+
+// parseSnapshotRow turns one CSV row into a Snapshot, given the header keys.
+func parseSnapshotRow(rec, keys []string) (Snapshot, error) {
+	if len(rec) != len(keys)+1 {
+		return Snapshot{}, fmt.Errorf("got %d fields, want %d", len(rec), len(keys)+1)
+	}
+	if _, err := time.Parse("2006-01-02", rec[0]); err != nil {
+		return Snapshot{}, fmt.Errorf("bad date %q", rec[0])
+	}
+	s := Snapshot{Date: rec[0], Stars: map[string]int{}}
+	for i, cell := range rec[1:] {
+		if cell == "" {
+			continue
+		}
+		n, err := strconv.Atoi(cell)
+		if err != nil {
+			return Snapshot{}, fmt.Errorf("bad star count %q for %s", cell, keys[i])
+		}
+		s.Stars[keys[i]] = n
+	}
+	return s, nil
 }
 
 // applyMigrations rewrites any deprecated history keys to their current
@@ -171,16 +214,39 @@ func resolveCanonicalKey(key string) string {
 	return key
 }
 
-// writeSnapshots persists every snapshot as one JSON object per line.
+// writeSnapshots persists the snapshots as the wide CSV readSnapshots reads:
+// one column per repo that appears in any snapshot, sorted, one row per day.
+// Writing each key once in the header instead of on every row keeps the file
+// about a third of the size of one JSON object per day.
 func writeSnapshots(path string, snapshots []Snapshot) error {
+	keySet := map[string]bool{}
+	for _, s := range snapshots {
+		for k := range s.Stars {
+			keySet[k] = true
+		}
+	}
+	keys := slices.Sorted(maps.Keys(keySet))
+
 	return atomicWriteFile(path, func(w io.Writer) error {
-		enc := json.NewEncoder(w)
+		cw := csv.NewWriter(w)
+		if err := cw.Write(append([]string{"date"}, keys...)); err != nil {
+			return err
+		}
+		rec := make([]string, len(keys)+1)
 		for _, s := range snapshots {
-			if err := enc.Encode(s); err != nil {
+			rec[0] = s.Date
+			for i, k := range keys {
+				rec[i+1] = ""
+				if n, ok := s.Stars[k]; ok {
+					rec[i+1] = strconv.Itoa(n)
+				}
+			}
+			if err := cw.Write(rec); err != nil {
 				return err
 			}
 		}
-		return nil
+		cw.Flush()
+		return cw.Error()
 	})
 }
 

@@ -31,7 +31,7 @@ func TestAtomicWriteFile_WritesAndLeavesNoTemp(t *testing.T) {
 
 func TestAtomicWriteFile_FailedWriteKeepsPreviousContent(t *testing.T) {
 	// The point of the temp-file dance: a generated file (README.md,
-	// history.jsonl) must never be truncated by a write that fails midway.
+	// history.csv) must never be truncated by a write that fails midway.
 	path := t.TempDir() + "/out.txt"
 	if err := os.WriteFile(path, []byte("previous"), 0o644); err != nil {
 		t.Fatalf("seed file: %v", err)

@@ -16,7 +16,7 @@ Data refresh and site build are two separate steps, in two separate places:
 
 | Step | Command | Runs where | Needs a token? | Writes |
 | --- | --- | --- | --- | --- |
-| Update | `go run .` | GitHub Actions (`update.yml`, nightly + manual) | Yes — `GITHUB_TOKEN` | `README.md`, `data/history.jsonl`, `data/metadata.json` (all committed) |
+| Update | `go run .` | GitHub Actions (`update.yml`, nightly + manual) | Yes — `GITHUB_TOKEN` | `README.md`, `data/history.csv`, `data/metadata.json` (all committed) |
 | Build | `go run . -build` | Cloudflare Pages, and GitHub Actions (`pages.yml`) for the mirror | No | `dist/` (never committed) |
 
 `data/metadata.json` is the handoff. The update step records every GitHub-sourced
@@ -52,7 +52,7 @@ If it is ever missing (a fresh fork, say), regenerate it by triggering
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
 go run .
-git add data/metadata.json data/history.jsonl README.md
+git add data/metadata.json data/history.csv README.md
 git commit -m "chore: bootstrap metadata snapshot"
 git push
 ```

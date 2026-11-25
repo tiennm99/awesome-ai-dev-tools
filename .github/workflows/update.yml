@@ -39,7 +39,7 @@ jobs:
           cache: true
 
       # The only step that touches the network or needs a token. It refreshes
-      # README.md, data/history.jsonl and data/metadata.json; rendering the
+      # README.md, data/history.csv and data/metadata.json; rendering the
       # site from those files happens later, on Cloudflare.
       - name: Run updater
         env:
@@ -58,7 +58,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md data/history.jsonl data/metadata.json
+          git add README.md data/history.csv data/metadata.json
           if git diff --staged --quiet; then
             echo "no changes"
             exit 0
@@ -66,7 +66,7 @@ jobs:
           git commit -m "chore: daily ranking refresh"
           # Rebase + retry guards against the race where two runs commit near-simultaneously.
           # Strategy: plain rebase first; only force-resolve bot-generated files (README.md,
-          # data/history.jsonl, data/metadata.json) when they are the sole conflicts. If any human-maintained file
+          # data/history.csv, data/metadata.json) when they are the sole conflicts. If any human-maintained file
           # (e.g. data/agents.yml) conflicts, abort and fail loudly so a human can investigate.
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
@@ -79,15 +79,15 @@ jobs:
             conflicted=$(git diff --name-only --diff-filter=U)
             echo "conflicted files: $conflicted"
             # Only auto-resolve if ALL conflicts are in bot-generated files.
-            non_bot=$(echo "$conflicted" | grep -v -E '^(README\.md|data/history\.jsonl|data/metadata\.json)$' || true)
+            non_bot=$(echo "$conflicted" | grep -v -E '^(README\.md|data/history\.csv|data/metadata\.json)$' || true)
             if [ -n "$non_bot" ]; then
               echo "ERROR: conflict in human-maintained file(s): $non_bot — aborting rebase"
               git rebase --abort
               exit 1
             fi
             # Safe to force-resolve: keep our (freshest) bot-generated content.
-            git checkout --theirs README.md data/history.jsonl data/metadata.json 2>/dev/null || true
-            git add README.md data/history.jsonl data/metadata.json
+            git checkout --theirs README.md data/history.csv data/metadata.json 2>/dev/null || true
+            git add README.md data/history.csv data/metadata.json
             GIT_EDITOR=true git rebase --continue
           done
           exit 1
