@@ -399,3 +399,52 @@ agents:
     description: "Desktop app and self-hosted server that runs Claude Code, Codex, OpenCode, and other coding agents in parallel in git worktrees"
     tags: [desktop, web, self-hosted, orchestration, mcp, community]
     notes: "ADE; runs locally as a desktop app or remotely via headless jean-server."
+  - owner: BloopAI
+    repo: vibe-kanban
+    description: "Kanban board that plans and runs Claude Code, Codex, Gemini CLI and other coding agents in isolated git worktrees"
+    tags: [web, desktop, orchestration, review, mcp, community]
+    notes: "ADE; launched locally with npx vibe-kanban."
+  - owner: stackblitz-labs
+    repo: bolt.diy
+    description: "Open-source Bolt that prompts, runs, edits and deploys full-stack web apps in the browser with any LLM"
+    tags: [web, desktop, byo-model, local-models, app-builder, mcp, community]
+  - owner: coleam00
+    repo: Archon
+    description: "Self-hosted engine that runs Claude Code, Codex and Pi through YAML workflows with fixed steps, approval gates and run logs"
+    tags: [terminal, web, self-hosted, orchestration, autonomous, mcp, community]
+  - owner: musistudio
+    repo: claude-code-router
+    description: "Local model gateway that routes Claude Code, Codex, OpenCode and other agents to the providers and models you choose"
+    tags: [terminal, desktop, byo-model, mcp, community]
+  - owner: github
+    repo: gh-aw
+    description: "GitHub CLI extension that runs coding agents in GitHub Actions from Markdown workflows, sandboxed with read-only defaults"
+    tags: [terminal, byo-model, autonomous, review, headless, community]
+  - owner: dagger
+    repo: container-use
+    description: "MCP server and CLI that gives each coding agent its own container and git branch so several can work in parallel"
+    tags: [terminal, orchestration, mcp, community]
+  - owner: gastownhall
+    repo: beads
+    description: "CLI issue tracker that gives coding agents a persistent dependency graph of tasks for long-horizon work"
+    tags: [terminal, mcp, community]
+  - owner: microsoft
+    repo: amplifier
+    description: "Modular command-line AI development assistant from Microsoft, published as an early research demonstrator"
+    tags: [terminal, byo-model, local-models, interactive, research, community]
+  - owner: coder
+    repo: claudecode.nvim
+    description: "Neovim extension that connects Claude Code to the editor over the same protocol as the official IDE extensions"
+    tags: [editor-plugin, single-vendor, interactive, mcp, community]
+  - owner: github
+    repo: copilot.vim
+    description: "Official Vim and Neovim plugin for GitHub Copilot inline code suggestions"
+    tags: [editor-plugin, single-vendor, interactive, community]
+  - owner: zbirenbaum
+    repo: copilot.lua
+    description: "Lua rewrite of copilot.vim for Neovim, with a panel, inline suggestions and an API for other plugins"
+    tags: [editor-plugin, single-vendor, interactive, community]
+  - owner: milanglacier
+    repo: minuet-ai.nvim
+    description: "Neovim plugin for as-you-type code completion from cloud LLMs or local llama.cpp and Ollama servers"
+    tags: [editor-plugin, byo-model, local-models, interactive, community]

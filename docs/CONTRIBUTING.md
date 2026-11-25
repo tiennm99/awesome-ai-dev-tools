@@ -67,6 +67,15 @@ Actions log (`enforceStarFloor` in `github.go`). Because star counts require the
 API, `go run . -check` cannot catch this offline — a below-floor entry passes CI
 and is then dropped by the next daily run, so check the count before opening a PR.
 
+### The list holds about 100 entries
+
+The target is a "Top 100": keep the list at about 100 entries. When a new tool
+qualifies and the list is already full, add it only if it is more interesting
+than the weakest current entry, and remove that entry in the same change. The
+weakest entry is the least interesting one: low or flat stars, a narrow niche,
+or a near-duplicate of a stronger tool. A removed entry's star history stays
+in `data/history.csv` until it ages out of the one-year retention window.
+
 Maintenance requirements apply to every entry equally: no push in 6 months means
 removal, and the daily run warns past 3 months.
 
@@ -132,7 +141,7 @@ say nothing about choosing the tool. GitHub topics are a drafting aid only —
 
 **Renamed repos:** GitHub redirects the old slug, so the updater keeps working — it prints a `::warning::` naming the new slug. Update `owner`/`repo` in `data/agents.yml` to the new slug and add the old key to `canonicalKeyMigrations` in `history.go`, or the repo's star history detaches and its deltas show `—`.
 
-**Deprecation:** To remove an agent, delete its entry from `data/agents.yml`. The next run drops it from the README; its history stays in `data/history.jsonl`, so re-adding the entry later restores its star chart.
+**Deprecation:** To remove an agent, delete its entry from `data/agents.yml`. The next run drops it from the README; its history stays in `data/history.csv` for up to a year (`historyRetentionDays` in `history.go`), so re-adding the entry within that time restores its star chart.
 
 **Staleness:** An entry with no push in **6 months** is dropped. Past **3 months** the updater prints a `::warning::` naming the repo and its days idle, so the daily run surfaces candidates without anyone auditing the list by hand. Removal stays a human decision: a repo can go quiet between releases, and a historically significant one (`gpt-engineer`) is kept with a `notes` marker instead.
 A repo the maintainers have **archived or declared deprecated** is different: it will never
@@ -141,7 +150,7 @@ historical-significance exception.
 
 ## PR Review
 
-- Keep PRs to changes in `data/agents.yml` only (do not edit `README.md` or `data/history.jsonl`)
+- Keep PRs to changes in `data/agents.yml` only (do not edit `README.md` or `data/history.csv`)
 - The daily GitHub Actions workflow (runs at 00:00 UTC) picks up merged PRs automatically
 - No manual review required; the updater regenerates the README after your PR merges
 
