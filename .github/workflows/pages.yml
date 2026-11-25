@@ -23,12 +23,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # Check out the branch head, not the triggering SHA, so a run chained on
       # the updater builds the data commit it just pushed.
@@ -49,5 +46,15 @@ jobs:
         with:
           path: dist
 
+  # A separate job, not a step after the upload: deploy-pages can list the
+  # run's artifacts before a just-finalized upload shows up and fail with
+  # "No artifacts named github-pages" (actions/deploy-pages#451).
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v5
