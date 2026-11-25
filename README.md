@@ -5,40 +5,40 @@
 
 📊 **[Interactive dashboard with star-history charts →](https://awesome-ai-dev-tools.pages.dev/)** (mirror: [GitHub Pages](https://tiennm99.github.io/awesome-ai-dev-tools/))
 
-**Last updated:** 2026-11-25 03:06 UTC · **Tracked:** 88 repos
-**Top 7-day mover:** [pingdotgg/t3code](https://github.com/pingdotgg/t3code) (+13339 stars)
+**Last updated:** 2026-11-25 03:14 UTC · **Tracked:** 88 repos
+**Top 7-day mover:** [pingdotgg/t3code](https://github.com/pingdotgg/t3code) (+13363 stars)
 
 | # | Repo | Stars | Δ7d | Language | Last push | Description |
 |---|------|------:|----:|----------|-----------|-------------|
-| 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 286.6k | +3412 | TypeScript | 2026-11-22 | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
+| 1 | [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | 286.6k | +3416 | TypeScript | 2026-11-22 | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
 | 2 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 229.0k | +1335 | TypeScript | 2026-11-25 | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
-| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 157.0k | +886 | TypeScript | 2026-11-25 | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
-| 4 | [openai/codex](https://github.com/openai/codex) | 136.4k | +646 | Rust | 2026-11-25 | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
-| 5 | [stablyai/orca](https://github.com/stablyai/orca) | 136.4k | +8220 | TypeScript | 2026-11-25 | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
+| 3 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 157.0k | +888 | TypeScript | 2026-11-25 | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
+| 4 | [stablyai/orca](https://github.com/stablyai/orca) | 136.4k | +8232 | TypeScript | 2026-11-25 | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
+| 5 | [openai/codex](https://github.com/openai/codex) | 136.4k | +648 | Rust | 2026-11-25 | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
 | 6 | [earendil-works/pi](https://github.com/earendil-works/pi) | 123.7k | +1131 | TypeScript | 2026-11-25 | Minimal, extensible terminal coding agent harness you customize with extensions, skills, and packages, with an SDK and RPC mode |
-| 7 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 109.1k | +158 | TypeScript | 2026-11-25 | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
-| 8 | [zed-industries/zed](https://github.com/zed-industries/zed) | 95.7k | +430 | Rust | 2026-11-25 | Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
-| 9 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 94.3k | +551 | TypeScript | 2026-11-25 | Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
-| 10 | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | 77.8k | +13339 | TypeScript | 2026-11-25 | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
+| 7 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 109.1k | +159 | TypeScript | 2026-11-25 | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
+| 8 | [zed-industries/zed](https://github.com/zed-industries/zed) | 95.7k | +431 | Rust | 2026-11-25 | Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
+| 9 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 94.3k | +553 | TypeScript | 2026-11-25 | Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
+| 10 | [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | 77.8k | +13363 | TypeScript | 2026-11-25 | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
 | 11 | [cline/cline](https://github.com/cline/cline) | 71.9k | +137 | TypeScript | 2026-11-23 | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
 | 12 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 69.0k | +56 | Rust | 2026-11-24 | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
 | 13 | [warpdotdev/warp](https://github.com/warpdotdev/warp) | 66.1k | +91 | Rust | 2026-11-25 | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
 | 14 | [multica-ai/multica](https://github.com/multica-ai/multica) | 57.8k | — | Go | 2026-11-25 | Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop |
 | 15 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 57.0k | +218 | Rust | 2026-11-25 | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
-| 16 | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 56.1k | +2164 | Go | 2026-11-24 | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
+| 16 | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 56.1k | +2169 | Go | 2026-11-24 | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
 | 17 | [AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer) | 54.9k | -12 | Python | 2025-05-14 | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
 | 18 | [herdrdev/herdr](https://github.com/herdrdev/herdr) | 52.7k | — | Rust | 2026-11-19 | Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked |
-| 19 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 50.2k | +85 | Python | 2026-05-22 | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
+| 19 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 50.2k | +84 | Python | 2026-05-22 | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
 | 20 | [codewhale-hq/Codewhale](https://github.com/codewhale-hq/Codewhale) | 41.2k | +15 | Rust | 2026-11-25 | Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents |
 | 21 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | 39.8k | +477 | TypeScript | 2026-11-25 | Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in |
-| 22 | [Twigpine/openclaude](https://github.com/Twigpine/openclaude) | 34.5k | +111 | TypeScript | 2026-11-24 | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
+| 22 | [Twigpine/openclaude](https://github.com/Twigpine/openclaude) | 34.5k | +112 | TypeScript | 2026-11-24 | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
 | 23 | [TabbyML/tabby](https://github.com/TabbyML/tabby) | 33.9k | -5 | Rust | 2026-06-30 | Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot |
 | 24 | [Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot) | 33.6k | -6 | Python | 2026-06-18 | AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream |
 | 25 | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | 30.9k | +186 | TypeScript | 2026-11-25 | Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models |
 | 26 | [charmbracelet/crush](https://github.com/charmbracelet/crush) | 29.2k | +77 | Go | 2026-11-25 | Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context |
 | 27 | [manaflow-ai/cmux](https://github.com/manaflow-ai/cmux) | 28.9k | — | Swift | 2026-11-25 | Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents |
-| 28 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | 28.1k | +69 | TypeScript | 2026-11-24 | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
-| 29 | [onlook-dev/onlook](https://github.com/onlook-dev/onlook) | 27.9k | +643 | TypeScript | 2026-11-25 | Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code |
+| 28 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | 28.1k | +70 | TypeScript | 2026-11-24 | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
+| 29 | [onlook-dev/onlook](https://github.com/onlook-dev/onlook) | 27.9k | +644 | TypeScript | 2026-11-25 | Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code |
 | 30 | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 27.8k | +46 | Rust | 2026-09-29 | SpaceXAI's Grok Build terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
 | 31 | [getpaseo/paseo](https://github.com/getpaseo/paseo) | 25.1k | +798 | TypeScript | 2026-11-25 | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
 | 32 | [slopus/happy](https://github.com/slopus/happy) | 24.8k | — | Swift | 2026-11-25 | Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync |

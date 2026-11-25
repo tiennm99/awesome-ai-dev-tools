@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-25T03:06:52.994095051Z",
+  "fetchedAt": "2026-11-25T03:14:34.854023514Z",
   "repos": {
     "1jehuang/jcode": {
       "nameWithOwner": "1jehuang/jcode",
@@ -13,7 +13,7 @@
     "Aider-AI/aider": {
       "nameWithOwner": "Aider-AI/aider",
       "url": "https://github.com/Aider-AI/aider",
-      "stars": 50247,
+      "stars": 50246,
       "language": "Python",
       "pushedAt": "2026-05-22T14:02:20Z",
       "description": "Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs",
@@ -49,7 +49,7 @@
     "Gaurav-Gosain/tuios": {
       "nameWithOwner": "Gaurav-Gosain/tuios",
       "url": "https://github.com/Gaurav-Gosain/tuios",
-      "stars": 6787,
+      "stars": 6790,
       "language": "Go",
       "pushedAt": "2026-11-25T02:56:29Z",
       "description": "Terminal multiplexer and tiling window manager that tracks coding agent state and can fan one prompt out to several agents",
@@ -67,7 +67,7 @@
     "JetBrains/thinkrail": {
       "nameWithOwner": "JetBrains/thinkrail",
       "url": "https://github.com/JetBrains/thinkrail",
-      "stars": 8435,
+      "stars": 8434,
       "language": "TypeScript",
       "pushedAt": "2026-11-24T22:02:06Z",
       "description": "Agentic IDE built around the pi agent, with git worktree workspaces and a spec graph that keeps project knowledge",
@@ -76,7 +76,7 @@
     "Kilo-Org/kilocode": {
       "nameWithOwner": "Kilo-Org/kilocode",
       "url": "https://github.com/Kilo-Org/kilocode",
-      "stars": 28113,
+      "stars": 28114,
       "language": "TypeScript",
       "pushedAt": "2026-11-24T22:11:40Z",
       "description": "Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models",
@@ -105,7 +105,7 @@
       "url": "https://github.com/MoonshotAI/kimi-code",
       "stars": 8290,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:05:51Z",
+      "pushedAt": "2026-11-25T03:09:35Z",
       "description": "Moonshot's terminal coding agent for Kimi models, configurable for other providers and drivable from editors over ACP",
       "archived": false
     },
@@ -121,7 +121,7 @@
     "OpenHands/OpenHands": {
       "nameWithOwner": "OpenHands/OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
-      "stars": 94259,
+      "stars": 94261,
       "language": "TypeScript",
       "pushedAt": "2026-11-25T02:49:20Z",
       "description": "Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud",
@@ -132,7 +132,7 @@
       "url": "https://github.com/OrchestratorInc/agent-orchestrator",
       "stars": 15103,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T02:22:42Z",
+      "pushedAt": "2026-11-25T03:10:13Z",
       "description": "Desktop workspace where an orchestrator splits work across coding agents in separate worktrees and follows it through CI and review",
       "archived": false
     },
@@ -177,7 +177,7 @@
       "url": "https://github.com/QwenLM/qwen-code",
       "stars": 30926,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:03:11Z",
+      "pushedAt": "2026-11-25T03:13:57Z",
       "description": "Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models",
       "archived": false
     },
@@ -238,7 +238,7 @@
     "Twigpine/openclaude": {
       "nameWithOwner": "Twigpine/openclaude",
       "url": "https://github.com/Twigpine/openclaude",
-      "stars": 34522,
+      "stars": 34523,
       "language": "TypeScript",
       "pushedAt": "2026-11-24T12:40:48Z",
       "description": "Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension",
@@ -283,7 +283,7 @@
     "alibaba/open-code-review": {
       "nameWithOwner": "alibaba/open-code-review",
       "url": "https://github.com/alibaba/open-code-review",
-      "stars": 56082,
+      "stars": 56087,
       "language": "Go",
       "pushedAt": "2026-11-24T16:19:18Z",
       "description": "AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent",
@@ -294,14 +294,14 @@
       "url": "https://github.com/anomalyco/opencode",
       "stars": 229000,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:05:19Z",
+      "pushedAt": "2026-11-25T03:13:45Z",
       "description": "Open-source coding agent with a terminal UI and desktop app that works with any model provider",
       "archived": false
     },
     "anthropics/claude-code": {
       "nameWithOwner": "anthropics/claude-code",
       "url": "https://github.com/anthropics/claude-code",
-      "stars": 156959,
+      "stars": 156961,
       "language": "TypeScript",
       "pushedAt": "2026-11-25T01:32:14Z",
       "description": "Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows",
@@ -346,7 +346,7 @@
     "coder/xum": {
       "nameWithOwner": "coder/xum",
       "url": "https://github.com/coder/xum",
-      "stars": 2082,
+      "stars": 2081,
       "language": "TypeScript",
       "pushedAt": "2026-11-24T14:57:03Z",
       "description": "Desktop coding agent multiplexer that runs parallel agent workspaces locally, in git worktrees, or over SSH",
@@ -373,7 +373,7 @@
     "deepseek-ai/deepseek-harness": {
       "nameWithOwner": "deepseek-ai/deepseek-harness",
       "url": "https://github.com/deepseek-ai/deepseek-harness",
-      "stars": 286611,
+      "stars": 286615,
       "language": "TypeScript",
       "pushedAt": "2026-11-22T11:00:05Z",
       "description": "DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI",
@@ -429,7 +429,7 @@
       "url": "https://github.com/getpaseo/paseo",
       "stars": 25096,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T02:58:28Z",
+      "pushedAt": "2026-11-25T03:12:56Z",
       "description": "Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI",
       "archived": false
     },
@@ -454,7 +454,7 @@
     "google-gemini/gemini-cli": {
       "nameWithOwner": "google-gemini/gemini-cli",
       "url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 109072,
+      "stars": 109073,
       "language": "TypeScript",
       "pushedAt": "2026-11-25T01:08:48Z",
       "description": "Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support",
@@ -465,14 +465,14 @@
       "url": "https://github.com/gptme/gptme",
       "stars": 4494,
       "language": "Python",
-      "pushedAt": "2026-11-25T03:02:59Z",
+      "pushedAt": "2026-11-25T03:13:28Z",
       "description": "Terminal agent that writes code, runs shell and Python, and browses the web, with any provider or local models",
       "archived": false
     },
     "herdrdev/herdr": {
       "nameWithOwner": "herdrdev/herdr",
       "url": "https://github.com/herdrdev/herdr",
-      "stars": 52688,
+      "stars": 52689,
       "language": "Rust",
       "pushedAt": "2026-11-19T22:15:19Z",
       "description": "Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked",
@@ -490,7 +490,7 @@
     "humanlayer/humanlayer": {
       "nameWithOwner": "humanlayer/humanlayer",
       "url": "https://github.com/humanlayer/humanlayer",
-      "stars": 12953,
+      "stars": 12954,
       "language": "TypeScript",
       "pushedAt": "2026-11-23T04:42:16Z",
       "description": "Platform that runs Claude Code, Codex, OpenCode, and Pi on your machines so a team can steer them from desktop, web, or CLI",
@@ -519,7 +519,7 @@
       "url": "https://github.com/langchain-ai/open-swe",
       "stars": 11258,
       "language": "Python",
-      "pushedAt": "2026-11-25T03:06:10Z",
+      "pushedAt": "2026-11-25T03:07:41Z",
       "description": "Robin, LangChain's deployable coding agent that turns issues into pull requests, reviews PRs, and monitors CI, built on Deep Agents",
       "archived": false
     },
@@ -537,7 +537,7 @@
       "url": "https://github.com/manaflow-ai/cmux",
       "stars": 28948,
       "language": "Swift",
-      "pushedAt": "2026-11-25T03:06:39Z",
+      "pushedAt": "2026-11-25T03:14:29Z",
       "description": "Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents",
       "archived": false
     },
@@ -562,9 +562,9 @@
     "multica-ai/multica": {
       "nameWithOwner": "multica-ai/multica",
       "url": "https://github.com/multica-ai/multica",
-      "stars": 57774,
+      "stars": 57776,
       "language": "Go",
-      "pushedAt": "2026-11-25T03:05:01Z",
+      "pushedAt": "2026-11-25T03:13:41Z",
       "description": "Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop",
       "archived": false
     },
@@ -589,16 +589,16 @@
     "onlook-dev/onlook": {
       "nameWithOwner": "onlook-dev/onlook",
       "url": "https://github.com/onlook-dev/onlook",
-      "stars": 27895,
+      "stars": 27896,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:06:00Z",
+      "pushedAt": "2026-11-25T03:12:08Z",
       "description": "Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code",
       "archived": false
     },
     "openai/codex": {
       "nameWithOwner": "openai/codex",
       "url": "https://github.com/openai/codex",
-      "stars": 136354,
+      "stars": 136356,
       "language": "Rust",
       "pushedAt": "2026-11-25T02:46:14Z",
       "description": "OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options",
@@ -625,9 +625,9 @@
     "pingdotgg/t3code": {
       "nameWithOwner": "pingdotgg/t3code",
       "url": "https://github.com/pingdotgg/t3code",
-      "stars": 77765,
+      "stars": 77789,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:06:14Z",
+      "pushedAt": "2026-11-25T03:13:22Z",
       "description": "Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile",
       "archived": false
     },
@@ -645,7 +645,7 @@
       "url": "https://github.com/slopus/happy",
       "stars": 24800,
       "language": "Swift",
-      "pushedAt": "2026-11-25T02:51:10Z",
+      "pushedAt": "2026-11-25T03:13:14Z",
       "description": "Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync",
       "archived": false
     },
@@ -661,9 +661,9 @@
     "stablyai/orca": {
       "nameWithOwner": "stablyai/orca",
       "url": "https://github.com/stablyai/orca",
-      "stars": 136351,
+      "stars": 136363,
       "language": "TypeScript",
-      "pushedAt": "2026-11-25T03:06:35Z",
+      "pushedAt": "2026-11-25T03:14:29Z",
       "description": "Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree",
       "archived": false
     },
@@ -717,7 +717,7 @@
       "url": "https://github.com/vercel-labs/fx",
       "stars": 3998,
       "language": "Zig",
-      "pushedAt": "2026-11-25T03:01:58Z",
+      "pushedAt": "2026-11-25T03:09:49Z",
       "description": "Minimal native coding agent CLI, scriptable with fx ask and drivable from editors over ACP",
       "archived": false
     },
@@ -769,7 +769,7 @@
     "zed-industries/zed": {
       "nameWithOwner": "zed-industries/zed",
       "url": "https://github.com/zed-industries/zed",
-      "stars": 95676,
+      "stars": 95677,
       "language": "Rust",
       "pushedAt": "2026-11-25T02:52:20Z",
       "description": "Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP",
