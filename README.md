@@ -10,7 +10,7 @@
 
 **[📊 Interactive dashboard](https://awesome-ai-dev-tools.pages.dev/)** · [GitHub Pages mirror](https://tiennm99.github.io/awesome-ai-dev-tools/) · [➕ Suggest a tool](#-contributing)
 
-<sub>Last updated 2026-11-27 07:19 UTC</sub>
+<sub>Last updated 2026-11-28 06:51 UTC</sub>
 
 </div>
 
@@ -20,114 +20,114 @@ Every tool here is open source, actively maintained, and has at least 1,000 GitH
 
 | Tool | Stars gained in 7 days |
 |------|-----------------------:|
-| [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | +13,975 |
-| [stablyai/orca](https://github.com/stablyai/orca) | +10,454 |
-| [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | +3,174 |
-| [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | +2,122 |
-| [anomalyco/opencode](https://github.com/anomalyco/opencode) | +1,304 |
+| [pingdotgg/t3code](https://github.com/pingdotgg/t3code) | +14,179 |
+| [stablyai/orca](https://github.com/stablyai/orca) | +11,640 |
+| [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | +3,365 |
+| [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | +2,107 |
+| [getpaseo/paseo](https://github.com/getpaseo/paseo) | +1,472 |
 
 ## 📋 The ranking
 
 | # | Tool | ⭐ Stars | Δ 7d | Runs in | What it is |
 |:-:|------|------:|-----:|---------|------------|
-| 🥇 | **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)** | 287.8k | +3,174 | `terminal` `web` | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
-| 🥈 | **[anomalyco/opencode](https://github.com/anomalyco/opencode)** | 229.5k | +1,304 | `terminal` `desktop` | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
-| 🥉 | **[anthropics/claude-code](https://github.com/anthropics/claude-code)** | 157.3k | +840 | `terminal` `editor-plugin` `desktop` | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
-| 4 | **[stablyai/orca](https://github.com/stablyai/orca)** | 141.1k | +10,454 | `desktop` `terminal` | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
-| 5 | **[openai/codex](https://github.com/openai/codex)** | 136.6k | +643 | `terminal` `editor-plugin` `desktop` | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
-| 6 | **[earendil-works/pi](https://github.com/earendil-works/pi)** | 124.2k | +1,112 | `terminal` | Minimal, extensible terminal coding agent harness you customize with extensions, skills, and packages, with an SDK and RPC mode |
-| 7 | **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** | 109.2k | +267 | `terminal` | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
-| 8 | **[zed-industries/zed](https://github.com/zed-industries/zed)** | 95.8k | +406 | `ide` | Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
-| 9 | **[OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)** | 94.4k | +526 | `web` `self-hosted` | Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
-| 10 | **[pingdotgg/t3code](https://github.com/pingdotgg/t3code)** | 81.3k | +13,975 | `desktop` `web` `self-hosted` | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
-| 11 | **[cline/cline](https://github.com/cline/cline)** | 71.9k | +146 | `editor-plugin` `terminal` `desktop` | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
-| 12 | **[openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter)** | 69.0k | +53 | `terminal` | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
-| 13 | **[warpdotdev/warp](https://github.com/warpdotdev/warp)** | 66.2k | +93 | `terminal` `desktop` | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
-| 14 | **[multica-ai/multica](https://github.com/multica-ai/multica)** | 58.1k | — | `web` `desktop` `self-hosted` | Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop |
-| 15 | **[aaif-goose/goose](https://github.com/aaif-goose/goose)** | 57.1k | +231 | `terminal` `desktop` | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
-| 16 | **[alibaba/open-code-review](https://github.com/alibaba/open-code-review)** | 56.7k | +2,122 | `terminal` | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
-| 17 | **[AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer)** | 54.9k | -12 | `terminal` | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
-| 18 | **[herdrdev/herdr](https://github.com/herdrdev/herdr)** | 53.1k | +1,099 | `terminal` | Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked |
-| 19 | **[Aider-AI/aider](https://github.com/Aider-AI/aider)** | 50.3k | +83 | `terminal` | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
-| 20 | **[codewhale-hq/Codewhale](https://github.com/codewhale-hq/Codewhale)** | 41.2k | +32 | `terminal` `web` `editor-plugin` | Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents |
-| 21 | **[can1357/oh-my-pi](https://github.com/can1357/oh-my-pi)** | 40.0k | +462 | `terminal` | Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in |
+| 🥇 | **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)** | 288.2k | +3,365 | `terminal` `web` | DeepSeek's official plugin-based agent harness (dsh), run through npx with a web UI |
+| 🥈 | **[anomalyco/opencode](https://github.com/anomalyco/opencode)** | 229.7k | +1,386 | `terminal` `desktop` | Open-source coding agent with a terminal UI and desktop app that works with any model provider |
+| 🥉 | **[anthropics/claude-code](https://github.com/anthropics/claude-code)** | 157.3k | +856 | `terminal` `editor-plugin` `desktop` | Anthropic's terminal coding agent that reads your codebase, edits files, runs commands, and handles git workflows |
+| 4 | **[stablyai/orca](https://github.com/stablyai/orca)** | 142.9k | +11,640 | `desktop` `terminal` | Desktop agent development environment that runs Claude Code, Codex, or any CLI agent in parallel, each in its own git worktree |
+| 5 | **[openai/codex](https://github.com/openai/codex)** | 136.7k | +647 | `terminal` `editor-plugin` `desktop` | OpenAI's coding agent that runs locally in your terminal, with IDE extension and desktop app options |
+| 6 | **[earendil-works/pi](https://github.com/earendil-works/pi)** | 124.4k | +1,289 | `terminal` | Minimal, extensible terminal coding agent harness you customize with extensions, skills, and packages, with an SDK and RPC mode |
+| 7 | **[google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)** | 109.3k | +302 | `terminal` | Google's open-source terminal agent for Gemini models, for enterprise Gemini Code Assist users, with MCP support |
+| 8 | **[zed-industries/zed](https://github.com/zed-industries/zed)** | 95.9k | +432 | `ide` | Multiplayer code editor with a built-in agent panel that also hosts external agents over ACP |
+| 9 | **[OpenHands/OpenHands](https://github.com/OpenHands/OpenHands)** | 94.5k | +545 | `web` `self-hosted` | Agent Canvas, a self-hosted control center that runs OpenHands or other ACP agents locally, in Docker, or in the cloud |
+| 10 | **[pingdotgg/t3code](https://github.com/pingdotgg/t3code)** | 82.4k | +14,179 | `desktop` `web` `self-hosted` | Control surface for coding agents already on your machine, such as Claude Code, Codex, and OpenCode, from desktop, web, or mobile |
+| 11 | **[cline/cline](https://github.com/cline/cline)** | 72.0k | +161 | `editor-plugin` `terminal` `desktop` | Open-source coding agent for your IDE, terminal, or desktop, with a headless CLI mode for CI |
+| 12 | **[openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter)** | 69.0k | +70 | `terminal` | Terminal coding agent written in Rust, tuned for low-cost open-weight models |
+| 13 | **[warpdotdev/warp](https://github.com/warpdotdev/warp)** | 66.2k | +95 | `terminal` `desktop` | Agentic development environment built on a terminal, with a built-in coding agent that also runs third-party CLI agents |
+| 14 | **[multica-ai/multica](https://github.com/multica-ai/multica)** | 58.2k | — | `web` `desktop` `self-hosted` | Self-hostable team workspace that assigns issues to Claude Code, Codex, OpenCode, and other coding agent CLIs across web and desktop |
+| 15 | **[aaif-goose/goose](https://github.com/aaif-goose/goose)** | 57.1k | +250 | `terminal` `desktop` | Extensible open-source agent in Rust with a desktop app, CLI, and API that works with any LLM and MCP extensions |
+| 16 | **[alibaba/open-code-review](https://github.com/alibaba/open-code-review)** | 57.0k | +2,107 | `terminal` | AI code review CLI that reads Git diffs and posts line-level comments, pairing deterministic checks with an LLM agent |
+| 17 | **[AntonOsika/gpt-engineer](https://github.com/AntonOsika/gpt-engineer)** | 54.9k | -11 | `terminal` | CLI that generates a codebase from a natural-language spec and iterates on feedback; archived upstream |
+| 18 | **[herdrdev/herdr](https://github.com/herdrdev/herdr)** | 53.3k | +1,226 | `terminal` | Terminal workspace that keeps Claude Code, Codex, and other agents running in persistent panes and flags the ones that are blocked |
+| 19 | **[Aider-AI/aider](https://github.com/Aider-AI/aider)** | 50.3k | +85 | `terminal` | Terminal pair-programming tool that maps your codebase and edits it with cloud or local LLMs |
+| 20 | **[codewhale-hq/Codewhale](https://github.com/codewhale-hq/Codewhale)** | 41.2k | +28 | `terminal` `web` `editor-plugin` | Open-source terminal coding agent in Rust that works with hosted or local models and delegates work to sub-agents |
+| 21 | **[can1357/oh-my-pi](https://github.com/can1357/oh-my-pi)** | 40.0k | +495 | `terminal` | Terminal coding agent forked from Pi, with LSP and debugger (DAP) integration built in |
 | 22 | **[musistudio/claude-code-router](https://github.com/musistudio/claude-code-router)** | 38.4k | — | `terminal` `desktop` | Local model gateway that routes Claude Code, Codex, OpenCode and other agents to the providers and models you choose |
-| 23 | **[Twigpine/openclaude](https://github.com/Twigpine/openclaude)** | 34.6k | +112 | `terminal` `editor-plugin` | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
-| 24 | **[TabbyML/tabby](https://github.com/TabbyML/tabby)** | 34.0k | +19 | `self-hosted` `editor-plugin` | Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot |
-| 25 | **[Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot)** | 33.6k | -3 | `terminal` `editor-plugin` | AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream |
-| 26 | **[QwenLM/qwen-code](https://github.com/QwenLM/qwen-code)** | 31.0k | +161 | `terminal` `editor-plugin` `desktop` `web` | Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models |
-| 27 | **[charmbracelet/crush](https://github.com/charmbracelet/crush)** | 29.2k | +67 | `terminal` | Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context |
-| 28 | **[gastownhall/beads](https://github.com/gastownhall/beads)** | 29.1k | — | `terminal` | CLI issue tracker that gives coding agents a persistent dependency graph of tasks for long-horizon work |
-| 29 | **[manaflow-ai/cmux](https://github.com/manaflow-ai/cmux)** | 29.0k | +146 | `desktop` `terminal` | Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents |
+| 23 | **[Twigpine/openclaude](https://github.com/Twigpine/openclaude)** | 34.6k | +99 | `terminal` `editor-plugin` | Terminal coding-agent CLI that works with cloud and local model providers, with MCP support and a VS Code extension |
+| 24 | **[TabbyML/tabby](https://github.com/TabbyML/tabby)** | 33.9k | +16 | `self-hosted` `editor-plugin` | Self-hosted, on-premises AI coding assistant and open-source alternative to GitHub Copilot |
+| 25 | **[Pythagora-io/gpt-pilot](https://github.com/Pythagora-io/gpt-pilot)** | 33.6k | -2 | `terminal` `editor-plugin` | AI developer that builds apps step by step from a spec, the engine behind the Pythagora extension; unmaintained upstream |
+| 26 | **[QwenLM/qwen-code](https://github.com/QwenLM/qwen-code)** | 31.0k | +167 | `terminal` `editor-plugin` `desktop` `web` | Open-source terminal coding agent with IDE and desktop integrations that works with hosted or local models |
+| 27 | **[charmbracelet/crush](https://github.com/charmbracelet/crush)** | 29.2k | +68 | `terminal` | Terminal coding agent that switches LLMs mid-session and uses LSPs and MCP servers for context |
+| 28 | **[gastownhall/beads](https://github.com/gastownhall/beads)** | 29.2k | — | `terminal` | CLI issue tracker that gives coding agents a persistent dependency graph of tasks for long-horizon work |
+| 29 | **[manaflow-ai/cmux](https://github.com/manaflow-ai/cmux)** | 29.0k | +158 | `desktop` `terminal` | Ghostty-based macOS terminal with vertical tabs, agent notifications, and a scriptable in-app browser for running many coding agents |
 | 30 | **[BloopAI/vibe-kanban](https://github.com/BloopAI/vibe-kanban)** | 28.8k | — | `web` `desktop` | Kanban board that plans and runs Claude Code, Codex, Gemini CLI and other coding agents in isolated git worktrees |
-| 31 | **[Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode)** | 28.1k | +76 | `editor-plugin` `terminal` | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
-| 32 | **[onlook-dev/onlook](https://github.com/onlook-dev/onlook)** | 28.0k | +431 | `desktop` | Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code |
-| 33 | **[xai-org/grok-build](https://github.com/xai-org/grok-build)** | 27.9k | +54 | `terminal` | SpaceXAI's Grok Build terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
-| 34 | **[getpaseo/paseo](https://github.com/getpaseo/paseo)** | 25.8k | +1,268 | `desktop` `web` `terminal` `editor-plugin` `self-hosted` | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
-| 35 | **[slopus/happy](https://github.com/slopus/happy)** | 24.9k | +130 | `web` `terminal` | Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync |
+| 31 | **[Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode)** | 28.1k | +81 | `editor-plugin` `terminal` | Open-source coding agent for VS Code, JetBrains, and the CLI that works with hundreds of models |
+| 32 | **[onlook-dev/onlook](https://github.com/onlook-dev/onlook)** | 28.0k | +393 | `desktop` | Open-source desktop design canvas that runs your real app and has your own Claude Code or Codex agent edit its code |
+| 33 | **[xai-org/grok-build](https://github.com/xai-org/grok-build)** | 27.9k | +84 | `terminal` | SpaceXAI's Grok Build terminal coding agent, a full-screen Rust TUI that also runs headless or inside editors over ACP |
+| 34 | **[getpaseo/paseo](https://github.com/getpaseo/paseo)** | 26.0k | +1,472 | `desktop` `web` `terminal` `editor-plugin` `self-hosted` | Self-hosted daemon for orchestrating Claude Code, Codex, OpenCode, and other agents, driven from desktop, mobile, web, or CLI |
+| 35 | **[slopus/happy](https://github.com/slopus/happy)** | 24.9k | +138 | `web` `terminal` | Mobile, web, and CLI client that runs Claude Code, Codex, and ACP agents on your own machine with end-to-end encrypted sync |
 | 36 | **[coleam00/Archon](https://github.com/coleam00/Archon)** | 24.0k | — | `terminal` `web` `self-hosted` | Self-hosted engine that runs Claude Code, Codex and Pi through YAML workflows with fixed steps, approval gates and run logs |
-| 37 | **[PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent)** | 22.9k | +77 | `terminal` | Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness |
-| 38 | **[wavetermdev/waveterm](https://github.com/wavetermdev/waveterm)** | 22.8k | +26 | `terminal` `desktop` | Cross-platform terminal with a built-in AI assistant that reads terminal output, plus durable SSH sessions and a graphical editor |
+| 37 | **[PrimeIntellect-ai/prime-agent](https://github.com/PrimeIntellect-ai/prime-agent)** | 22.9k | +83 | `terminal` | Terminal coding and research agent driven from a persistent Python REPL, with subagents and a self-refining harness |
+| 38 | **[wavetermdev/waveterm](https://github.com/wavetermdev/waveterm)** | 22.8k | +24 | `terminal` `desktop` | Cross-platform terminal with a built-in AI assistant that reads terminal output, plus durable SSH sessions and a graphical editor |
 | 39 | **[dyad-sh/dyad](https://github.com/dyad-sh/dyad)** | 22.5k | +131 | `desktop` | Local, open-source desktop AI app builder that uses your own API keys |
-| 40 | **[winfunc/opcode](https://github.com/winfunc/opcode)** | 22.5k | +11 | `desktop` | Desktop GUI for Claude Code that manages interactive sessions, custom agents, background runs, and MCP servers |
-| 41 | **[1jehuang/jcode](https://github.com/1jehuang/jcode)** | 22.1k | +147 | `terminal` | Terminal coding agent harness with a TUI and SDK, built for low memory use |
-| 42 | **[SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent)** | 20.9k | +40 | `terminal` | Research agent that lets a language model autonomously fix GitHub issues; superseded upstream by mini-swe-agent |
-| 43 | **[stackblitz-labs/bolt.diy](https://github.com/stackblitz-labs/bolt.diy)** | 20.1k | — | `web` `desktop` | Open-source Bolt that prompts, runs, edits and deploys full-stack web apps in the browser with any LLM |
-| 44 | **[gastownhall/gastown](https://github.com/gastownhall/gastown)** | 18.9k | +62 | `terminal` | Workspace manager that coordinates Claude Code, Copilot, Codex, and other agents with git-backed work tracking and handoffs |
-| 45 | **[avante-corp/avante.nvim](https://github.com/avante-corp/avante.nvim)** | 18.2k | +4 | `editor-plugin` | Neovim plugin that brings Cursor-style AI editing to Neovim, applying suggestions directly to source files |
-| 46 | **[HKUDS/DeepCode](https://github.com/HKUDS/DeepCode)** | 16.9k | +18 | `terminal` `desktop` `web` | Multi-agent coding tool with terminal, desktop, and web clients sharing one local service |
-| 47 | **[ParadevAI/Paradev](https://github.com/ParadevAI/Paradev)** | 16.8k | +353 | `desktop` | Desktop app that runs Claude Code, Codex, and other CLI agents in parallel, each in its own git worktree with review and previews |
-| 48 | **[The-PR-Agent/pr-agent](https://github.com/The-PR-Agent/pr-agent)** | 16.7k | +224 | `terminal` `self-hosted` | Pull request review agent for GitHub, GitLab, Bitbucket, and more, run as a CLI, GitHub Action, or webhook |
-| 49 | **[OrchestratorInc/agent-orchestrator](https://github.com/OrchestratorInc/agent-orchestrator)** | 15.2k | +238 | `desktop` | Desktop workspace where an orchestrator splits work across coding agents in separate worktrees and follows it through CI and review |
-| 50 | **[siteboon/claudecodeui](https://github.com/siteboon/claudecodeui)** | 14.8k | +91 | `web` `desktop` `self-hosted` | Self-hostable web, desktop, and mobile UI for Claude Code, Cursor CLI, and Codex sessions, with files, git, and a shell |
-| 51 | **[CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff)** | 14.3k | +82 | `terminal` `desktop` `web` | Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos |
-| 52 | **[XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code)** | 13.8k | +2 | `terminal` | Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider |
-| 53 | **[openchamber/openchamber](https://github.com/openchamber/openchamber)** | 13.3k | +224 | `desktop` `web` `editor-plugin` | Workspace for running and reviewing OpenCode agent sessions from desktop, web, VS Code, and mobile |
-| 54 | **[humanlayer/humanlayer](https://github.com/humanlayer/humanlayer)** | 13.0k | +48 | `desktop` `web` `terminal` | Platform that runs Claude Code, Codex, OpenCode, and Pi on your machines so a team can steer them from desktop, web, or CLI |
+| 40 | **[winfunc/opcode](https://github.com/winfunc/opcode)** | 22.5k | +12 | `desktop` | Desktop GUI for Claude Code that manages interactive sessions, custom agents, background runs, and MCP servers |
+| 41 | **[1jehuang/jcode](https://github.com/1jehuang/jcode)** | 22.1k | +160 | `terminal` | Terminal coding agent harness with a TUI and SDK, built for low memory use |
+| 42 | **[SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent)** | 20.9k | +45 | `terminal` | Research agent that lets a language model autonomously fix GitHub issues; superseded upstream by mini-swe-agent |
+| 43 | **[stackblitz-labs/bolt.diy](https://github.com/stackblitz-labs/bolt.diy)** | 20.2k | — | `web` `desktop` | Open-source Bolt that prompts, runs, edits and deploys full-stack web apps in the browser with any LLM |
+| 44 | **[gastownhall/gastown](https://github.com/gastownhall/gastown)** | 18.9k | +74 | `terminal` | Workspace manager that coordinates Claude Code, Copilot, Codex, and other agents with git-backed work tracking and handoffs |
+| 45 | **[avante-corp/avante.nvim](https://github.com/avante-corp/avante.nvim)** | 18.2k | +6 | `editor-plugin` | Neovim plugin that brings Cursor-style AI editing to Neovim, applying suggestions directly to source files |
+| 46 | **[HKUDS/DeepCode](https://github.com/HKUDS/DeepCode)** | 16.9k | +19 | `terminal` `desktop` `web` | Multi-agent coding tool with terminal, desktop, and web clients sharing one local service |
+| 47 | **[ParadevAI/Paradev](https://github.com/ParadevAI/Paradev)** | 16.9k | +434 | `desktop` | Desktop app that runs Claude Code, Codex, and other CLI agents in parallel, each in its own git worktree with review and previews |
+| 48 | **[The-PR-Agent/pr-agent](https://github.com/The-PR-Agent/pr-agent)** | 16.7k | +229 | `terminal` `self-hosted` | Pull request review agent for GitHub, GitLab, Bitbucket, and more, run as a CLI, GitHub Action, or webhook |
+| 49 | **[OrchestratorInc/agent-orchestrator](https://github.com/OrchestratorInc/agent-orchestrator)** | 15.2k | +253 | `desktop` | Desktop workspace where an orchestrator splits work across coding agents in separate worktrees and follows it through CI and review |
+| 50 | **[siteboon/claudecodeui](https://github.com/siteboon/claudecodeui)** | 14.8k | +103 | `web` `desktop` `self-hosted` | Self-hostable web, desktop, and mobile UI for Claude Code, Cursor CLI, and Codex sessions, with files, git, and a shell |
+| 51 | **[CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff)** | 14.4k | +95 | `terminal` `desktop` `web` | Free, ad-supported coding agent available as a CLI, desktop app, web app, and cloud agent for GitHub repos |
+| 52 | **[XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code)** | 13.8k | 0 | `terminal` | Terminal coding assistant from Xiaomi with persistent project memory, subagents, and any OpenAI-compatible provider |
+| 53 | **[openchamber/openchamber](https://github.com/openchamber/openchamber)** | 13.3k | +233 | `desktop` `web` `editor-plugin` | Workspace for running and reviewing OpenCode agent sessions from desktop, web, VS Code, and mobile |
+| 54 | **[humanlayer/humanlayer](https://github.com/humanlayer/humanlayer)** | 13.0k | +51 | `desktop` `web` `terminal` | Platform that runs Claude Code, Codex, OpenCode, and Pi on your machines so a team can steer them from desktop, web, or CLI |
 | 55 | **[github/copilot.vim](https://github.com/github/copilot.vim)** | 11.7k | — | `editor-plugin` | Official Vim and Neovim plugin for GitHub Copilot inline code suggestions |
-| 56 | **[github/copilot-cli](https://github.com/github/copilot-cli)** | 11.5k | +33 | `terminal` | GitHub Copilot's terminal coding agent, with built-in GitHub integration, MCP support, and per-action approval |
+| 56 | **[github/copilot-cli](https://github.com/github/copilot-cli)** | 11.5k | +28 | `terminal` | GitHub Copilot's terminal coding agent, with built-in GitHub integration, MCP support, and per-action approval |
 | 57 | **[langchain-ai/open-swe](https://github.com/langchain-ai/open-swe)** | 11.3k | +25 | `self-hosted` `web` | Robin, LangChain's deployable coding agent that turns issues into pull requests, reviews PRs, and monitors CI, built on Deep Agents |
-| 58 | **[Kuberwastaken/claurst](https://github.com/Kuberwastaken/claurst)** | 10.3k | -4 | `terminal` | Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta |
-| 59 | **[SWE-agent/mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent)** | 10.1k | +242 | `terminal` | Minimal bash-only software engineering agent from the SWE-bench team that runs with any model, locally or in sandboxes |
-| 60 | **[zai-org/ZCode](https://github.com/zai-org/ZCode)** | 8.9k | +136 | `desktop` `web` `terminal` | Z.ai's AI coding workspace with desktop, browser, and terminal interfaces on one agent runtime |
-| 61 | **[smtg-ai/claude-squad](https://github.com/smtg-ai/claude-squad)** | 8.9k | +34 | `terminal` | Terminal app that manages several Claude Code, Codex, Gemini, or Aider sessions, each in its own git worktree |
-| 62 | **[JetBrains/thinkrail](https://github.com/JetBrains/thinkrail)** | 8.5k | +96 | `ide` `desktop` `web` | Agentic IDE built around the pi agent, with git worktree workspaces and a spec graph that keeps project knowledge |
-| 63 | **[agegr/pi-web](https://github.com/agegr/pi-web)** | 8.4k | +99 | `web` | Local browser UI for the pi coding agent that browses, resumes, and branches sessions on the same config and files |
-| 64 | **[MoonshotAI/kimi-code](https://github.com/MoonshotAI/kimi-code)** | 8.3k | +39 | `terminal` | Moonshot's terminal coding agent for Kimi models, configurable for other providers and drivable from editors over ACP |
-| 65 | **[vastsa/PI-Desktop](https://github.com/vastsa/PI-Desktop)** | 8.3k | +152 | `desktop` | Plugin-based desktop coding agent built on the pi harness, with any provider, local models, and MCP servers |
+| 58 | **[Kuberwastaken/claurst](https://github.com/Kuberwastaken/claurst)** | 10.3k | -3 | `terminal` | Multi-provider terminal coding agent in Rust, begun as a clean-room reimplementation of Claude Code; beta |
+| 59 | **[SWE-agent/mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent)** | 10.1k | +240 | `terminal` | Minimal bash-only software engineering agent from the SWE-bench team that runs with any model, locally or in sandboxes |
+| 60 | **[zai-org/ZCode](https://github.com/zai-org/ZCode)** | 9.0k | +140 | `desktop` `web` `terminal` | Z.ai's AI coding workspace with desktop, browser, and terminal interfaces on one agent runtime |
+| 61 | **[smtg-ai/claude-squad](https://github.com/smtg-ai/claude-squad)** | 8.9k | +37 | `terminal` | Terminal app that manages several Claude Code, Codex, Gemini, or Aider sessions, each in its own git worktree |
+| 62 | **[JetBrains/thinkrail](https://github.com/JetBrains/thinkrail)** | 8.5k | +100 | `ide` `desktop` `web` | Agentic IDE built around the pi agent, with git worktree workspaces and a spec graph that keeps project knowledge |
+| 63 | **[agegr/pi-web](https://github.com/agegr/pi-web)** | 8.5k | +117 | `web` | Local browser UI for the pi coding agent that browses, resumes, and branches sessions on the same config and files |
+| 64 | **[MoonshotAI/kimi-code](https://github.com/MoonshotAI/kimi-code)** | 8.3k | +45 | `terminal` | Moonshot's terminal coding agent for Kimi models, configurable for other providers and drivable from editors over ACP |
+| 65 | **[vastsa/PI-Desktop](https://github.com/vastsa/PI-Desktop)** | 8.3k | +190 | `desktop` | Plugin-based desktop coding agent built on the pi harness, with any provider, local models, and MCP servers |
 | 66 | **[intitni/CopilotForXcode](https://github.com/intitni/CopilotForXcode)** | 8.2k | 0 | `editor-plugin` | Xcode source editor extension that adds GitHub Copilot, Codeium, and ChatGPT suggestions, chat, and code modification |
-| 67 | **[zhukunpenglinyutong/jetbrains-cc-gui](https://github.com/zhukunpenglinyutong/jetbrains-cc-gui)** | 7.8k | +61 | `editor-plugin` | IntelliJ plugin that gives Claude Code, Codex, and other coding CLIs a chat panel inside JetBrains IDEs |
-| 68 | **[tailcallhq/forgecode](https://github.com/tailcallhq/forgecode)** | 7.6k | +6 | `terminal` | Terminal coding agent with an interactive TUI, a one-shot prompt mode, and a zsh plugin, working with many LLM providers |
-| 69 | **[olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)** | 7.0k | +18 | `editor-plugin` | Neovim plugin for chatting with LLMs and driving CLI agents over ACP, with MCP support and many providers |
-| 70 | **[stagewise-io/stagewise](https://github.com/stagewise-io/stagewise)** | 6.8k | +5 | `ide` | Agentic IDE with a built-in browser whose coding agent can read the page's console and debugger |
-| 71 | **[Gaurav-Gosain/tuios](https://github.com/Gaurav-Gosain/tuios)** | 6.8k | +244 | `terminal` | Terminal multiplexer and tiling window manager that tracks coding agent state and can fan one prompt out to several agents |
+| 67 | **[zhukunpenglinyutong/jetbrains-cc-gui](https://github.com/zhukunpenglinyutong/jetbrains-cc-gui)** | 7.8k | +71 | `editor-plugin` | IntelliJ plugin that gives Claude Code, Codex, and other coding CLIs a chat panel inside JetBrains IDEs |
+| 68 | **[tailcallhq/forgecode](https://github.com/tailcallhq/forgecode)** | 7.6k | +5 | `terminal` | Terminal coding agent with an interactive TUI, a one-shot prompt mode, and a zsh plugin, working with many LLM providers |
+| 69 | **[olimorris/codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)** | 7.0k | +14 | `editor-plugin` | Neovim plugin for chatting with LLMs and driving CLI agents over ACP, with MCP support and many providers |
+| 70 | **[Gaurav-Gosain/tuios](https://github.com/Gaurav-Gosain/tuios)** | 6.8k | +248 | `terminal` | Terminal multiplexer and tiling window manager that tracks coding agent state and can fan one prompt out to several agents |
+| 71 | **[stagewise-io/stagewise](https://github.com/stagewise-io/stagewise)** | 6.8k | +3 | `ide` | Agentic IDE with a built-in browser whose coding agent can read the page's console and debugger |
 | 72 | **[generalaction/emdash](https://github.com/generalaction/emdash)** | 6.3k | — | `desktop` | Desktop app that runs Claude Code, Codex, OpenCode, and other coding agents in parallel in separate git worktrees, locally or over SSH |
-| 73 | **[get-bb/bb](https://github.com/get-bb/bb)** | 6.1k | +243 | `desktop` `web` `terminal` | Agentic IDE that drives Claude Code, Codex, Pi, and OpenCode from a desktop app, web app, CLI, or HTTP API |
-| 74 | **[PawanOsman/OpenCursor](https://github.com/PawanOsman/OpenCursor)** | 6.0k | +3 | `editor-plugin` | VS Code coding agent that works with your API keys, existing subscriptions, or local Ollama and llama.cpp models |
-| 75 | **[Tencent/LoopForge](https://github.com/Tencent/LoopForge)** | 6.0k | +816 | `self-hosted` | Self-hosted team workspace that runs Claude Code, Codex, CodeBuddy, and other agent CLIs in Docker sandboxes via chat or SOPs |
+| 73 | **[get-bb/bb](https://github.com/get-bb/bb)** | 6.1k | +257 | `desktop` `web` `terminal` | Agentic IDE that drives Claude Code, Codex, Pi, and OpenCode from a desktop app, web app, CLI, or HTTP API |
+| 74 | **[Tencent/LoopForge](https://github.com/Tencent/LoopForge)** | 6.1k | +771 | `self-hosted` | Self-hosted team workspace that runs Claude Code, Codex, CodeBuddy, and other agent CLIs in Docker sandboxes via chat or SOPs |
+| 75 | **[PawanOsman/OpenCursor](https://github.com/PawanOsman/OpenCursor)** | 6.0k | +4 | `editor-plugin` | VS Code coding agent that works with your API keys, existing subscriptions, or local Ollama and llama.cpp models |
 | 76 | **[github/gh-aw](https://github.com/github/gh-aw)** | 5.7k | — | `terminal` | GitHub CLI extension that runs coding agents in GitHub Actions from Markdown workflows, sandboxed with read-only defaults |
-| 77 | **[mistralai/mistral-vibe](https://github.com/mistralai/mistral-vibe)** | 5.5k | +66 | `terminal` | Mistral's terminal coding agent that asks before risky actions, with a programmatic mode and ACP editor support |
-| 78 | **[tiann/hapi](https://github.com/tiann/hapi)** | 5.5k | +25 | `web` `terminal` `self-hosted` | Local-first remote control for Claude Code, Codex, OpenCode, and other agents from mobile apps, web, or Telegram |
-| 79 | **[agent-of-empires/agent-of-empires](https://github.com/agent-of-empires/agent-of-empires)** | 5.0k | +376 | `terminal` `web` | Session manager for coding agents on Linux and macOS, with a TUI, a web dashboard, worktrees, and optional containers |
-| 80 | **[gptme/gptme](https://github.com/gptme/gptme)** | 4.5k | +7 | `terminal` `web` `desktop` | Terminal agent that writes code, runs shell and Python, and browses the web, with any provider or local models |
+| 77 | **[mistralai/mistral-vibe](https://github.com/mistralai/mistral-vibe)** | 5.5k | +75 | `terminal` | Mistral's terminal coding agent that asks before risky actions, with a programmatic mode and ACP editor support |
+| 78 | **[tiann/hapi](https://github.com/tiann/hapi)** | 5.5k | +26 | `web` `terminal` `self-hosted` | Local-first remote control for Claude Code, Codex, OpenCode, and other agents from mobile apps, web, or Telegram |
+| 79 | **[agent-of-empires/agent-of-empires](https://github.com/agent-of-empires/agent-of-empires)** | 5.0k | +445 | `terminal` `web` | Session manager for coding agents on Linux and macOS, with a TUI, a web dashboard, worktrees, and optional containers |
+| 80 | **[gptme/gptme](https://github.com/gptme/gptme)** | 4.5k | +10 | `terminal` `web` `desktop` | Terminal agent that writes code, runs shell and Python, and browses the web, with any provider or local models |
 | 81 | **[zgsm-ai/costrict](https://github.com/zgsm-ai/costrict)** | 4.5k | 0 | `editor-plugin` | VS Code and JetBrains coding agent for enterprises, with a strict spec-first mode and private deployment |
 | 82 | **[dagger/container-use](https://github.com/dagger/container-use)** | 4.1k | — | `terminal` | MCP server and CLI that gives each coding agent its own container and git branch so several can work in parallel |
 | 83 | **[zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)** | 4.1k | — | `editor-plugin` | Lua rewrite of copilot.vim for Neovim, with a panel, inline suggestions and an API for other plugins |
-| 84 | **[vercel-labs/fx](https://github.com/vercel-labs/fx)** | 4.0k | +107 | `terminal` | Minimal native coding agent CLI, scriptable with fx ask and drivable from editors over ACP |
+| 84 | **[vercel-labs/fx](https://github.com/vercel-labs/fx)** | 4.1k | +115 | `terminal` | Minimal native coding agent CLI, scriptable with fx ask and drivable from editors over ACP |
 | 85 | **[twinnydotdev/twinny](https://github.com/twinnydotdev/twinny)** | 3.7k | +6 | `editor-plugin` | VS Code assistant for completion, chat, inline edits, and code review against local or self-hosted model servers |
 | 86 | **[CopilotC-Nvim/CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim)** | 3.6k | 0 | `editor-plugin` | Neovim plugin for GitHub Copilot Chat with tool calling and custom providers such as Ollama |
-| 87 | **[RunMaestro/Maestro](https://github.com/RunMaestro/Maestro)** | 3.6k | +16 | `desktop` | Desktop app for orchestrating Claude Code, Codex, OpenCode, and other agents across projects, with Auto Run and a headless CLI |
+| 87 | **[RunMaestro/Maestro](https://github.com/RunMaestro/Maestro)** | 3.6k | +19 | `desktop` | Desktop app for orchestrating Claude Code, Codex, OpenCode, and other agents across projects, with Auto Run and a headless CLI |
 | 88 | **[coder/claudecode.nvim](https://github.com/coder/claudecode.nvim)** | 3.2k | — | `editor-plugin` | Neovim extension that connects Claude Code to the editor over the same protocol as the official IDE extensions |
 | 89 | **[microsoft/amplifier](https://github.com/microsoft/amplifier)** | 3.1k | — | `terminal` | Modular command-line AI development assistant from Microsoft, published as an early research demonstrator |
-| 90 | **[huggingface/tau](https://github.com/huggingface/tau)** | 3.1k | +18 | `terminal` | Small, readable Python terminal coding agent ported from Pi, with a TUI and a print mode |
+| 90 | **[huggingface/tau](https://github.com/huggingface/tau)** | 3.1k | +19 | `terminal` | Small, readable Python terminal coding agent ported from Pi, with a TUI and a print mode |
 | 91 | **[Nano-Collective/nanocoder](https://github.com/Nano-Collective/nanocoder)** | 2.6k | +6 | `terminal` | Community-built terminal coding agent that runs on local Ollama models or any OpenAI-compatible API |
-| 92 | **[MiniMax-AI/minimax-code](https://github.com/MiniMax-AI/minimax-code)** | 2.3k | +25 | `terminal` | MiniMax's terminal coding agent with a headless exec mode, ACP support, and custom OpenAI- or Anthropic-compatible providers |
-| 93 | **[microsoft/intelligent-terminal](https://github.com/microsoft/intelligent-terminal)** | 2.3k | +30 | `terminal` `desktop` | Windows Terminal fork that runs ACP-compatible coding agents, GitHub Copilot by default, beside your shells |
-| 94 | **[nimbalyst/nimbalyst](https://github.com/nimbalyst/nimbalyst)** | 2.1k | +27 | `desktop` | Desktop workspace with visual editors, a session kanban, and worktrees for running Codex, Claude Code, and other agents |
+| 92 | **[MiniMax-AI/minimax-code](https://github.com/MiniMax-AI/minimax-code)** | 2.3k | +27 | `terminal` | MiniMax's terminal coding agent with a headless exec mode, ACP support, and custom OpenAI- or Anthropic-compatible providers |
+| 93 | **[microsoft/intelligent-terminal](https://github.com/microsoft/intelligent-terminal)** | 2.3k | +27 | `terminal` `desktop` | Windows Terminal fork that runs ACP-compatible coding agents, GitHub Copilot by default, beside your shells |
+| 94 | **[nimbalyst/nimbalyst](https://github.com/nimbalyst/nimbalyst)** | 2.1k | +28 | `desktop` | Desktop workspace with visual editors, a session kanban, and worktrees for running Codex, Claude Code, and other agents |
 | 95 | **[coder/xum](https://github.com/coder/xum)** | 2.1k | +1 | `desktop` | Desktop coding agent multiplexer that runs parallel agent workspaces locally, in git worktrees, or over SSH |
-| 96 | **[kodustech/kodus-ai](https://github.com/kodustech/kodus-ai)** | 1.7k | +28 | `self-hosted` | Self-hostable AI code review for pull requests on GitHub, GitLab, Bitbucket, Azure DevOps, and Forgejo, with any LLM |
-| 97 | **[ggml-org/llama.vscode](https://github.com/ggml-org/llama.vscode)** | 1.6k | +6 | `editor-plugin` | VS Code extension from the llama.cpp project for local code completion, chat, and agentic coding |
-| 98 | **[magiksoft/aider-desk](https://github.com/magiksoft/aider-desk)** | 1.5k | +9 | `desktop` | Desktop app for AI-assisted development built on Aider and its own agent, with git worktrees and MCP |
+| 96 | **[kodustech/kodus-ai](https://github.com/kodustech/kodus-ai)** | 1.7k | +26 | `self-hosted` | Self-hostable AI code review for pull requests on GitHub, GitLab, Bitbucket, Azure DevOps, and Forgejo, with any LLM |
+| 97 | **[ggml-org/llama.vscode](https://github.com/ggml-org/llama.vscode)** | 1.6k | +4 | `editor-plugin` | VS Code extension from the llama.cpp project for local code completion, chat, and agentic coding |
+| 98 | **[magiksoft/aider-desk](https://github.com/magiksoft/aider-desk)** | 1.5k | +10 | `desktop` | Desktop app for AI-assisted development built on Aider and its own agent, with git worktrees and MCP |
 | 99 | **[milanglacier/minuet-ai.nvim](https://github.com/milanglacier/minuet-ai.nvim)** | 1.5k | — | `editor-plugin` | Neovim plugin for as-you-type code completion from cloud LLMs or local llama.cpp and Ollama servers |
 | 100 | **[coollabsio/jean](https://github.com/coollabsio/jean)** | 1.4k | — | `desktop` `web` `self-hosted` | Desktop app and self-hosted server that runs Claude Code, Codex, OpenCode, and other coding agents in parallel in git worktrees |
 
